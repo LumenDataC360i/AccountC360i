@@ -55,6 +55,9 @@ public class CalculateTransactionAmount extends EnrichmentFunction {
 					
 					logger.debug("discount : " + discount);
 					
+					transaction.setUnitAmountDouble(unitPriceDouble);
+					transaction.setDiscountAmountTotalDouble(discount);
+					
 					transaction.setDiscountAmountTotal(discountStr);  // discount value
 					
 					Double totalAmount = amount - discount;
