@@ -10,6 +10,11 @@ import com.allsight.enrichment.common.EnrichmentOutputHelper;
 import com.allsight.entity.bean.EnrichmentInfo;
 import com.allsight.entity.impl.Entity;
 
+/**
+ * @author Aradhana Pandey
+ * Output handler for Eid post enrichments
+ * Note : Perspective records business objects can not be part of eid post enrichment output
+ */
 public class SummaryOutputHandler implements EnrichmentOutputHelper {
 	  private static final Logger logger = Logger.getLogger(SummaryOutputHandler.class);
 
@@ -18,7 +23,7 @@ public class SummaryOutputHandler implements EnrichmentOutputHelper {
 		// TODO Auto-generated method stub
 		
 		if(!(resultObject instanceof Party)) {
-			 logger.error("OuputObject is not of acceptable type. skipping customer predictor enrichment");
+			 logger.error("Output Object is not of acceptable type. skipping enrichment");
 			return null;
 		}
 		

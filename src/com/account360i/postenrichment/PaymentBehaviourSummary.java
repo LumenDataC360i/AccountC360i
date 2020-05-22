@@ -58,31 +58,25 @@ public class PaymentBehaviourSummary extends EnrichmentFunction {
 		logger.debug("Eid Party : " + entity);
 
 		if (((Party) entity).getTransactions() != null && ((Party) entity).getTransactions().getTransaction()!= null) {
-
 			Collection<Transaction> transactions = ((Party) entity).getTransactions().getTransaction();
-
-			logger.debug("Transaction collction : " + transactions);
+			logger.debug("Transaction collection : " + transactions);
 
 			for (Transaction transaction : transactions) {
+				if(transaction.getEndTimestamp() != null && transaction.getStartTimestamp() != null) {
+					Timestamp endtime = transaction .getEndTimestamp();
+					Timestamp starttime = transaction.getStartTimestamp();
+					long milliseconds = endtime.getTime() - starttime.getTime();
+					Long millisec = new Long(milliseconds);
+					TimeTaken.add(millisec);
 
-				Timestamp endtime = transaction .getEndTimestamp();
-				Timestamp starttime = transaction.getStartTimestamp();
-				long milliseconds = endtime.getTime() - starttime.getTime();
-				Long millisec = new Long(milliseconds);
-				logger.debug("diff : " + millisec);
-				TimeTaken.add(millisec);
-
-				String productName = transaction.getProductName().toLowerCase().trim();
-				populateMap(productName,millisec);
+					String productName = transaction.getProductName().toLowerCase().trim();
+					populateMap(productName,millisec);
+				}
 
 				if(transaction.getTransactionAmountDouble() != null) {
 					Revenue += transaction.getTransactionAmountDouble();  // total revenue for an account
 				}	
 			}
-			logger.debug("productTimeTaken : " + ProductTimeTaken);
-			logger.debug("timeTaken : " + TimeTaken);
-			logger.debug("Revenue : " + Revenue);
-
 			String productName = maxProductTimeTaken();
 			String maxTimetaken = maxTimeTaken();
 			String avgTimeTaken = avgTimeTaken();
@@ -95,6 +89,7 @@ public class PaymentBehaviourSummary extends EnrichmentFunction {
 			pay.setMaxPaymentTime(maxTimetaken);
 			pay.setTotalRevenue(Revenue);
 			pay.setMaxTimePaymentProduct(productName);
+
 
 			Collection<PaymentBehaviour> coll = new ArrayList<PaymentBehaviour>();
 			coll.add(pay);
@@ -113,12 +108,14 @@ public class PaymentBehaviourSummary extends EnrichmentFunction {
 	 * Function to get maximum time
 	 */
 	public String maxTimeTaken() {
-
-		long time = Collections.max(TimeTaken);
-		logger.debug("Maximum element : " + time);
-		logger.debug("max time : " + time);
-		String stime = standardTime(time);
-		return stime;
+		if(TimeTaken.size() != 0) {
+			long time = Collections.max(TimeTaken);
+			logger.debug("Maximum element : " + time);
+			logger.debug("max time : " + time);
+			String stime = standardTime(time);
+			return stime;
+		}
+		return "not available";
 	}
 
 	/**
@@ -127,20 +124,22 @@ public class PaymentBehaviourSummary extends EnrichmentFunction {
 	 */
 	public String avgTimeTaken() {
 
-		long avg = (long) 0;
-		int size = TimeTaken.size();
+		if(TimeTaken.size() != 0) {
+			long avg = (long) 0;
+			int size = TimeTaken.size();
 
-		for(int i = 0; i < size; i++) {
-			avg += TimeTaken.get(i);
+			for(int i = 0; i < size; i++) {
+				avg += TimeTaken.get(i);
+			}
+			if(avg > 0) {
+				avg = avg / size;
+			}
+			logger.debug("avg : " + avg);
+			String time = standardTime(avg);
+
+			return time;
 		}
-		if(avg > 0) {
-			avg = avg / size;
-		}
-
-		logger.debug("avg : " + avg);
-		String time = standardTime(avg);
-
-		return time;
+		return "not available";
 	}
 
 	/**
@@ -195,13 +194,11 @@ public class PaymentBehaviourSummary extends EnrichmentFunction {
 		if(ProductTimeTaken.containsKey(productName) == true) {
 			Long time = ProductTimeTaken.get(productName);
 			Long timevalue = time + millisec;
-
 			ProductTimeTaken.put(productName, timevalue);
 		}
 		else {
 			ProductTimeTaken.put(productName, millisec);
 		}
-
 		logger.debug("productTimeTaken : " + ProductTimeTaken);
 	}
 
@@ -214,25 +211,24 @@ public class PaymentBehaviourSummary extends EnrichmentFunction {
 		String maxproductName = null;
 		Long maxtime = (long) 0;
 
-		Iterator iter = ProductTimeTaken.entrySet().iterator();
-
-		while (iter.hasNext()) { 
-
-			Map.Entry mapelement = (Map.Entry)iter.next(); 
-			if((long)mapelement.getValue() > (long)maxtime) {
-				maxtime = (Long) mapelement.getValue();
-				maxproductName = (String) mapelement.getKey();
-			}	 
+		if(ProductTimeTaken.size() == 0) {
+			Iterator iter = ProductTimeTaken.entrySet().iterator();
+			while (iter.hasNext()) { 
+				Map.Entry mapelement = (Map.Entry)iter.next(); 
+				if((long)mapelement.getValue() > (long)maxtime) {
+					maxtime = (Long) mapelement.getValue();
+					maxproductName = (String) mapelement.getKey();
+				}	 
+			}
+			logger.debug("maxproductName : " + maxproductName);
+			return maxproductName;	
 		}
-		logger.debug("maxproductName : " + maxproductName);
-		return maxproductName;	
+		return "not applicable";
 	}
 
 	@Override
 	public String standardize(String arg0) {
 		// TODO Auto-generated method stub
-
-
 		return null;
 	}
 
