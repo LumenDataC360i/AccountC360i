@@ -52,13 +52,16 @@ public class AccountSummarySales extends EnrichmentFunction {
 		}
 
 		summary = getOldNewValue(party);
+		logger.info("summary 1: " + summary);
 		SUMMARYLIST.add(summary);
 
 		summary = getImportance(party);
 		SUMMARYLIST.add(summary);
-
+		logger.info("summary 2: " + summary);
+		
 		summary = getEngagementLevel(party);
 		SUMMARYLIST.add(summary);
+		logger.info("summary 3: " + summary);
 
 		if(!SUMMARYLIST.isEmpty()) {
 			for(String str : SUMMARYLIST) {
@@ -71,7 +74,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 		}
 
 		party.getInsights().setAccountSummary(summaryColl);
-		return null;
+		return party;
 	}
 
 	/**

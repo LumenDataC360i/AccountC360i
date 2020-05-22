@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="dist" name="AccountC360i">
+	<property file="build.properties"/>
+	<path id="compile.classpath">
+		<fileset dir="${c360i.lib.dir}">
+			<include name="**/*.jar"/>
+			<exclude name="**/enterprise-metadata*.jar"/>
+		</fileset>
+		<fileset dir="${model.jar.dir}">
+			<include name="enterprise-metadata-conf.jar"/>
+		</fileset>
+		<!--<fileset dir="${reference.lib.dir}">
+			<include name="**/*.jar"/>
+		</fileset>-->
+	</path>
+	<target name="clean">
+		<delete dir="${cust.dir}"/>
+		<delete dir="${build.dir}"/>
+	</target>
+	<target name="init" depends="clean">
+		<mkdir dir="${cust.dir}"/>
+		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${build.dir}/src-classes"/>
+	</target>
+	<target name="compile" depends="init">
+		<javac encoding="${java.encoding}" target="${target}" debug="${debug}" destdir="${build.dir}/src-classes" srcdir="${src.dir}">
+			<classpath refid="compile.classpath"/>
+		</javac>
+		<copy todir="${build.dir}/src-classes">
+			<fileset dir="${src.dir}" includes="*.syns,*.txt"/>
+		</copy>
+	</target>
+	<target name="dist" depends="compile">
+		<jar basedir="${build.dir}/src-classes" includes="com/account360i/enrichments/**,com/account360i/postenrichment/**,com/account360i/utils/**,com/account360i/postenrichment/outputhandler/**" destfile="${cust.dir}/${cust.name}"/>
+	</target>
+	<!--<target name="zip" depends="dist">
+		<zip destfile="${cust.dir}/${finalBuild.name}.zip" basedir="${cust.dir}"/>
+	</target>-->
+</project>
