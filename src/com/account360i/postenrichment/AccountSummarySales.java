@@ -56,22 +56,24 @@ public class AccountSummarySales extends EnrichmentFunction {
 
 		summary = getImportance(party);
 		SUMMARYLIST.add(summary);
-
+		
 		summary = getEngagementLevel(party);
 		SUMMARYLIST.add(summary);
+		
 
 		if(!SUMMARYLIST.isEmpty()) {
 			for(String str : SUMMARYLIST) {
 				aSummary.setSummary(str);
 				aSummary.setKey(key.toString() + "_summary");
+				
+				logger.info(key.toString() + ": "+ summary);
 				key++;
-
 				summaryColl.add(aSummary);
 			}
 		}
 
 		party.getInsights().setAccountSummary(summaryColl);
-		return null;
+		return party;
 	}
 
 	/**

@@ -13,6 +13,11 @@ import com.allsight.Party.Webchat;
 import com.allsight.enrichment.common.EnrichmentFunction;
 import com.allsight.entity.impl.Entity;
 
+/**
+ * @author Aradhana Pandey
+ * Class to get Interaction Behaviour
+ *
+ */
 public class InteractionBehaviourSummary extends EnrichmentFunction {
 	private static final Logger logger = Logger.getLogger(InteractionBehaviourSummary.class);
 
@@ -32,6 +37,11 @@ public class InteractionBehaviourSummary extends EnrichmentFunction {
 	}
 	
 
+	/**
+	 * @param entity
+	 * @return
+	 * Function to interaction summary
+	 */
 	private Party interactionSummary(Entity<?> entity) {
 		// TODO Auto-generated method stub
 		Integer totalEmails = 0;
@@ -54,8 +64,11 @@ public class InteractionBehaviourSummary extends EnrichmentFunction {
 		else if(totalEmails < totalWebchats) {
 			preferredMedium = "Webchat";
 		}
-		else {
+		else if(totalEmails == totalWebchats && totalWebchats != 0){
 			preferredMedium = "Email/Webchat";
+		}
+		else {
+			preferredMedium = "no interactions";
 		}
 		
 		totalInteractions = totalEmails + totalWebchats;
@@ -78,15 +91,14 @@ public class InteractionBehaviourSummary extends EnrichmentFunction {
 		insight.setInteractionBehaviour(coll);
 		asparty.setInsights(insight);
 		
-		logger.debug("totalInteractions : " + totalInteractions);
-		logger.debug("totalEmails : " + totalEmails);
-		logger.debug("totalWebchats : " + totalWebchats);
-		logger.debug("preferredMedium : " + preferredMedium);
-		
-		
 		return asparty;
 	}
 	
+	/**
+	 * @param entity
+	 * @return
+	 * Function to calculate product sentiment aggregate
+	 */
 	public String productSentimentAggregate(Entity entity) {
 		
 		String finalSentiment = "";
@@ -121,6 +133,10 @@ public class InteractionBehaviourSummary extends EnrichmentFunction {
 		}
 		else if(neutralCount >= negativeCount && neutralCount > positiveCount) {
 			finalSentiment = "Neutral";
+		}
+		
+		if(positiveCount == negativeCount && positiveCount == neutralCount && positiveCount == 0) {
+			finalSentiment = "no sentiments recorded";
 		}
 		
 		logger.debug("sentiment : " + finalSentiment);

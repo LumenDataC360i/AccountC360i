@@ -3,7 +3,6 @@ package com.account360i.postenrichment;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -36,8 +35,8 @@ public class OrganizationHierarchy extends EnrichmentFunction {
 	private Set<String> childSet = new HashSet<String>(); 
 	private String root;    //root of hierarchy
 	private Integer key = 1;
-	
-	
+
+
 	/* (non-Javadoc)
 	 * @see com.allsight.enrichment.common.EnrichmentFunction#applyEnrichment(com.allsight.entity.impl.Entity)
 	 */
@@ -50,7 +49,7 @@ public class OrganizationHierarchy extends EnrichmentFunction {
 		List<Party.OrganizationHierarchy> orghierarchy = new ArrayList<>();
 		Collection<Party.OrganizationHierarchy> finalorghierarchy = new ArrayList<>();
 		Collection<Link> linkcollection = new ArrayList<>();
-		
+
 		logger.debug("Party : " + entity);
 
 		if (((Party) entity).getRelationships() != null && ((Party) entity).getRelationships().getOrganizationRelations()!= null) {
@@ -71,19 +70,19 @@ public class OrganizationHierarchy extends EnrichmentFunction {
 			logger.debug("not a root so returning null");
 			return null;
 		}
-		
+
 		//for root
 		String sname = entity.getEntityMeta().getSourceName();
 		String skey = entity.getEntityMeta().getSourceKey();
 		String parent = sname + ":" + skey;
 		childSet.add(parent);
-		
+
 		if(childSet.size()!=0){
 			logger.debug("child set is not equal to zero");
-				root = getName(entity);
-			
+			root = getName(entity);
+
 			logger.debug("root name : " + root);
-			
+
 			EntityMeta entityMeta = new EntityMeta();
 			entityMeta.setSourceName(sname);
 			entityMeta.setSourceKey(skey+"_hierarchy");
@@ -99,7 +98,7 @@ public class OrganizationHierarchy extends EnrichmentFunction {
 				String[] split = firstChild.split(":");
 				String sourcename = split[0];
 				String sourcekey = split[1];
-	
+
 				if(sourcename.compareTo(sname) == 0 && sourcekey.compareTo(skey) == 0){    //if root entity
 					getChildSet(entity);
 					Link link = createLink(hierarchyRecord.getEntityMeta().getSourceName(),hierarchyRecord.getEntityMeta().getSourceKey(),sourcename,sourcekey) ;
@@ -121,11 +120,11 @@ public class OrganizationHierarchy extends EnrichmentFunction {
 		}
 
 		hierarchyRecord.setBusinessObjects("Link", linkcollection);
-		
+
 		Party.HierarchyCategory cat = new Party.HierarchyCategory();
 		cat.setOrganizationHierarchy(finalorghierarchy);
 		hierarchyRecord.setHierarchyCategory(cat);
-		
+
 		if(hierarchyRecord != null){
 			Short sourceId = manager.getDataSourceManager().getNidbyDS(sname);
 			dao.saveOrUpdateEntity("party",sourceId.toString(),skey+"_hierarchy",hierarchyRecord);
@@ -142,13 +141,13 @@ public class OrganizationHierarchy extends EnrichmentFunction {
 	 * Merge two collections
 	 */
 	Collection<?> mergeCollection(Collection<?> col1, Collection<?> col2) {
-		
+
 		Iterable<?> combinedIterables = Iterables.unmodifiableIterable(Iterables.concat(col1, col2));
 		col1 = Lists.newArrayList(combinedIterables);
-		
+
 		return col1;
 	}
-	
+
 	/**
 	 * @param entity
 	 * @return
@@ -166,7 +165,7 @@ public class OrganizationHierarchy extends EnrichmentFunction {
 
 		return name;
 	}
-	
+
 
 	/**
 	 * @param entity
@@ -188,7 +187,7 @@ public class OrganizationHierarchy extends EnrichmentFunction {
 			}
 		}
 	}
-	
+
 
 	/**
 	 * @param entity
@@ -202,37 +201,37 @@ public class OrganizationHierarchy extends EnrichmentFunction {
 
 		if (((Party) entity).getRelationships() != null && ((Party) entity).getRelationships().getOrganizationRelations()!= null) {
 			Collection<com.allsight.Party.OrganizationRelations> relations = ((Party) entity).getRelationships().getOrganizationRelations();
-			
+
 			for (com.allsight.Party.OrganizationRelations rel : relations) {
-				
+
 				Party.OrganizationHierarchy hierarchy = null;
-				
+
 				if(rel.getRelationshipSubType().equalsIgnoreCase("child")){
 
 					hierarchy = new Party.OrganizationHierarchy();
-					
+
 					String tskey = rel.getTargetSourceKey();
 					String tsname = rel.getTargetSourceName();
 					Entity tEntity = getEntityById(tsname, tskey);
-					
-					
+
+
 					hierarchy.setChild(getName(tEntity));
 					hierarchy.setRoot(root);
 					hierarchy.setParent(getName(entity));
 					hierarchy.setKey(key.toString());
-					
+
 					key++;
 				}
-				
+
 				if(hierarchy != null) {
 					orgHierarchy.add(hierarchy);
 				}			
 			}
 		}
-		
+
 		return orgHierarchy;
 	}
-	
+
 
 	/**
 	 * @param sourcename
@@ -254,7 +253,7 @@ public class OrganizationHierarchy extends EnrichmentFunction {
 		return link;
 	}
 
-	
+
 	/**
 	 * @param sourceName
 	 * @param sourceKey
@@ -279,7 +278,7 @@ public class OrganizationHierarchy extends EnrichmentFunction {
 		return entityRecord;
 	}
 
-	
+
 	@Override
 	public String standardize(String arg0) {
 		// TODO Auto-generated method stub
