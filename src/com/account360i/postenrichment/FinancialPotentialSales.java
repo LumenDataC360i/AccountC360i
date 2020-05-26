@@ -15,6 +15,11 @@ import com.allsight.Party.FinancialPotential;
 import com.allsight.enrichment.common.EnrichmentFunction;
 import com.allsight.entity.impl.Entity;
 
+/**
+ * @author Aradhana Pandey
+ * Enrichment to Calculate financial potential of an organization
+ *
+ */
 public class FinancialPotentialSales extends EnrichmentFunction {
 	private static final Logger logger = Logger.getLogger(FinancialPotentialSales.class);
 	private Map<String,ArrayList<Double>> ContactDealAmountMap = new HashMap<String,ArrayList<Double>>();
@@ -33,6 +38,11 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 		return asparty;
 	}
 
+	/**
+	 * @param entity
+	 * @return
+	 * Function to calculate financial potential
+	 */
 	private Party financialPotentialSales(Entity<?> entity) {
 		// TODO Auto-generated method stub
 		
@@ -63,6 +73,7 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 				while (iter.hasNext()) { 
 					Map.Entry mapelement = (Map.Entry)iter.next(); 
 					ArrayList<Double> amountList= (ArrayList<Double>) mapelement.getValue();
+					int numberOfOrders = amountList.size();
 					Double maxAmount = Collections.max(amountList);
 					Double minAmount = Collections.min(amountList);
 					Double avgAmount = avg(amountList);
@@ -74,14 +85,16 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 					logger.debug("avg amount : " + avgAmount);
 					logger.debug("id : " + contactID);
 					logger.debug("name : " + contactPersonName);
+					logger.debug("numberOfOrders : " + numberOfOrders);
 					
 					FinancialPotential finance = new FinancialPotential();
 					finance.setKey(Integer.toString(key));
 					key++;
-					finance.setAmountRange(minAmount+"-"+maxAmount);
+					finance.setAmountRange("$"+minAmount+ " - $"+maxAmount);
 					finance.setAvgAmount(avgAmount.toString());
 					finance.setContactID(contactID);
 					finance.setContactName(contactPersonName);
+					finance.setNumberOfOrders(Integer.toString(numberOfOrders));
 					coll.add(finance);
 				}
 				insight.setFinancialPotential(coll);
@@ -93,6 +106,11 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 		return null;
 	}
 
+	/**
+	 * @param contactPersonID
+	 * @param contactPerson
+	 * Function to populate map where key is contact id and value is contact name
+	 */
 	private void populateContactMap(String contactPersonID, String contactPerson) {
 		// TODO Auto-generated method stub
 		if(!ContactMap.containsKey(contactPersonID)) {
@@ -100,6 +118,11 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 		}			
 	}
 
+	/**
+	 * @param amountList
+	 * @return
+	 * Function to return avg of element in a list
+	 */
 	private Double avg(ArrayList<Double> amountList) {
 		// TODO Auto-generated method stub
 		
@@ -115,6 +138,11 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 		return avg;
 	}
 
+	/**
+	 * @param contactPersonID
+	 * @param estimatedDealAmount
+	 * Function to populate a map where key is contact id and value is list of all the amounts in all the orders
+	 */
 	private void populateAmountMap(String contactPersonID, Double estimatedDealAmount) {
 		// TODO Auto-generated method stub
 		 
