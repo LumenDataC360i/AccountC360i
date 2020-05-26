@@ -168,8 +168,13 @@ public class PaymentBehaviourSummary extends EnrichmentFunction {
 			days = 0;
 		}
 
-		if(week != 0) {
-			time = week + " week";
+		if(week != 0 ) {
+			if(week == 1) {
+				time ="1 week";
+			}
+			else {
+				time = week + " weeks";
+			}		
 		}
 		else {
 			if(days != 0) {
@@ -193,8 +198,12 @@ public class PaymentBehaviourSummary extends EnrichmentFunction {
 
 		if(ProductTimeTaken.containsKey(productName) == true) {
 			Long time = ProductTimeTaken.get(productName);
-			Long timevalue = time + millisec;
-			ProductTimeTaken.put(productName, timevalue);
+			logger.debug("old time : " + time);
+			logger.debug("new time : " + millisec);
+			
+			if(time < millisec) {
+				ProductTimeTaken.put(productName, millisec);
+			}	
 		}
 		else {
 			ProductTimeTaken.put(productName, millisec);
