@@ -25,6 +25,7 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 	private static final Logger logger = Logger.getLogger(FinancialPotentialSales.class);
 	private Map<String,ArrayList<Double>> ContactDealAmountMap = new HashMap<String,ArrayList<Double>>();
 	private Map<String,String> ContactMap = new HashMap<String,String>();
+	private Map<String,Double> ContactSumAmount = new HashMap<String,Double>();
 
 	@Override
 	public Object applyEnrichment(Entity<?> entity) throws Exception {
@@ -76,9 +77,10 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 					int numberOfOrders = amountList.size();
 					Double maxAmount = Collections.max(amountList);
 					Double minAmount = Collections.min(amountList);
-					Double avgAmount = avg(amountList);
 					String contactID = (String) mapelement.getKey();
 					String contactPersonName = ContactMap.get(contactID);
+					//Double avgAmount = avg(amountList);
+					Double avgAmount = ContactSumAmount.get(contactID) / numberOfOrders;
 					
 					logger.debug("max amount : " + maxAmount);
 					logger.debug("min amount : " + minAmount);
@@ -128,7 +130,7 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 	 * @return
 	 * Function to return avg of element in a list
 	 */
-	private Double avg(ArrayList<Double> amountList) {
+	/*private Double avg(ArrayList<Double> amountList) {
 		// TODO Auto-generated method stub
 		
 		Double avg = 0.0;
@@ -141,13 +143,14 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 		}
 		
 		return avg;
-	}
+	}*/
 
 	/**
 	 * @param contactPersonID
 	 * @param estimatedDealAmount
 	 * Function to populate a map where key is contact id and value is list of all the amounts in all the orders
-	 */
+	 * and another map where key is contact id and value is sum of all the order values
+	 **/
 	private void populateAmountMap(String contactPersonID, Double estimatedDealAmount) {
 		// TODO Auto-generated method stub
 		 
@@ -158,6 +161,15 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 		    }
 		  list.add(estimatedDealAmount);
 		  ContactDealAmountMap.put(contactPersonID,list);   
+		  
+		  if(ContactSumAmount.containsKey(contactPersonID)) {
+			  Double sum = ContactSumAmount.get(contactPersonID);
+			  sum = sum + estimatedDealAmount;
+			  ContactSumAmount.put(contactPersonID, sum);
+		  }
+		  else {
+			  ContactSumAmount.put(contactPersonID, estimatedDealAmount);
+		  }
 	}
 
 	@Override
