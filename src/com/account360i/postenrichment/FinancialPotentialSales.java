@@ -20,6 +20,7 @@ import com.allsight.entity.impl.Entity;
  * Enrichment to Calculate financial potential of an organization
  *
  */
+@SuppressWarnings("deprecation")
 public class FinancialPotentialSales extends EnrichmentFunction {
 	private static final Logger logger = Logger.getLogger(FinancialPotentialSales.class);
 	private Map<String,ArrayList<Double>> ContactDealAmountMap = new HashMap<String,ArrayList<Double>>();
@@ -69,7 +70,6 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 			
 			if(ContactDealAmountMap != null) {
 				Iterator iter = ContactDealAmountMap.entrySet().iterator();
-				int key = 1;
 				while (iter.hasNext()) { 
 					Map.Entry mapelement = (Map.Entry)iter.next(); 
 					ArrayList<Double> amountList= (ArrayList<Double>) mapelement.getValue();
@@ -88,9 +88,14 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 					logger.debug("numberOfOrders : " + numberOfOrders);
 					
 					FinancialPotential finance = new FinancialPotential();
-					finance.setKey(Integer.toString(key));
-					key++;
-					finance.setAmountRange("$"+minAmount+ " - $"+maxAmount);
+					finance.setKey(contactID.toUpperCase()+"~"+contactPersonName.toUpperCase());
+					if(minAmount.compareTo(maxAmount) == 0)
+					{
+						finance.setAmountRange("$"+minAmount);
+					}
+					else {
+						finance.setAmountRange("$"+minAmount+ " - $"+maxAmount);
+					}
 					finance.setAvgAmount(avgAmount.toString());
 					finance.setContactID(contactID);
 					finance.setContactName(contactPersonName);
