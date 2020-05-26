@@ -210,8 +210,9 @@ public class PaymentBehaviourSummary extends EnrichmentFunction {
 
 		String maxproductName = null;
 		Long maxtime = (long) 0;
-
-		if(ProductTimeTaken.size() == 0) {
+		
+		if(ProductTimeTaken.size() != 0) {
+			logger.debug("inside max product time");
 			Iterator iter = ProductTimeTaken.entrySet().iterator();
 			while (iter.hasNext()) { 
 				Map.Entry mapelement = (Map.Entry)iter.next(); 
