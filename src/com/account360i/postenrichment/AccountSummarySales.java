@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Locale;
-
 import org.apache.log4j.Logger;
-
 import com.allsight.Party;
 import com.allsight.Party.AccountSummary;
 import com.allsight.Party.InteractionBehaviour;
@@ -36,7 +34,6 @@ public class AccountSummarySales extends EnrichmentFunction {
 
 		Party party = (Party) entity;
 		String summary = new String(); 
-		AccountSummary aSummary = new AccountSummary();
 		Collection<AccountSummary> summaryColl = new ArrayList<>();
 
 		logger.info("Deriving Account summary");
@@ -56,18 +53,28 @@ public class AccountSummarySales extends EnrichmentFunction {
 
 		summary = getImportance(party);
 		SUMMARYLIST.add(summary);
-		
+
 		summary = getEngagementLevel(party);
 		SUMMARYLIST.add(summary);
-		
+
+		//summary = getPaymentDetails(party);
+		//SUMMARYLIST.add(summary);
+
+		//summary = getDefaultPaymentDetails(party);
+		//SUMMARYLIST.add(summary);
+
+
+		logger.info("Summary collection: " + SUMMARYLIST);
 
 		if(!SUMMARYLIST.isEmpty()) {
 			for(String str : SUMMARYLIST) {
+
+				AccountSummary aSummary = new AccountSummary();
 				aSummary.setSummary(str);
 				aSummary.setKey(key.toString() + "_summary");
-				
-				logger.info(key.toString() + ": "+ summary);
-				key++;
+
+				logger.info(aSummary.getKey() + ": "+ str);
+				key+=1;
 				summaryColl.add(aSummary);
 			}
 		}
@@ -126,7 +133,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 	 */
 	private String getEngagementLevel(Party party) {
 
-		StringBuilder str = new StringBuilder();
+		String str = null;
 		Integer totalInteraction = new Integer(0);
 
 		if(party.getInsights() != null && party.getInsights().getInteractionBehaviour() != null) {
@@ -137,25 +144,25 @@ public class AccountSummarySales extends EnrichmentFunction {
 				}
 
 				else {
-					str.append("No interaction information available");
+					str = new String("No interaction information available");
 				}
 			}
 		}
 
 		else {
-			str.append("No interaction information available");
+			str = new String("No interaction information available");
 		}
 
 		if(totalInteraction > 100 )
-			str.append(ORGNAME + " has high engagement level.");
+			str = new String("This account has high engagement level.");
 
 		else if(totalInteraction > 50)
-			str.append(ORGNAME + " has medium engagement level.");
+			str = new String("This account has medium engagement level.");
 
 		else
-			str.append(ORGNAME + " has low engagement level.");
+			str = new String("This account has low engagement level.");
 
-		return str.toString();
+		return str;
 	}
 
 	/**
@@ -165,31 +172,46 @@ public class AccountSummarySales extends EnrichmentFunction {
 	 */
 	private String getImportance(Party party) {
 
-		StringBuilder str = new StringBuilder();
+		String str = null;
 
 		if(party.getInsights() != null && party.getInsights().getPaymentBehaviour() != null) {
 			for(PaymentBehaviour pay : party.getInsights().getPaymentBehaviour()) {
 				if(pay.getTotalRevenue() != null) {
 					Double revenue = pay.getTotalRevenue();
+					logger.info("Total Revenue: " + revenue);
 
 					if(Double.compare(revenue, 20000.0) > 0) 
-						str.append(ORGNAME + " is one of our very important accounts.");
+						str = new String("It is one of our very important accounts.");
 
 					else
-						str.append(ORGNAME + " is one of our very lesser accounts.");
+						str = new String("It is one of our very lesser accounts.");
 
 					break;
 				}
 
 				else {
-					str.append("No revenue information is available for " + ORGNAME);
+					str = new String("No revenue information is available.");
 				}
 			}
 		}
 
 		else {
-			str.append("No revenue information is available for " + ORGNAME);
+			str = new String("No revenue information is available.");
 		}
+
+		return str;
+	}
+
+	private String getPaymentDetails(Party party) {
+
+		StringBuilder str = new StringBuilder();
+
+		return str.toString();
+	}
+
+	private String getDefaultPaymentDetails(Party party) {
+
+		StringBuilder str = new StringBuilder();
 
 		return str.toString();
 	}
@@ -210,6 +232,5 @@ public class AccountSummarySales extends EnrichmentFunction {
 		System.out.println("Th " + threshold);
 
 	}
-
 
 }
