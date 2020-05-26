@@ -283,6 +283,11 @@ public class AccountSummarySales extends EnrichmentFunction {
 				}
 			}
 		}
+		
+		else{
+			str = "No payment detail available";
+			return str;
+		}
 
 		//no defaulted payments
 		if(count == 0) 
@@ -423,6 +428,10 @@ public class AccountSummarySales extends EnrichmentFunction {
 			}
 		}
 
+		else{
+			str.append("No deal information available");
+			return str.toString();
+		}
 		mostProb = (double) (mostDone / mostTotal * 100);
 		leastProb = (double) (leastDone / leastTotal * 100);
 
