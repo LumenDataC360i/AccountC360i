@@ -15,10 +15,17 @@ import com.allsight.Party.FinancialPotential;
 import com.allsight.enrichment.common.EnrichmentFunction;
 import com.allsight.entity.impl.Entity;
 
+/**
+ * @author Aradhana Pandey
+ * Enrichment to Calculate financial potential of an organization
+ *
+ */
+@SuppressWarnings("deprecation")
 public class FinancialPotentialSales extends EnrichmentFunction {
 	private static final Logger logger = Logger.getLogger(FinancialPotentialSales.class);
 	private Map<String,ArrayList<Double>> ContactDealAmountMap = new HashMap<String,ArrayList<Double>>();
 	private Map<String,String> ContactMap = new HashMap<String,String>();
+	private Map<String,Double> ContactSumAmount = new HashMap<String,Double>();
 
 	@Override
 	public Object applyEnrichment(Entity<?> entity) throws Exception {
@@ -33,6 +40,11 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 		return asparty;
 	}
 
+	/**
+	 * @param entity
+	 * @return
+	 * Function to calculate financial potential
+	 */
 	private Party financialPotentialSales(Entity<?> entity) {
 		// TODO Auto-generated method stub
 		
@@ -59,29 +71,37 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 			
 			if(ContactDealAmountMap != null) {
 				Iterator iter = ContactDealAmountMap.entrySet().iterator();
-				int key = 1;
 				while (iter.hasNext()) { 
 					Map.Entry mapelement = (Map.Entry)iter.next(); 
 					ArrayList<Double> amountList= (ArrayList<Double>) mapelement.getValue();
+					int numberOfOrders = amountList.size();
 					Double maxAmount = Collections.max(amountList);
 					Double minAmount = Collections.min(amountList);
-					Double avgAmount = avg(amountList);
 					String contactID = (String) mapelement.getKey();
 					String contactPersonName = ContactMap.get(contactID);
+					//Double avgAmount = avg(amountList);
+					Double avgAmount = ContactSumAmount.get(contactID) / numberOfOrders;
 					
 					logger.debug("max amount : " + maxAmount);
 					logger.debug("min amount : " + minAmount);
 					logger.debug("avg amount : " + avgAmount);
 					logger.debug("id : " + contactID);
 					logger.debug("name : " + contactPersonName);
+					logger.debug("numberOfOrders : " + numberOfOrders);
 					
 					FinancialPotential finance = new FinancialPotential();
-					finance.setKey(Integer.toString(key));
-					key++;
-					finance.setAmountRange(minAmount+"-"+maxAmount);
+					finance.setKey(contactID.toUpperCase()+"~"+contactPersonName.toUpperCase());
+					if(minAmount.compareTo(maxAmount) == 0)
+					{
+						finance.setAmountRange("$"+minAmount);
+					}
+					else {
+						finance.setAmountRange("$"+minAmount+ " - $"+maxAmount);
+					}
 					finance.setAvgAmount(avgAmount.toString());
 					finance.setContactID(contactID);
 					finance.setContactName(contactPersonName);
+					finance.setNumberOfOrders(Integer.toString(numberOfOrders));
 					coll.add(finance);
 				}
 				insight.setFinancialPotential(coll);
@@ -93,6 +113,11 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 		return null;
 	}
 
+	/**
+	 * @param contactPersonID
+	 * @param contactPerson
+	 * Function to populate map where key is contact id and value is contact name
+	 */
 	private void populateContactMap(String contactPersonID, String contactPerson) {
 		// TODO Auto-generated method stub
 		if(!ContactMap.containsKey(contactPersonID)) {
@@ -100,7 +125,12 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 		}			
 	}
 
-	private Double avg(ArrayList<Double> amountList) {
+	/**
+	 * @param amountList
+	 * @return
+	 * Function to return avg of element in a list
+	 */
+	/*private Double avg(ArrayList<Double> amountList) {
 		// TODO Auto-generated method stub
 		
 		Double avg = 0.0;
@@ -113,8 +143,14 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 		}
 		
 		return avg;
-	}
+	}*/
 
+	/**
+	 * @param contactPersonID
+	 * @param estimatedDealAmount
+	 * Function to populate a map where key is contact id and value is list of all the amounts in all the orders
+	 * and another map where key is contact id and value is sum of all the order values
+	 **/
 	private void populateAmountMap(String contactPersonID, Double estimatedDealAmount) {
 		// TODO Auto-generated method stub
 		 
@@ -125,6 +161,15 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 		    }
 		  list.add(estimatedDealAmount);
 		  ContactDealAmountMap.put(contactPersonID,list);   
+		  
+		  if(ContactSumAmount.containsKey(contactPersonID)) {
+			  Double sum = ContactSumAmount.get(contactPersonID);
+			  sum = sum + estimatedDealAmount;
+			  ContactSumAmount.put(contactPersonID, sum);
+		  }
+		  else {
+			  ContactSumAmount.put(contactPersonID, estimatedDealAmount);
+		  }
 	}
 
 	@Override

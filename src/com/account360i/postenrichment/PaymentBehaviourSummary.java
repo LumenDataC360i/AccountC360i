@@ -24,6 +24,7 @@ import com.allsight.entity.impl.Entity;
  * Class to find payment summary of an organization
  *
  */
+@SuppressWarnings("deprecation")
 public class PaymentBehaviourSummary extends EnrichmentFunction {
 	private static final Logger logger = Logger.getLogger(PaymentBehaviourSummary.class);
 	private List<Long> TimeTaken = new ArrayList<Long>();
