@@ -283,7 +283,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 				}
 			}
 		}
-		
+
 		else{
 			str = "No payment detail available";
 			return str;
@@ -432,8 +432,12 @@ public class AccountSummarySales extends EnrichmentFunction {
 			str.append("No deal information available");
 			return str.toString();
 		}
-		mostProb = (double) (mostDone / mostTotal * 100);
-		leastProb = (double) (leastDone / leastTotal * 100);
+
+		if(mostTotal != 0)
+			mostProb = (double) (mostDone / mostTotal * 100);
+
+		if(leastTotal != 0)
+			leastProb = (double) (leastDone / leastTotal * 100);
 
 		str.append(ORGNAME + " in ");
 
