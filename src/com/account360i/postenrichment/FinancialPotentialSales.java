@@ -14,6 +14,7 @@ import com.allsight.Party.CRM;
 import com.allsight.Party.FinancialPotential;
 import com.allsight.enrichment.common.EnrichmentFunction;
 import com.allsight.entity.impl.Entity;
+import com.ibm.icu.text.DecimalFormat;
 
 /**
  * @author Aradhana Pandey
@@ -79,12 +80,14 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 					Double minAmount = Collections.min(amountList);
 					String contactID = (String) mapelement.getKey();
 					String contactPersonName = ContactMap.get(contactID);
-					//Double avgAmount = avg(amountList);
 					Double avgAmount = ContactSumAmount.get(contactID) / numberOfOrders;
+					DecimalFormat df = new DecimalFormat("0.00");
+					//double avg = (double) avgAmount;
+					String avgAmountString = df.format(avgAmount);
 					
 					logger.debug("max amount : " + maxAmount);
 					logger.debug("min amount : " + minAmount);
-					logger.debug("avg amount : " + avgAmount);
+					logger.debug("avg amount : " + avgAmountString);
 					logger.debug("id : " + contactID);
 					logger.debug("name : " + contactPersonName);
 					logger.debug("numberOfOrders : " + numberOfOrders);
@@ -98,7 +101,7 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 					else {
 						finance.setAmountRange("$"+minAmount+ " - $"+maxAmount);
 					}
-					finance.setAvgAmount(avgAmount.toString());
+					finance.setAvgAmount(avgAmountString);
 					finance.setContactID(contactID);
 					finance.setContactName(contactPersonName);
 					finance.setNumberOfOrders(Integer.toString(numberOfOrders));
