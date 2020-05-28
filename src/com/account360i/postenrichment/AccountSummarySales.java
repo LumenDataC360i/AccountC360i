@@ -155,6 +155,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 		String str = null;
 		Integer totalInteraction = new Integer(0);
 
+		logger.info("Interaction Collection: " + party.getInsights().getInteractionBehaviour());
 		if(party.getInsights() != null && party.getInsights().getInteractionBehaviour() != null) {
 			for(InteractionBehaviour interaction : party.getInsights().getInteractionBehaviour()) {
 				if(interaction.getTotalInteractions() != null) {
@@ -165,6 +166,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 
 				else {
 					str = new String("No interaction information available");
+					return str;
 				}
 			}
 		}
@@ -230,6 +232,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 	private String getPaymentDetails(Party party) {
 
 		String str = null;
+		logger.info("Payment Behaviour collection: " + party.getInsights().getPaymentBehaviour());
 
 		if(party.getInsights() != null && party.getInsights().getPaymentBehaviour() != null) {
 			for(PaymentBehaviour pay : party.getInsights().getPaymentBehaviour()) {
@@ -315,7 +318,6 @@ public class AccountSummarySales extends EnrichmentFunction {
 
 			Collection<Transaction> trans = party.getTransactions().getTransaction();
 			str = ORGNAME + " has placed a total of " + trans.size() + " orders with us";
-
 		}
 
 		else 
@@ -333,9 +335,11 @@ public class AccountSummarySales extends EnrichmentFunction {
 
 		String str = new String();
 
+		logger.info("Deal Behaviour collection: " + party.getInsights().getDealBehaviour());
 		if(party.getInsights() != null && party.getInsights().getDealBehaviour() != null) {
 
 			for(DealBehaviour deal : party.getInsights().getDealBehaviour()) {
+				logger.info("Deal Behaviour " + deal);
 				if(deal.getMostlyOrderedProduct() != null) {
 					str = "We have mostly sold " + deal.getMostlyOrderedProduct() + " to " + ORGNAME;
 				}
@@ -390,8 +394,8 @@ public class AccountSummarySales extends EnrichmentFunction {
 	private String getDealDetails(Party party) {
 		StringBuilder str = new StringBuilder();
 
-		String mostOrdered = "";
-		String leastOrdered = "";
+		String mostOrdered = null;
+		String leastOrdered = null;
 		int mostDone = 0;
 		int mostTotal = 0;
 		int leastDone = 0;
@@ -404,6 +408,9 @@ public class AccountSummarySales extends EnrichmentFunction {
 			for(DealBehaviour deal : party.getInsights().getDealBehaviour()) {
 				mostOrdered = deal.getMostlyOrderedProduct();
 				leastOrdered = deal.getLeastOrderedProduct();
+
+				logger.info("Most Ordered: " + mostOrdered);
+				logger.info("Least Ordered: " + leastOrdered);
 			}
 		}
 
@@ -433,18 +440,20 @@ public class AccountSummarySales extends EnrichmentFunction {
 			return str.toString();
 		}
 
-		if(mostTotal != 0)
-			mostProb = (double) (mostDone / mostTotal * 100);
+		//logger.info("Values needed: " + mostTotal + " : " + mostDone + " : " + leastTotal + " : " + leastDone);
 
-		if(leastTotal != 0)
-			leastProb = (double) (leastDone / leastTotal * 100);
+		if(mostTotal != 0) 
+			mostProb = (double) (mostDone * 100 / mostTotal);
+
+		if(leastTotal != 0) 
+			leastProb = (double) (leastDone *100 / leastTotal);
 
 		str.append(ORGNAME + " in ");
 
-		if(!mostOrdered.isEmpty()) 
-			str.append(mostProb + "% of the cases closes the deal for " + mostOrdered + "positively");
+		if(mostOrdered != null) 
+			str.append(mostProb + "% of the cases closes the deal for " + mostOrdered + " positively");
 
-		if(!leastOrdered.isEmpty()) 
+		if(leastOrdered != null) 
 			str.append(" whereas for the " + leastOrdered + " it positively closed only " + leastProb + "% of the time.");
 
 		return str.toString();

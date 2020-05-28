@@ -95,7 +95,12 @@ public class PaymentBehaviourSummary extends EnrichmentFunction {
 			Collection<PaymentBehaviour> coll = new ArrayList<PaymentBehaviour>();
 			coll.add(pay);
 			insight.setPaymentBehaviour(coll);
-			asparty.setInsights(insight);
+
+			if(asparty.getInsights() == null)
+				asparty.setInsights(insight);
+
+			else
+				asparty.getInsights().setPaymentBehaviour(coll);
 
 			logger.debug("asparty : " + asparty);
 
@@ -201,7 +206,7 @@ public class PaymentBehaviourSummary extends EnrichmentFunction {
 			Long time = ProductTimeTaken.get(productName);
 			logger.debug("old time : " + time);
 			logger.debug("new time : " + millisec);
-			
+
 			if(time < millisec) {
 				ProductTimeTaken.put(productName, millisec);
 			}	
@@ -220,7 +225,7 @@ public class PaymentBehaviourSummary extends EnrichmentFunction {
 
 		String maxproductName = null;
 		Long maxtime = (long) 0;
-		
+
 		if(ProductTimeTaken.size() != 0) {
 			logger.debug("inside max product time");
 			Iterator iter = ProductTimeTaken.entrySet().iterator();

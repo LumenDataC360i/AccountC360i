@@ -87,7 +87,12 @@ public class InteractionBehaviourSummary extends EnrichmentFunction {
 		Collection<InteractionBehaviour> coll = new ArrayList<InteractionBehaviour>();
 		coll.add(interaction);
 		insight.setInteractionBehaviour(coll);
-		asparty.setInsights(insight);
+
+		if(asparty.getInsights() == null)
+			asparty.setInsights(insight);
+
+		else
+			asparty.getInsights().setInteractionBehaviour(coll);
 
 		return asparty;
 	}

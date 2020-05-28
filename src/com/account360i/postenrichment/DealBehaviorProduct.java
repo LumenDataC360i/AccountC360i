@@ -125,7 +125,13 @@ public class DealBehaviorProduct  extends EnrichmentFunction{
 				}
 				insight.setDealBehaviourProduct(dealBehaviorProductColl);
 				logger.debug("insight" + insight.toString() );
-				asparty.setInsights(insight);;
+
+				if(asparty.getInsights() == null)
+					asparty.setInsights(insight);
+
+				else
+					asparty.getInsights().setDealBehaviourProduct(dealBehaviorProductColl);
+
 				logger.debug("asparty : " + asparty);
 
 			}
@@ -166,7 +172,7 @@ public class DealBehaviorProduct  extends EnrichmentFunction{
 			}
 			if(average > 0) {
 				average = average / timeDuration.size();
-				
+
 			}
 			String time = timeStandard(average);
 

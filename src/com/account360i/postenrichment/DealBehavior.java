@@ -132,7 +132,13 @@ public class DealBehavior extends EnrichmentFunction{
 			//logger.debug("coll: "  + coll);
 			insight.setDealBehaviour(coll);
 			//logger.debug("insight  "  + insight);
-			asparty.setInsights(insight);
+
+
+			if(asparty.getInsights() == null)
+				asparty.setInsights(insight);
+
+			else
+				asparty.getInsights().setDealBehaviour(coll);
 
 			logger.debug("asparty : " + asparty);
 

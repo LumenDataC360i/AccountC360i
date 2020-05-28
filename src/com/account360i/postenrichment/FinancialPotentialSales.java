@@ -31,7 +31,7 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 	@Override
 	public Object applyEnrichment(Entity<?> entity) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 		if (!getExecutionContext().isEIDRecord()) {
 			logger.warn("This enrichment expects an EID record. Skipping enrichment");
 			return null;
@@ -48,7 +48,7 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 	 */
 	private Party financialPotentialSales(Entity<?> entity) {
 		// TODO Auto-generated method stub
-		
+
 		logger.debug("Eid Party : " + entity);
 
 		if (((Party) entity).getCRMS() != null && ((Party) entity).getCRMS().getCRM()!= null) {
@@ -62,14 +62,14 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 					populateContactMap(crm.getContactPersonID(),crm.getContactPerson());
 				}
 			}
-			
+
 			logger.debug("ContactDealAmountMap : " + ContactDealAmountMap);
 			logger.debug("ContactMap : " + ContactMap);
-			
+
 			Party asparty = (Party)entity;
 			Collection<FinancialPotential> coll = new ArrayList<FinancialPotential>();
 			Party.Insights insight = new Party.Insights();
-			
+
 			if(ContactDealAmountMap != null) {
 				Iterator iter = ContactDealAmountMap.entrySet().iterator();
 				while (iter.hasNext()) { 
@@ -84,14 +84,14 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 					DecimalFormat df = new DecimalFormat("0.00");
 					//double avg = (double) avgAmount;
 					String avgAmountString = df.format(avgAmount);
-					
+
 					logger.debug("max amount : " + maxAmount);
 					logger.debug("min amount : " + minAmount);
 					logger.debug("avg amount : " + avgAmountString);
 					logger.debug("id : " + contactID);
 					logger.debug("name : " + contactPersonName);
 					logger.debug("numberOfOrders : " + numberOfOrders);
-					
+
 					FinancialPotential finance = new FinancialPotential();
 					finance.setKey(contactID.toUpperCase()+"~"+contactPersonName.toUpperCase());
 					if(minAmount.compareTo(maxAmount) == 0)
@@ -108,11 +108,16 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 					coll.add(finance);
 				}
 				insight.setFinancialPotential(coll);
-				asparty.setInsights(insight);
+
+				if(asparty.getInsights() == null)
+					asparty.setInsights(insight);
+
+				else
+					asparty.getInsights().setFinancialPotential(coll);
 			}
 			return asparty;
 		}
-		
+
 		return null;
 	}
 
@@ -135,7 +140,7 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 	 */
 	/*private Double avg(ArrayList<Double> amountList) {
 		// TODO Auto-generated method stub
-		
+
 		Double avg = 0.0;
 		int size = amountList.size();
 		for(int i = 0; i < size; i++) {
@@ -144,7 +149,7 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 		if(avg > 0.0) {
 			avg = avg / size;
 		}
-		
+
 		return avg;
 	}*/
 
@@ -156,23 +161,23 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 	 **/
 	private void populateAmountMap(String contactPersonID, Double estimatedDealAmount) {
 		// TODO Auto-generated method stub
-		 
-		  ArrayList<Double> list = ContactDealAmountMap.get(contactPersonID); 
-		   if(list == null)
-		    {
-		         list = new ArrayList<Double>();
-		    }
-		  list.add(estimatedDealAmount);
-		  ContactDealAmountMap.put(contactPersonID,list);   
-		  
-		  if(ContactSumAmount.containsKey(contactPersonID)) {
-			  Double sum = ContactSumAmount.get(contactPersonID);
-			  sum = sum + estimatedDealAmount;
-			  ContactSumAmount.put(contactPersonID, sum);
-		  }
-		  else {
-			  ContactSumAmount.put(contactPersonID, estimatedDealAmount);
-		  }
+
+		ArrayList<Double> list = ContactDealAmountMap.get(contactPersonID); 
+		if(list == null)
+		{
+			list = new ArrayList<Double>();
+		}
+		list.add(estimatedDealAmount);
+		ContactDealAmountMap.put(contactPersonID,list);   
+
+		if(ContactSumAmount.containsKey(contactPersonID)) {
+			Double sum = ContactSumAmount.get(contactPersonID);
+			sum = sum + estimatedDealAmount;
+			ContactSumAmount.put(contactPersonID, sum);
+		}
+		else {
+			ContactSumAmount.put(contactPersonID, estimatedDealAmount);
+		}
 	}
 
 	@Override
