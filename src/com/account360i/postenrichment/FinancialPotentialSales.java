@@ -58,8 +58,10 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 			for (CRM crm : crms) {
 				if(crm.getContactPersonID() != null && !crm.getContactPersonID().isEmpty() 
 						&& crm.getEstimatedDealAmount() != null && !crm.getEstimatedDealAmount().toString().isEmpty()) {
-					populateAmountMap(crm.getContactPersonID(),crm.getEstimatedDealAmount());
-					populateContactMap(crm.getContactPersonID(),crm.getContactPerson());
+					if(crm.getDealStatus().equalsIgnoreCase("done")) {
+						populateAmountMap(crm.getContactPersonID(),crm.getEstimatedDealAmount());
+						populateContactMap(crm.getContactPersonID(),crm.getContactPerson());
+					}
 				}
 			}
 
