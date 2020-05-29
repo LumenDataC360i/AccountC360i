@@ -21,7 +21,7 @@ import com.allsight.entity.impl.Entity;
 
 /**
  * @author Aradhana Pandey
- * Class to find payment summary of an organization
+ * Eid post enrichment to find payment summary of an organization
  *
  */
 @SuppressWarnings("deprecation")

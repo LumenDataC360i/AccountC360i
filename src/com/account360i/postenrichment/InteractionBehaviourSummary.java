@@ -15,7 +15,7 @@ import com.allsight.entity.impl.Entity;
 
 /**
  * @author Aradhana Pandey
- * Class to get Interaction Behaviour
+ * Eid post enrichment to get Interaction Behaviour
  *
  */
 public class InteractionBehaviourSummary extends EnrichmentFunction {

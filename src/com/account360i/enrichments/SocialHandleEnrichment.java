@@ -14,6 +14,10 @@ import com.allsight.entity.bean.EnrichmentInfo;
 import com.allsight.entity.impl.Entity;
 import com.allsight.util.TextUtils;
 
+/**
+ * @author Aradhana Pandey
+ * Class to standardize social handle
+ */
 public class SocialHandleEnrichment extends EnrichmentFunction {
 	private static final Logger logger = Logger.getLogger(SocialHandleEnrichment.class);
 
