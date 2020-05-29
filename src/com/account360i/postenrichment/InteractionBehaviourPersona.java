@@ -107,37 +107,41 @@ public class InteractionBehaviourPersona extends EnrichmentFunction {
 
 	private String mostTalkedProduct(Entity<?> entity) {
 		// TODO Auto-generated method stub
-		
+
 		if (((Party) entity).getSocialInteractions() != null && ((Party) entity).getSocialInteractions().getMentions()!= null && 
 				((Party) entity).getSocialInteractions().getMentions().getProductMention()!= null) {
 			Collection<ProductMention> mentions = ((Party) entity).getSocialInteractions().getMentions().getProductMention();
 
 			for (ProductMention mention : mentions) {
-				String pname = mention.getProductName().toUpperCase().trim();
-				if(ProductCountMap.containsKey(pname)) {
-					Integer count = ProductCountMap.get(pname);
-					count = count + 1;
-					ProductCountMap.put(pname, count);
+				if(mention.getProductName() != null) {
+					String pname = mention.getProductName().toUpperCase().trim();
+					if(ProductCountMap.containsKey(pname)) {
+						Integer count = ProductCountMap.get(pname);
+						count = count + 1;
+						ProductCountMap.put(pname, count);
+					}
+					else {
+						ProductCountMap.put(pname, 1);
+					}
 				}
-				else {
-					ProductCountMap.put(pname, 1);
-				}	
 			}
 			if(ProductCountMap.size() == 0) {    // if no mentions having product names then go for product category
 				for (ProductMention mention : mentions) {
-					String pcategory = mention.getProductCategory().toUpperCase();
-					if(ProductCountMap.containsKey(pcategory)) {
-						Integer count = ProductCountMap.get(pcategory);
-						count = count + 1;
-						ProductCountMap.put(pcategory, count);
+					if(mention.getProductCategory() != null) {
+						String pcategory = mention.getProductCategory().toUpperCase();
+						if(ProductCountMap.containsKey(pcategory)) {
+							Integer count = ProductCountMap.get(pcategory);
+							count = count + 1;
+							ProductCountMap.put(pcategory, count);
+						}
+						else {
+							ProductCountMap.put(pcategory, 1);
+						}	
 					}
-					else {
-						ProductCountMap.put(pcategory, 1);
-					}	
 				}
 			}
 		}
-		
+
 		int maxCount = 0;
 		String name = null;
 		if(ProductCountMap.size() != 0) {
@@ -152,11 +156,11 @@ public class InteractionBehaviourPersona extends EnrichmentFunction {
 			}
 		}
 		logger.debug("ProductCountMap : " + ProductCountMap);
-		
+
 		return name;
 	}
 
-	
+
 
 	/**
 	 * @param entity
