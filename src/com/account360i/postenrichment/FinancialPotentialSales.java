@@ -81,7 +81,7 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 					String contactID = (String) mapelement.getKey();
 					String contactPersonName = ContactMap.get(contactID);
 					Double avgAmount = ContactSumAmount.get(contactID) / numberOfOrders;
-					DecimalFormat df = new DecimalFormat("0.00");
+					DecimalFormat df = new DecimalFormat("0");
 					//double avg = (double) avgAmount;
 					String avgAmountString = df.format(avgAmount);
 
@@ -96,10 +96,10 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 					finance.setKey(contactID.toUpperCase()+"~"+contactPersonName.toUpperCase());
 					if(minAmount.compareTo(maxAmount) == 0)
 					{
-						finance.setAmountRange("$"+minAmount);
+						finance.setAmountRange(minAmount.toString());
 					}
 					else {
-						finance.setAmountRange("$"+minAmount+ " - $"+maxAmount);
+						finance.setAmountRange(minAmount+ " - "+maxAmount);
 					}
 					finance.setAvgAmount(avgAmountString);
 					finance.setContactID(contactID);
@@ -186,4 +186,11 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 		return null;
 	}
 
+	public static void main(String[] args) {
+		Double avgAmount = 9999999.99999999999999;
+		DecimalFormat df = new DecimalFormat("0");
+		//double avg = (double) avgAmount;
+		String avgAmountString = df.format(avgAmount);
+		System.out.println(avgAmountString);
+	}
 }

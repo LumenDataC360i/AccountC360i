@@ -89,7 +89,7 @@ public class PaymentBehaviourSummary extends EnrichmentFunction {
 			pay.setAvgPaymentTime(avgTimeTaken);
 			pay.setMaxPaymentTime(maxTimetaken);
 			pay.setTotalRevenue(Revenue);
-			pay.setMaxTimePaymentProduct(productName);
+			pay.setMaxTimePaymentProduct(productName.toUpperCase());
 
 
 			Collection<PaymentBehaviour> coll = new ArrayList<PaymentBehaviour>();
