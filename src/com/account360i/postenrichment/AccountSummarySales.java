@@ -6,7 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
+
 import org.apache.log4j.Logger;
 import com.allsight.Party;
 import com.allsight.Party.AccountSummary;
@@ -14,7 +17,6 @@ import com.allsight.Party.CRM;
 import com.allsight.Party.DealBehaviour;
 import com.allsight.Party.InteractionBehaviour;
 import com.allsight.Party.Organization;
-import com.allsight.Party.OrganizationName;
 import com.allsight.Party.PaymentBehaviour;
 import com.allsight.Party.Transaction;
 import com.allsight.enrichment.common.EnrichmentFunction;
@@ -30,7 +32,7 @@ import com.allsight.util.DateUtil;
 public class AccountSummarySales extends EnrichmentFunction {
 	private static final Logger logger = Logger.getLogger(AccountSummarySales.class);
 
-	private String ORGNAME = new String();
+	//private String ORGNAME = new String();
 	private Collection<String> SUMMARYLIST = new ArrayList<>();
 	Integer key = 1;
 
@@ -43,7 +45,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 
 		logger.info("Deriving Account summary");
 
-		if(party.getDemographics() != null && party.getDemographics().getOrganizationName() != null) {
+		/*		if(party.getDemographics() != null && party.getDemographics().getOrganizationName() != null) {
 
 			//get Organization Name
 			for (OrganizationName orgName : party.getDemographics().getOrganizationName()) {
@@ -51,15 +53,9 @@ public class AccountSummarySales extends EnrichmentFunction {
 					ORGNAME = orgName.getName();
 				}
 			}
-		}
+		}*/
 
-		summary = getOldNewValue(party);
-		SUMMARYLIST.add(summary);
-
-		summary = getImportance(party);
-		SUMMARYLIST.add(summary);
-
-		summary = getEngagementLevel(party);
+		summary = getBasicInfo(party);
 		SUMMARYLIST.add(summary);
 
 		summary = getPaymentDetails(party);
@@ -68,17 +64,24 @@ public class AccountSummarySales extends EnrichmentFunction {
 		summary = getDefaultPaymentDetails(party);
 		SUMMARYLIST.add(summary);
 
-		summary = getTotalOrders(party);
+		summary = getMostOrders(party);
 		SUMMARYLIST.add(summary);
 
-		summary = getMostOrders(party);
+		summary = getBestContact(party);
+		SUMMARYLIST.add(summary);
+
+		summary = getDealDetails(party);
 		SUMMARYLIST.add(summary);
 
 		summary = getDealRenewal(party);
 		SUMMARYLIST.add(summary);
 
-		summary = getDealDetails(party);
+		summary = getTotalOrders(party);
 		SUMMARYLIST.add(summary);
+
+		summary = getFinanceInfo(party);
+		SUMMARYLIST.add(summary);
+
 
 		logger.info("Summary collection: " + SUMMARYLIST);
 
@@ -90,7 +93,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 
 				AccountSummary aSummary = new AccountSummary();
 				aSummary.setSummary(str);
-				aSummary.setKey(key.toString() + "_summary");
+				aSummary.setKey(key.toString() + ".");
 
 				logger.info(aSummary.getKey() + ": "+ str);
 				key+=1;
@@ -102,15 +105,19 @@ public class AccountSummarySales extends EnrichmentFunction {
 		return party;
 	}
 
+
 	/**
-	 * To get the age (old/new) of the account
+	 * To get the basic info like age, importance and engagement level
 	 * @return
 	 * @throws ParseException
 	 */
-	private String getOldNewValue(Party party) throws ParseException {
+	private String getBasicInfo(Party party) throws ParseException {
 
 		StringBuilder str = new StringBuilder();
 		String createDate = new String();
+		Integer totalInteraction = null;
+		Double revenue = null;
+
 		if(party.getDemographics() != null && party.getDemographics().getOrganization() != null) {
 			//get Create Date for Account
 			for (Organization org : party.getDemographics().getOrganization()) {
@@ -121,41 +128,9 @@ public class AccountSummarySales extends EnrichmentFunction {
 			}
 		}
 
-		if(!ORGNAME.isEmpty())
-			str.append(ORGNAME);
-
-		else
-			str.append("This account");
-
-		if(createDate.isEmpty()) {
-			str.append(" have no create date");
-			return str.toString();
-		}
-
 		Date date = new SimpleDateFormat("MM/dd/yyyy", 	Locale.ENGLISH).parse(createDate);
 		Date threshold = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH).parse("12/31/2018");
 
-		if(date.after(threshold)) 
-			str.append(" is one of our new Accounts.");
-
-		else
-			str.append(" is one of our old Accounts.");
-
-		return str.toString();
-	}
-
-
-	/**
-	 * Get engagement level based on the total interactions
-	 * @param party
-	 * @return
-	 */
-	private String getEngagementLevel(Party party) {
-
-		String str = null;
-		Integer totalInteraction = new Integer(0);
-
-		logger.info("Interaction Collection: " + party.getInsights().getInteractionBehaviour());
 		if(party.getInsights() != null && party.getInsights().getInteractionBehaviour() != null) {
 			for(InteractionBehaviour interaction : party.getInsights().getInteractionBehaviour()) {
 				if(interaction.getTotalInteractions() != null) {
@@ -163,66 +138,59 @@ public class AccountSummarySales extends EnrichmentFunction {
 					logger.info("Total interactions: " + totalInteraction);
 					break;
 				}
-
-				else {
-					str = new String("No interaction information available");
-					return str;
-				}
 			}
 		}
-
-		else {
-			str = new String("No interaction information available");
-		}
-
-		if(totalInteraction > 100 )
-			str = new String("This account has high engagement level.");
-
-		else if(totalInteraction > 50)
-			str = new String("This account has medium engagement level.");
-
-		else
-			str = new String("This account has low engagement level.");
-
-		return str;
-	}
-
-	/**
-	 * To get the importance value of the account
-	 * @param party
-	 * @return
-	 */
-	private String getImportance(Party party) {
-
-		String str = null;
 
 		if(party.getInsights() != null && party.getInsights().getPaymentBehaviour() != null) {
 			for(PaymentBehaviour pay : party.getInsights().getPaymentBehaviour()) {
 				if(pay.getTotalRevenue() != null) {
-					Double revenue = pay.getTotalRevenue();
+					revenue = pay.getTotalRevenue();
 					logger.info("Total Revenue: " + revenue);
-
-					if(Double.compare(revenue, 20000.0) > 0) 
-						str = new String("It is one of our very important accounts.");
-
-					else
-						str = new String("It is one of our very lesser accounts.");
-
 					break;
-				}
-
-				else {
-					str = new String("No revenue information is available.");
 				}
 			}
 		}
 
-		else {
-			str = new String("No revenue information is available.");
+		if(!createDate.isEmpty()) {
+			if(date.after(threshold)) 
+				str.append("This is one of our new");
+
+			else
+				str.append("This is one of our old");
 		}
 
-		return str;
+		else
+			str.append("This account is");
+
+		if(!createDate.isEmpty() && revenue != null)
+			str.append("and");
+
+		if(revenue != null) {
+			if(Double.compare(revenue, 20000.0) > 0)
+				str.append(" very important account. ");
+
+			else
+				str.append(" very lesser account. ");
+		}
+
+		else
+			str.append(" account. ");
+
+		if(totalInteraction == null)
+			return str.toString();
+
+		if(totalInteraction > 100 )
+			str.append("The engagement level is high for this account.");
+
+		else if(totalInteraction > 50)
+			str.append("The engagement level is meduim for this account.");
+
+		else
+			str.append("The engagement level is low for this account.");
+
+		return str.toString();
 	}
+
 
 	/**
 	 * To get the average payment time details
@@ -239,7 +207,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 				if(pay.getAvgPaymentTime() != null) {
 					String avgTime = pay.getAvgPaymentTime();
 					logger.info("Average payment time: " + avgTime);
-					str = new String("For orders placed by " + ORGNAME + ", usually the payment is done within " + avgTime + " of the closure.");
+					str = new String("For orders placed usually the payment is done within " + avgTime + " of the closure.");
 				}
 
 				else {
@@ -294,37 +262,17 @@ public class AccountSummarySales extends EnrichmentFunction {
 
 		//no defaulted payments
 		if(count == 0) 
-			str = "Meanwhile " + ORGNAME + " has never defaulted payments in the orders placed till date";
+			str = "Meanwhile there has never been defaulted payment in the orders placed till date";
 
 		if(count == 1) 
-			str = "Meanwhile " + ORGNAME + " has once defaulted payments in the orders placed till date";
+			str = "Meanwhile there has been only one defaulted payment in the orders placed till date";
 
 		else
-			str = "Meanwhile " + ORGNAME + " has " + count + " times defaulted payments in the orders placed till date";
+			str = "Meanwhile there has been " + count + " defaulted payments in the orders placed till date";
 
 		return str;
 	}
 
-	/**
-	 * Get the total ordered product
-	 * @param party
-	 * @return
-	 */
-	private String getTotalOrders(Party party) {
-
-		String str = new String();
-
-		if(party.getTransactions() != null && party.getTransactions().getTransaction() != null) {
-
-			Collection<Transaction> trans = party.getTransactions().getTransaction();
-			str = ORGNAME + " has placed a total of " + trans.size() + " orders with us";
-		}
-
-		else 
-			str = ORGNAME + " has placed no orders with us";
-
-		return str;
-	}
 
 	/**
 	 * Get the mostly ordered product
@@ -339,13 +287,55 @@ public class AccountSummarySales extends EnrichmentFunction {
 		if(party.getInsights() != null && party.getInsights().getDealBehaviour() != null) {
 
 			for(DealBehaviour deal : party.getInsights().getDealBehaviour()) {
-				logger.info("Deal Behaviour " + deal);
 				if(deal.getMostlyOrderedProduct() != null) {
-					str = "We have mostly sold " + deal.getMostlyOrderedProduct() + " to " + ORGNAME;
+					str = "We have mostly sold " + deal.getMostlyOrderedProduct() + " to this account.";
 				}
 			}
 		}
 
+		return str;
+	}
+
+	/** Best contact person for the account
+	 * @param party
+	 * @return
+	 */
+	private String getBestContact(Party party) {
+		String str = new String();
+		Map <String,Integer> contactMap = new HashMap<>();
+		int max = 0;
+		String bestSeller = "";
+
+		if(party.getCRMS() != null && party.getCRMS().getCRM() != null) {
+			for(CRM crm : party.getCRMS().getCRM()) {
+
+				if("done".equalsIgnoreCase(crm.getDealStatus()) && crm.getContactPerson() != null) {
+					
+					String contactName = crm.getContactPerson();
+					if(contactMap.containsKey(contactName)) {
+						int value = contactMap.get(contactName);
+						value+=1;
+						contactMap.put(contactName, value);
+					}
+					
+					else
+						contactMap.put(contactName, 1);
+				}
+			}
+		}
+
+		
+		for(Map.Entry<String, Integer> pair : contactMap.entrySet()) {
+			if(max < pair.getValue()) {
+				bestSeller = new String(pair.getKey());
+				max = pair.getValue();
+			}
+		}
+		
+		if(!bestSeller.isEmpty()) {
+			str = "Best contact person for this account is " + bestSeller;
+		}
+		
 		return str;
 	}
 
@@ -376,11 +366,11 @@ public class AccountSummarySales extends EnrichmentFunction {
 		}
 
 		if(renewCount == 0)
-			str = ORGNAME + " has no renewal orders with us.";
+			str = "There are no renewal orders with us.";
 
 		else {
-			Double prob = (double) (renewDoneCount * 100 / renewCount);
-			str = ORGNAME + " closes the renewal orders in " + prob.toString() + "% of the cases.";
+			int prob = renewDoneCount * 100 / renewCount;
+			str = "This account closes the renewal orders in " + prob + "% of the cases.";
 		}
 
 		return str;
@@ -448,8 +438,6 @@ public class AccountSummarySales extends EnrichmentFunction {
 		if(leastTotal != 0) 
 			leastProb = (double) (leastDone *100 / leastTotal);
 
-		str.append(ORGNAME + " in ");
-
 		if(mostOrdered != null) 
 			str.append(mostProb + "% of the cases closes the deal for " + mostOrdered + " positively");
 
@@ -458,6 +446,76 @@ public class AccountSummarySales extends EnrichmentFunction {
 
 		return str.toString();
 	}
+
+	/**
+	 * Get the total ordered product
+	 * @param party
+	 * @return
+	 */
+	private String getTotalOrders(Party party) {
+
+		String str = new String();
+
+		if(party.getTransactions() != null && party.getTransactions().getTransaction() != null) {
+
+			Collection<Transaction> trans = party.getTransactions().getTransaction();
+			str = "This account has placed a total of " + trans.size() + " orders with us";
+		}
+
+		else 
+			str = "This account has placed no orders with us";
+
+		return str;
+	}
+
+	/**
+	 * Get Finance Summary
+	 * @param party
+	 * @return
+	 */
+	private String getFinanceInfo(Party party) {
+		StringBuilder str = new StringBuilder();
+
+		Double minAmt = 999999.0;
+		Double maxAmt = 0.0;
+		Double totalAmount = 0.0;
+		int totalDeals = 0;
+
+		if(party.getCRMS() != null && party.getCRMS().getCRM() != null) {
+
+			for(CRM crm : party.getCRMS().getCRM()) {
+				if("done".equalsIgnoreCase(crm.getDealStatus())) {
+
+					Double estimateAmount = crm.getEstimatedDealAmount();
+					//set the max deal amount
+					if(estimateAmount != null && Double.compare(estimateAmount, maxAmt) > 0 )
+						maxAmt = estimateAmount;
+
+					//set minimum deal amount
+					if(estimateAmount != null && Double.compare(estimateAmount, minAmt) < 0 )
+						minAmt = estimateAmount;
+
+					totalDeals ++;
+
+					if(estimateAmount != null)
+						totalAmount += estimateAmount;
+				}
+			}
+		}
+
+		else {
+			str.append("No finance information available");
+			return str.toString();
+		}
+
+		Double avgAmount = totalAmount / totalDeals;
+
+		str.append("This account has signed an order of an average amount of $" + avgAmount + "/-.");
+		str.append(" And the amount range in which it has placed orders is $" + minAmt + "-$" + maxAmt + ".");
+
+		return str.toString();
+	}
+
 
 	@Override
 	public String standardize(String arg0) {

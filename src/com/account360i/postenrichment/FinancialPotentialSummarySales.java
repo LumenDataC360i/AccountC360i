@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import org.apache.log4j.Logger;
 import com.allsight.Party;
+import com.allsight.Party.AccountSummary;
 import com.allsight.Party.CRM;
 import com.allsight.Party.DealBehaviour;
 import com.allsight.Party.FinancialPotentialSummary;
@@ -29,6 +30,13 @@ public class FinancialPotentialSummarySales extends EnrichmentFunction {
 		Party party = (Party) entity;
 		String summary = new String(); 
 		Collection<FinancialPotentialSummary> summaryColl = new ArrayList<>();
+		Collection<AccountSummary> asummaryColl;
+
+		if(party.getInsights().getAccountSummary() != null)
+			asummaryColl = party.getInsights().getAccountSummary();
+
+		else
+			asummaryColl = new ArrayList<>();
 
 		logger.info("Deriving Account summary");
 
@@ -58,15 +66,22 @@ public class FinancialPotentialSummarySales extends EnrichmentFunction {
 
 				FinancialPotentialSummary fSummary = new FinancialPotentialSummary();
 				fSummary.setFinancialSummary(str);
-				fSummary.setKey(key.toString() + "_summary");
+				fSummary.setKey(key.toString() + ".");
+
+				AccountSummary aSummary = new AccountSummary();
+				aSummary.setSummary(str);
+				aSummary.setKey(key.toString() + ".");
+
 
 				logger.info(fSummary.getKey() + ": "+ str);
 				key+=1;
 				summaryColl.add(fSummary);
+				asummaryColl.add(aSummary);
 			}
 		}
 
 		party.getInsights().setFinancialPotentialSummary(summaryColl);
+		party.getInsights().setAccountSummary(asummaryColl);
 		return party;
 
 	}
