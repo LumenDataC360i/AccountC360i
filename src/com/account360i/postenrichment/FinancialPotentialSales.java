@@ -84,6 +84,8 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 					DecimalFormat df = new DecimalFormat("0");
 					//double avg = (double) avgAmount;
 					String avgAmountString = df.format(avgAmount);
+					String maxAmountStrig = df.format(maxAmount);
+					String minAmountString = df.format(minAmount);
 
 					logger.debug("max amount : " + maxAmount);
 					logger.debug("min amount : " + minAmount);
@@ -99,7 +101,7 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 						finance.setAmountRange(minAmount.toString());
 					}
 					else {
-						finance.setAmountRange(minAmount+ " - "+maxAmount);
+						finance.setAmountRange(minAmountString+ " - "+maxAmountStrig);
 					}
 					finance.setAvgAmount(avgAmountString);
 					finance.setContactID(contactID);
