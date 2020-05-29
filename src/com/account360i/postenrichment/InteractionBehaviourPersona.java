@@ -21,8 +21,8 @@ import com.allsight.entity.impl.Entity;
  * Eid post enrichment to get Interaction Behaviour
  *
  */
-public class InteractionBehaviourSummary extends EnrichmentFunction {
-	private static final Logger logger = Logger.getLogger(InteractionBehaviourSummary.class);
+public class InteractionBehaviourPersona extends EnrichmentFunction {
+	private static final Logger logger = Logger.getLogger(InteractionBehaviourPersona.class);
 	private Map<String,Integer> ProductCountMap = new HashMap<String,Integer>();
 
 	@Override
