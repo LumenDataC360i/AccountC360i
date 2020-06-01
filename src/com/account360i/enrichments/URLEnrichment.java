@@ -14,6 +14,10 @@ import com.allsight.entity.impl.Entity;
 import com.allsight.util.TextUtils;
 import com.ibm.icu.text.SimpleDateFormat;
 
+/**
+ * @author Aradhana Pandey
+ * Class to standardize urls
+ */
 public class URLEnrichment extends EnrichmentFunction {
 	private static final Logger logger = Logger.getLogger(URLEnrichment.class);
 

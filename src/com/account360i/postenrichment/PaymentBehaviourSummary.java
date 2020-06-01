@@ -21,7 +21,7 @@ import com.allsight.entity.impl.Entity;
 
 /**
  * @author Aradhana Pandey
- * Class to find payment summary of an organization
+ * Eid post enrichment to find payment summary of an organization
  *
  */
 @SuppressWarnings("deprecation")
@@ -89,7 +89,7 @@ public class PaymentBehaviourSummary extends EnrichmentFunction {
 			pay.setAvgPaymentTime(avgTimeTaken);
 			pay.setMaxPaymentTime(maxTimetaken);
 			pay.setTotalRevenue(Revenue);
-			pay.setMaxTimePaymentProduct(productName);
+			pay.setMaxTimePaymentProduct(productName.toUpperCase());
 
 
 			Collection<PaymentBehaviour> coll = new ArrayList<PaymentBehaviour>();

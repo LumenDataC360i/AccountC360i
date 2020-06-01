@@ -25,7 +25,7 @@ import com.allsight.shaded.com.google.common.collect.Lists;
 
 /**
  * @author Aradhana Pandey
- * Class for creation of organization hierarchy
+ * Eid post enrichment for creation of organization hierarchy
  */
 public class OrganizationHierarchy extends EnrichmentFunction {
 
