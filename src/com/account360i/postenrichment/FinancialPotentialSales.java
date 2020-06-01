@@ -1,10 +1,12 @@
 package com.account360i.postenrichment;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -84,11 +86,16 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 					String contactPersonName = ContactMap.get(contactID);
 					Double avgAmount = ContactSumAmount.get(contactID) / numberOfOrders;
 					DecimalFormat df = new DecimalFormat("0");
-					//double avg = (double) avgAmount;
+					
 					String avgAmountString = df.format(avgAmount);
 					String maxAmountStrig = df.format(maxAmount);
 					String minAmountString = df.format(minAmount);
-
+					
+					// to change in international system
+					avgAmountString = NumberFormat.getNumberInstance(Locale.US).format(avgAmountString);
+					maxAmountStrig = NumberFormat.getNumberInstance(Locale.US).format(maxAmountStrig);
+					minAmountString = NumberFormat.getNumberInstance(Locale.US).format(minAmountString);
+					
 					logger.debug("max amount : " + maxAmount);
 					logger.debug("min amount : " + minAmount);
 					logger.debug("avg amount : " + avgAmountString);

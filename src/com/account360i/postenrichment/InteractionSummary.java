@@ -12,6 +12,10 @@ import com.allsight.enrichment.common.EnrichmentFunction;
 import com.allsight.entity.impl.Entity;
 
 
+/**
+ * @author Aradhana Pandey
+ * Enrichment to show interaction summary
+ */
 @SuppressWarnings("deprecation")
 public class InteractionSummary extends EnrichmentFunction {
 

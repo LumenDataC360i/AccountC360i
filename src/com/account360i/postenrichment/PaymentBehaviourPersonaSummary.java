@@ -1,7 +1,9 @@
 package com.account360i.postenrichment;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Locale;
 
 import org.apache.log4j.Logger;
 
@@ -11,6 +13,10 @@ import com.allsight.Party.PaymentBehaviourSummary;
 import com.allsight.enrichment.common.EnrichmentFunction;
 import com.allsight.entity.impl.Entity;
 
+/**
+ * @author Aradhana Pandey
+ * Post Enrichment to show payment summary
+ */
 public class PaymentBehaviourPersonaSummary extends EnrichmentFunction {
 
 	private static final Logger logger = Logger.getLogger(PaymentBehaviourPersonaSummary.class);
@@ -51,7 +57,7 @@ public class PaymentBehaviourPersonaSummary extends EnrichmentFunction {
 			summary = "Product for Max Time         : " + element.getMaxTimePaymentProduct();
 			SUMMARYLIST.add(summary);
 			
-			summary = "Total Revenue         : " + element.getTotalRevenue();
+			summary = "Total Revenue         		: " + NumberFormat.getNumberInstance(Locale.US).format(element.getTotalRevenue());
 			SUMMARYLIST.add(summary);
 		}	
 		
