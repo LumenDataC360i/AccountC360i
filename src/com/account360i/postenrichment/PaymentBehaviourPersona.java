@@ -25,8 +25,8 @@ import com.allsight.entity.impl.Entity;
  *
  */
 @SuppressWarnings("deprecation")
-public class PaymentBehaviourSummary extends EnrichmentFunction {
-	private static final Logger logger = Logger.getLogger(PaymentBehaviourSummary.class);
+public class PaymentBehaviourPersona extends EnrichmentFunction {
+	private static final Logger logger = Logger.getLogger(PaymentBehaviourPersona.class);
 	private List<Long> TimeTaken = new ArrayList<Long>();
 	private Double Revenue = 0.0;
 	private Map<String,Long> ProductTimeTaken = new HashMap<String,Long>();

@@ -6,16 +6,14 @@ import java.util.Collection;
 import org.apache.log4j.Logger;
 
 import com.allsight.Party;
-import com.allsight.Party.InteractionBehaviour;
-import com.allsight.Party.InteractionBehaviourSummary;
+import com.allsight.Party.PaymentBehaviour;
+import com.allsight.Party.PaymentBehaviourSummary;
 import com.allsight.enrichment.common.EnrichmentFunction;
 import com.allsight.entity.impl.Entity;
 
+public class PaymentBehaviourPersonaSummary extends EnrichmentFunction {
 
-@SuppressWarnings("deprecation")
-public class InteractionSummary extends EnrichmentFunction {
-
-	private static final Logger logger = Logger.getLogger(InteractionSummary.class);
+	private static final Logger logger = Logger.getLogger(PaymentBehaviourPersonaSummary.class);
 	private Collection<String> SUMMARYLIST = new ArrayList<>();
 	Integer key = 1;
 	
@@ -37,26 +35,23 @@ public class InteractionSummary extends EnrichmentFunction {
 		
 		String summary = new String();
 		Party party = (Party) entity;
-		Collection<InteractionBehaviourSummary> summaryColl = new ArrayList<>();
+		Collection<PaymentBehaviourSummary> summaryColl = new ArrayList<>();
 
 		
-		if (((Party) entity).getInsights() != null && ((Party) entity).getInsights().getInteractionBehaviour()!= null) {
-			Collection<InteractionBehaviour> interactionBehaviour = ((Party) entity).getInsights().getInteractionBehaviour();
+		if (((Party) entity).getInsights() != null && ((Party) entity).getInsights().getPaymentBehaviour()!= null) {
+			Collection<PaymentBehaviour> paymentBehaviour = ((Party) entity).getInsights().getPaymentBehaviour();
 		
-			InteractionBehaviour element = interactionBehaviour.iterator().next();
-			summary = "Total number of interaction(s)         : " + element.getTotalInteractions();
+			PaymentBehaviour element = paymentBehaviour.iterator().next();
+			summary = "Avg Time for payment         : " + element.getAvgPaymentTime();
 			SUMMARYLIST.add(summary);
 			
-			summary = "Total number of email interaction(s)   : " + element.getTotalEmailInteractions();
+			summary = "Max time for Payment         : " + element.getMaxPaymentTime();
 			SUMMARYLIST.add(summary);
 			
-			summary = "Total number of webchat interaction(s) : " + element.getTotalWebchatInteractions();
+			summary = "Product for Max Time         : " + element.getMaxTimePaymentProduct();
 			SUMMARYLIST.add(summary);
 			
-			summary = "Preferred Medium                       : " + element.getPreferredMedium();
-			SUMMARYLIST.add(summary);
-			
-			summary = "Most Talked Product                    : " + element.getMostTalkedProduct();
+			summary = "Total Revenue         : " + element.getTotalRevenue();
 			SUMMARYLIST.add(summary);
 		}	
 		
@@ -66,8 +61,8 @@ public class InteractionSummary extends EnrichmentFunction {
 				if(str.isEmpty())
 					continue;
 
-				InteractionBehaviourSummary isummary= new InteractionBehaviourSummary();
-				isummary.setInteractionSummary(str);
+				PaymentBehaviourSummary isummary= new PaymentBehaviourSummary();
+				isummary.setPaymentSummary(str);
 				isummary.setKey(key.toString() + "_summary");
 
 				logger.info(isummary.getKey() + ": "+ str);
@@ -76,7 +71,7 @@ public class InteractionSummary extends EnrichmentFunction {
 			}
 		}
 
-		party.getInsights().setInteractionBehaviourSummary(summaryColl);
+		party.getInsights().setPaymentBehaviourSummary(summaryColl);
 		return party;
 	}
 
