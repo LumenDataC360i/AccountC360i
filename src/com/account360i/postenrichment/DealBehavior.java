@@ -91,7 +91,7 @@ public class DealBehavior extends EnrichmentFunction{
 							//logger.debug("diffInMilliSec: "  + diffInMilliSec);
 							timeDurations.add(diffInMilliSec);
 							//logger.debug("timeDurations: "  + timeDurations);
-							String productName = crmBo.getProductName().toLowerCase().trim();
+							String productName = crmBo.getProductName().toUpperCase();
 							populateMap(productName,diffInMilliSec);
 
 						}
@@ -165,8 +165,10 @@ public class DealBehavior extends EnrichmentFunction{
 			//logger.debug("Transaction collection : " + transactions);
 
 			for (Transaction transaction : transactions) {
-				String productName = transaction.getProductName();
-				productList.add(productName);				
+				if(transaction.getProductName()!=null) {
+				String productName = transaction.getProductName().toUpperCase();
+				productList.add(productName);	
+				}
 
 			} 
 			//logger.debug("productList : " + productList);
@@ -253,7 +255,7 @@ public class DealBehavior extends EnrichmentFunction{
 
 			return time;
 		}
-		return "not available";
+		return null;
 	}
 
 
@@ -271,7 +273,7 @@ public class DealBehavior extends EnrichmentFunction{
 			logger.debug("max time in days/week  : " + time);
 			return timeInStandard;
 		}
-		return "not available";
+		return null;
 	}
 
 
@@ -303,7 +305,11 @@ public class DealBehavior extends EnrichmentFunction{
 		}
 
 		if(week != 0) {
-			time = week + " week(s)";
+			time = week + " weeks";
+		}
+		
+		else if (week == 1) {
+			time = week + " week";
 		}
 		else {
 			if(days != 0) {
@@ -364,7 +370,7 @@ public class DealBehavior extends EnrichmentFunction{
 			logger.debug("maxproductName : " + maxproductName);
 			return maxproductName;	
 		}
-		return "not applicable";
+		return null;
 	}
 
 	@Override

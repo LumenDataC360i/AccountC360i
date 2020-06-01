@@ -71,15 +71,15 @@ public class DealBehaviorProduct  extends EnrichmentFunction{
 				//logger.debug(" crmBoCollection :  "  + crmBoCollection);
 				for ( CRM crmBo : crmBoCollection ) {
 					if(crmBo.getProductName()!= null) {
-						productNames.add(crmBo.getProductName().toString());
+						productNames.add(crmBo.getProductName().toUpperCase().toString());
 					}
 				}
 
-				//logger.debug(" productNames :  "  + productNames);
+				logger.debug(" productNames :  "  + productNames);
 				/*To iterate over the unique products */
 				Set<String> uniqueProductNames = new HashSet<String>(productNames);	 
 
-				//logger.debug(" uniqueProductNames :   "  + uniqueProductNames);
+				logger.debug(" uniqueProductNames :   "  + uniqueProductNames);
 				Party.Insights insight = new Party.Insights();
 				Collection<DealBehaviourProduct> dealBehaviorProductColl = new ArrayList<DealBehaviourProduct>();
 
@@ -93,7 +93,7 @@ public class DealBehaviorProduct  extends EnrichmentFunction{
 
 						if(crmBo.getProductName()!= null && crmBo.getProductName().equalsIgnoreCase(uniquePrds)) {
 							productId = crmBo.getProductID();
-							//logger.debug(" crmBo.getProductName() :   "  + crmBo.getProductName().toString());
+							logger.debug(" crmBo.getProductName() :   "  + crmBo.getProductName().toString());
 							if(crmBo.getDealStartDate()!= null && crmBo.getDealEndDate()!=null) { 
 
 								SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -103,6 +103,7 @@ public class DealBehaviorProduct  extends EnrichmentFunction{
 								Timestamp endTimeStamp = new java.sql.Timestamp(dealEndDate.getTime());
 								long diffInMilliSec = endTimeStamp.getTime() -  startTimestamp.getTime() ;	
 								timeDurations.add(diffInMilliSec);
+								logger.debug("timeDurations" + timeDurations);
 
 							}
 
@@ -120,8 +121,13 @@ public class DealBehaviorProduct  extends EnrichmentFunction{
 					dealBehaviorProduct.setProductID(productId);
 					dealBehaviorProduct.setNumberOfDeals(noOfDeals);
 					dealBehaviorProduct.setAvgDealTime(avgDealClosureTimeStr);
+					
+					/*Added the this condition not to populate the dealBehavior BO itself if the no Of Deals and avgDealClosureTimeStr is null */
+					if(noOfDeals!= null && avgDealClosureTimeStr!= null)
+					{
 					dealBehaviorProductColl.add(dealBehaviorProduct);
-
+					logger.debug(" dealBehaviorProductColl :   "  + dealBehaviorProductColl);
+					}
 				}
 				insight.setDealBehaviourProduct(dealBehaviorProductColl);
 				logger.debug("insight" + insight.toString() );
@@ -150,11 +156,12 @@ public class DealBehaviorProduct  extends EnrichmentFunction{
 
 		if(timeDurations.size()!=0) {
 			String numberOfDeals = Integer.toString(timeDurations.size()); 
+			logger.debug(" numberOfDeals :   "  + numberOfDeals);
 			return numberOfDeals;
 		}
 		else
 		{
-			return "Not Available";
+			return null;
 		}
 	}
 
@@ -175,10 +182,10 @@ public class DealBehaviorProduct  extends EnrichmentFunction{
 
 			}
 			String time = timeStandard(average);
-
+			logger.debug(" time :   "  + time);
 			return time;
 		}
-		return "not available";
+		return null;
 	}
 
 	/**
@@ -208,7 +215,10 @@ public class DealBehaviorProduct  extends EnrichmentFunction{
 		}
 
 		if(week != 0) {
-			time = week + " week(s)";
+			time = week + " weeks";
+		}
+		else if (week == 1) {
+			time = week + " week";
 		}
 		else {
 			if(days != 0) {
