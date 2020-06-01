@@ -38,6 +38,7 @@ public class DealBehavior extends EnrichmentFunction{
 	List<Long> timeDurations = new ArrayList<Long>();
 	private Map<String,Long> productTimeTaken = new HashMap<String,Long>();
 	private Collection<String> productList = new ArrayList<>();
+	
 
 	public Object applyEnrichment(Entity<?> entity) throws Exception {
 		// TODO Auto-generated method stub
@@ -101,11 +102,15 @@ public class DealBehavior extends EnrichmentFunction{
 				}
 
 			}
-
-			String[] mostAndLeastOrderedProductStr = mostAndLeastOrderedProduct(asParty).split(":");
-			String mostOrderedProduct = mostAndLeastOrderedProductStr[0];
+			String mostOrderedProduct =null;
+			String leastOrderedProduct = null;
+			String mostAndLeastOrderedProductStr = mostAndLeastOrderedProduct(asParty);
+			if(mostAndLeastOrderedProductStr!= null) {
+				String[] mostAndLeastOrderedProduct = mostAndLeastOrderedProductStr.split(":");
+			 mostOrderedProduct = mostAndLeastOrderedProduct[0];
 			logger.debug("mostOrderedProduct: "  + mostOrderedProduct);
-			String leastOrderedProduct = mostAndLeastOrderedProductStr[1];
+			 leastOrderedProduct = mostAndLeastOrderedProduct[1];
+			}
 			logger.debug("leastOrderedProduct: "  + leastOrderedProduct);
 			String avgDealClosureTimeStr =  avgDealClosureTime();
 			logger.debug("avgDealClosureTimeStr: "  + avgDealClosureTimeStr);
@@ -162,7 +167,7 @@ public class DealBehavior extends EnrichmentFunction{
 		Map<String, Integer> productNameCountMap = new HashMap<>(); 
 		if (((Party) asParty).getTransactions() != null && ((Party) asParty).getTransactions().getTransaction()!= null) {
 			Collection<Transaction> transactions = ((Party) asParty).getTransactions().getTransaction();
-			//logger.debug("Transaction collection : " + transactions);
+			logger.debug("Transaction collection : " + transactions);
 
 			for (Transaction transaction : transactions) {
 				if(transaction.getProductName()!=null) {
@@ -171,8 +176,8 @@ public class DealBehavior extends EnrichmentFunction{
 				}
 
 			} 
-			//logger.debug("productList : " + productList);
-			// Traverse through array elements and 
+			logger.debug("productList : " + productList);
+		// Traverse through array elements and 
 			// count frequencies 
 			for(String prdName : productList )
 			{ 
@@ -188,9 +193,11 @@ public class DealBehavior extends EnrichmentFunction{
 			//return (sortByCountValues(productNameCountMap));
 
 			logger.debug("productNameCountMap : " + productNameCountMap);
+			return (sortByCountValues(productNameCountMap));
 
 		}
-		return (sortByCountValues(productNameCountMap));
+		return null;
+		
 	}
 
 
@@ -211,8 +218,8 @@ public class DealBehavior extends EnrichmentFunction{
 		for (Map.Entry<String, Integer> prdName : prdCountSet) { 
 			// Check for word having highest frequency 
 			if (prdName.getValue() > count) { 
-				//logger.debug(" me.getValue()   "+me.getValue());
-				//logger.debug("value " + value);
+				logger.debug(" prdName.getValue()   "+prdName.getValue());
+				logger.debug("value " + count);
 				count = prdName.getValue(); 
 				prdWithMaxCount = prdName.getKey(); 
 			} 
@@ -223,9 +230,9 @@ public class DealBehavior extends EnrichmentFunction{
 		for (Map.Entry<String, Integer> prdName : prdCountSet) { 
 			// Check for word having least frequency 
 			if (prdName.getValue() < valueHighest ) { 
-				//logger.debug("valueHighest  : " + valueHighest);
-				//logger.debug("value " + count);
-				//logger.debug(count);
+				logger.debug("valueHighest  : " + valueHighest);
+				logger.debug("value " + count);
+				logger.debug(count);
 				valueHighest = prdName.getValue(); 
 				prdWithMinCount = prdName.getKey(); 
 			} 
