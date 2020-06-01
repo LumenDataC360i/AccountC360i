@@ -329,7 +329,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 			Collections.sort(list, c);
 
 			str.append("We have moslty sold " + list.get(0).getKey() + " to this account.");
-			str.append("<br> Following is the list of products sold (desceding order): ");
+			str.append(" Following is the list of products sold (desceding order): ");
 			for(int i = 1; i < list.size()-1 ; i++) {
 				str.append(list.get(i).getKey() + ", ");
 			}
@@ -398,7 +398,8 @@ public class AccountSummarySales extends EnrichmentFunction {
 				if(trans.getProductName() != null) {
 					String product = trans.getProductName().toUpperCase();
 					if(trans.getQuantity() != null) {
-						Integer amount = Integer.parseInt(trans.getTotalAmount());
+						Integer amount = (int) Double.parseDouble(trans.getTotalAmount());
+
 
 						if(productAmountMap.containsKey(product)) {
 							productAmountMap.put(product, productAmountMap.get(product) + amount);
@@ -424,7 +425,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 			Collections.sort(list, c);
 
 			str.append(list.get(0).getKey() + "  have generated revenue of $" + NumberFormat.getNumberInstance(Locale.US).format(list.get(0).getValue()) + " for this account.");
-			str.append("<br> Revenue from rest of the products is as follows (desceding order): ");
+			str.append(" Revenue from rest of the products is as follows (desceding order): ");
 			for(int i = 1; i < list.size()-1 ; i++) {
 				str.append(list.get(i).getKey() + ": $" + NumberFormat.getNumberInstance(Locale.US).format(list.get(i).getValue()) + ", ");
 			}
@@ -568,7 +569,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 			Collections.sort(list, c);
 
 			str.append("Deals for " + list.get(0).getKey() + " is closed with " + list.get(0).getValue() + "% rate.");
-			str.append("Deal closure rate for other prodcuts is as follows: ");
+			str.append(" Deal closure rate for other prodcuts is as follows: ");
 
 			for(int i = 1 ; i<list.size()-1 ; i++) {
 				str.append(list.get(i).getKey() + "- " + list.get(i).getValue() + "%, ");
@@ -687,5 +688,10 @@ public class AccountSummarySales extends EnrichmentFunction {
 			}
 
 		}
+
+		String amt = "1247.04";
+		int x = (int) Double.parseDouble(amt);
+		System.out.println(x);
+
 	}
 }
