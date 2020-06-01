@@ -1,12 +1,14 @@
 package com.account360i.postenrichment;
 
 import java.sql.Timestamp;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -25,8 +27,8 @@ import com.allsight.entity.impl.Entity;
  *
  */
 @SuppressWarnings("deprecation")
-public class PaymentBehaviourSummary extends EnrichmentFunction {
-	private static final Logger logger = Logger.getLogger(PaymentBehaviourSummary.class);
+public class PaymentBehaviourPersona extends EnrichmentFunction {
+	private static final Logger logger = Logger.getLogger(PaymentBehaviourPersona.class);
 	private List<Long> TimeTaken = new ArrayList<Long>();
 	private Double Revenue = 0.0;
 	private Map<String,Long> ProductTimeTaken = new HashMap<String,Long>();
