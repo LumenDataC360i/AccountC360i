@@ -14,13 +14,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
 import org.apache.log4j.Logger;
 import com.allsight.Party;
 import com.allsight.Party.AccountSummary;
 import com.allsight.Party.CRM;
-import com.allsight.Party.DealBehaviour;
 import com.allsight.Party.InteractionBehaviour;
 import com.allsight.Party.Organization;
 import com.allsight.Party.PaymentBehaviour;
@@ -74,6 +72,9 @@ public class AccountSummarySales extends EnrichmentFunction {
 		SUMMARYLIST.add(summary);
 
 		summary = getBestContact(party);
+		SUMMARYLIST.add(summary);
+
+		summary = getRevenueDetails(party);
 		SUMMARYLIST.add(summary);
 
 		summary = getDealDetails(party);
@@ -328,7 +329,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 			Collections.sort(list, c);
 
 			str.append("We have moslty sold " + list.get(0).getKey() + " to this account.");
-			str.append("\\n Following is the list of products sold (desceding order): ");
+			str.append("<br> Following is the list of products sold (desceding order): ");
 			for(int i = 1; i < list.size()-1 ; i++) {
 				str.append(list.get(i).getKey() + ", ");
 			}
@@ -375,10 +376,63 @@ public class AccountSummarySales extends EnrichmentFunction {
 		}
 
 		if(!bestSeller.isEmpty()) {
-			str = "Best contact person for this account is " + bestSeller;
+			str = "Best contact person for this account is " + bestSeller + ".";
 		}
 
 		return str;
+	}
+
+	/**
+	 * Get revenue details for the products
+	 * @param party
+	 * @return
+	 */
+	private String getRevenueDetails(Party party) {
+		StringBuilder str = new StringBuilder();
+
+		Map <String,Integer> productAmountMap = new HashMap<String, Integer>();
+
+		if(party.getTransactions() != null && party.getTransactions().getTransaction() != null) {
+
+			for(Transaction trans : party.getTransactions().getTransaction()) {
+				if(trans.getProductName() != null) {
+					String product = trans.getProductName().toUpperCase();
+					if(trans.getQuantity() != null) {
+						Integer amount = Integer.parseInt(trans.getTotalAmount());
+
+						if(productAmountMap.containsKey(product)) {
+							productAmountMap.put(product, productAmountMap.get(product) + amount);
+						}
+
+						else
+							productAmountMap.put(product, amount);
+					}
+				}
+			}
+		}
+
+		if(!productAmountMap.isEmpty()) {
+			List<Map.Entry<String,Integer>> list = new LinkedList<>(productAmountMap.entrySet());
+			Comparator<Entry<String, Integer>> c = new Comparator<Map.Entry<String,Integer>>() {
+
+				//sort in descending order
+				public int compare(Entry<String, Integer> o1, Entry<String, Integer> o2) {
+					return (o2.getValue().compareTo(o1.getValue()));
+				}
+			};
+
+			Collections.sort(list, c);
+
+			str.append(list.get(0).getKey() + "  have generated revenue of $" + NumberFormat.getNumberInstance(Locale.US).format(list.get(0).getValue()) + " for this account.");
+			str.append("<br> Revenue from rest of the products is as follows (desceding order): ");
+			for(int i = 1; i < list.size()-1 ; i++) {
+				str.append(list.get(i).getKey() + ": $" + NumberFormat.getNumberInstance(Locale.US).format(list.get(i).getValue()) + ", ");
+			}
+
+			str.append(list.get(list.size()-1).getKey() + ": $" + NumberFormat.getNumberInstance(Locale.US).format(list.get(list.size()-1).getValue()));
+		}
+
+		return str.toString();
 	}
 
 	/**
@@ -426,7 +480,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 
 			if(renewCount != 0) {
 				int prob = renewDoneCount * 100 / renewCount;
-				str = str + "Also the renewal deals are closed in " + prob + "% of the cases.";
+				str = str + " Also the renewal deals are closed in " + prob + "% of the cases.";
 			}
 		}
 
@@ -438,48 +492,44 @@ public class AccountSummarySales extends EnrichmentFunction {
 	 * @param party
 	 * @return
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private String getDealDetails(Party party) {
 		StringBuilder str = new StringBuilder();
 
-		Map<String,Set<Integer>> productBasedDeals = new HashMap<>();
-
-		String mostOrdered = null;
-		String leastOrdered = null;
-		int mostDone = 0;
-		int mostTotal = 0;
-		int leastDone = 0;
-		int leastTotal = 0;
-
-		Double mostProb = 0.0;
-		Double leastProb = 0.0;
-
-		if(party.getInsights() != null && party.getInsights().getDealBehaviour() != null) {
-			for(DealBehaviour deal : party.getInsights().getDealBehaviour()) {
-				mostOrdered = deal.getMostlyOrderedProduct();
-				leastOrdered = deal.getLeastOrderedProduct();
-
-				logger.info("Most Ordered: " + mostOrdered);
-				logger.info("Least Ordered: " + leastOrdered);
-			}
-		}
+		Map<String,List<Integer>> productBasedDeals = new HashMap<>();
+		Map<String,Integer> productDealClosure = new HashMap<>();
 
 		if(party.getCRMS() != null && party.getCRMS().getCRM() != null) {
 			for(CRM crm : party.getCRMS().getCRM()) {
 
-				//for most ordered product
-				if(mostOrdered != null && mostOrdered.equalsIgnoreCase(crm.getProductName())) {
-					mostTotal++;
+				if(crm.getProductName() != null) {
 
-					if("done".equalsIgnoreCase(crm.getDealStatus()))
-						mostDone++;
-				}
+					String prodId = crm.getProductName().toUpperCase();
 
-				//for least ordered product
-				if(leastOrdered != null && leastOrdered.equalsIgnoreCase(crm.getProductName())) {
-					leastTotal++;
+					if(productBasedDeals.containsKey(prodId)) {
 
-					if("done".equalsIgnoreCase(crm.getDealStatus()))
-						leastDone++;
+						List<Integer> values = productBasedDeals.get(prodId);
+						values.add(0, values.get(0)+1);
+
+						if("done".equalsIgnoreCase(crm.getDealStatus())) {
+							values.add(1, values.get(1)+1);
+						}
+					}
+
+					//add new entry in the map
+					else {
+						List<Integer> values = new ArrayList();
+
+						//total deal is one for new entry
+						values.add(0, 1);
+						if("done".equalsIgnoreCase(crm.getDealStatus())) 
+							values.add(1, 1);
+
+						else
+							values.add(1, 0);
+
+						productBasedDeals.put(prodId, values);
+					}
 				}
 			}
 		}
@@ -489,19 +539,44 @@ public class AccountSummarySales extends EnrichmentFunction {
 			return str.toString();
 		}
 
-		//logger.info("Values needed: " + mostTotal + " : " + mostDone + " : " + leastTotal + " : " + leastDone);
+		logger.info("Value Map: " + productBasedDeals);
 
-		if(mostTotal != 0) 
-			mostProb = (double) (mostDone * 100 / mostTotal);
+		if(!productBasedDeals.isEmpty()) {
+			for(Map.Entry<String,List<Integer>> entry : productBasedDeals.entrySet()) {
 
-		if(leastTotal != 0) 
-			leastProb = (double) (leastDone *100 / leastTotal);
+				int total = entry.getValue().get(0);
+				int done = entry.getValue().get(1);
 
-		if(mostOrdered != null) 
-			str.append(mostProb + "% of the cases closes the deal for " + mostOrdered + " positively");
+				if(total == 0)
+					continue;
 
-		if(leastOrdered != null) 
-			str.append(" whereas for the " + leastOrdered + " it positively closed only " + leastProb + "% of the time.");
+				int closureRate = done * 100 / total;
+				productDealClosure.put(entry.getKey(), closureRate);
+			}
+		}
+
+		if(!productDealClosure.isEmpty()) {
+			List<Map.Entry<String,Integer>> list = new LinkedList<>(productDealClosure.entrySet());
+			Comparator<Entry<String, Integer>> c = new Comparator<Map.Entry<String,Integer>>() {
+
+				//sort in descending order
+				public int compare(Entry<String, Integer> o1, Entry<String, Integer> o2) {
+					return (o2.getValue().compareTo(o1.getValue()));
+				}
+			};
+
+			Collections.sort(list, c);
+
+			str.append("Deals for " + list.get(0).getKey() + " is closed with " + list.get(0).getValue() + "% rate.");
+			str.append("Deal closure rate for other prodcuts is as follows: ");
+
+			for(int i = 1 ; i<list.size()-1 ; i++) {
+				str.append(list.get(i).getKey() + "- " + list.get(i).getValue() + "%, ");
+			}
+
+			str.append(list.get(list.size()-1).getKey() + "- " + list.get(list.size()-1).getValue() + "%");
+
+		}
 
 		return str.toString();
 	}
@@ -522,7 +597,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 		}
 
 		else 
-			str = "This account has placed no orders with us";
+			str = "This account has placed no orders with us.";
 
 		return str;
 	}
@@ -567,7 +642,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 
 		int avgAmount = totalAmount / totalDeals;
 
-		str.append("This account has signed an order of an average amount of $" + NumberFormat.getNumberInstance(Locale.US).format(avgAmount));
+		str.append("This account has signed an order of an average amount of $" + NumberFormat.getNumberInstance(Locale.US).format(avgAmount) + ".");
 		str.append(" And the amount range in which it has placed orders is $" + NumberFormat.getNumberInstance(Locale.US).format(minAmt) + "-$");
 		str.append(NumberFormat.getNumberInstance(Locale.US).format(maxAmt) + ".");
 
