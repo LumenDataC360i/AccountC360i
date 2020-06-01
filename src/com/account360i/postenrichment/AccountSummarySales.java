@@ -328,7 +328,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 			Collections.sort(list, c);
 
 			str.append("We have moslty sold " + list.get(0).getKey() + " to this account.");
-			str.append("\n Following is the list of products sold (desceding order): ");
+			str.append("\\n Following is the list of products sold (desceding order): ");
 			for(int i = 1; i < list.size()-1 ; i++) {
 				str.append(list.get(i).getKey() + ", ");
 			}

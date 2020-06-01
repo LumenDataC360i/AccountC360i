@@ -19,6 +19,7 @@ import com.allsight.Party.PaymentBehaviour;
 import com.allsight.Party.Transaction;
 import com.allsight.enrichment.common.EnrichmentFunction;
 import com.allsight.entity.impl.Entity;
+import com.ibm.icu.text.DecimalFormat;
 
 
 /**
@@ -83,6 +84,9 @@ public class PaymentBehaviourPersona extends EnrichmentFunction {
 			String productName = maxProductTimeTaken();
 			String maxTimetaken = maxTimeTaken();
 			String avgTimeTaken = avgTimeTaken();
+			
+			DecimalFormat df = new DecimalFormat("0");
+			String revenueString = df.format(Revenue);
 
 			Party asparty = (Party)entity;
 			Party.Insights insight = new Party.Insights();
@@ -90,7 +94,7 @@ public class PaymentBehaviourPersona extends EnrichmentFunction {
 			pay.setKey("1");
 			pay.setAvgPaymentTime(avgTimeTaken);
 			pay.setMaxPaymentTime(maxTimetaken);
-			pay.setTotalRevenue(Revenue);
+			pay.setTotalRevenue(Double.parseDouble(revenueString));
 			pay.setMaxTimePaymentProduct(productName.toUpperCase());
 
 

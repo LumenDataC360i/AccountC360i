@@ -92,9 +92,9 @@ public class FinancialPotentialSales extends EnrichmentFunction {
 					String minAmountString = df.format(minAmount);
 					
 					// to change in international system
-					avgAmountString = NumberFormat.getNumberInstance(Locale.US).format(avgAmountString);
-					maxAmountStrig = NumberFormat.getNumberInstance(Locale.US).format(maxAmountStrig);
-					minAmountString = NumberFormat.getNumberInstance(Locale.US).format(minAmountString);
+					avgAmountString = NumberFormat.getNumberInstance(Locale.US).format(Integer.parseInt(avgAmountString));
+					maxAmountStrig = NumberFormat.getNumberInstance(Locale.US).format(Integer.parseInt(maxAmountStrig));
+					minAmountString = NumberFormat.getNumberInstance(Locale.US).format(Integer.parseInt(minAmountString));
 					
 					logger.debug("max amount : " + maxAmount);
 					logger.debug("min amount : " + minAmount);
