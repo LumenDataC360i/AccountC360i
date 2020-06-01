@@ -1,15 +1,21 @@
 package com.account360i.postenrichment;
 
 import java.sql.Timestamp;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
+import java.util.Set;
+import java.util.Map.Entry;
 import org.apache.log4j.Logger;
 import com.allsight.Party;
 import com.allsight.Party.AccountSummary;
@@ -64,7 +70,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 		summary = getDefaultPaymentDetails(party);
 		SUMMARYLIST.add(summary);
 
-		summary = getMostOrders(party);
+		summary = getMostSoldOrders(party);
 		SUMMARYLIST.add(summary);
 
 		summary = getBestContact(party);
@@ -153,10 +159,10 @@ public class AccountSummarySales extends EnrichmentFunction {
 
 		if(!createDate.isEmpty()) {
 			if(date.after(threshold)) 
-				str.append("This is one of our new");
+				str.append("This is one of our new ");
 
 			else
-				str.append("This is one of our old");
+				str.append("This is one of our old ");
 		}
 
 		else
@@ -174,7 +180,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 		}
 
 		else
-			str.append(" account. ");
+			str.append("account. ");
 
 		if(totalInteraction == null)
 			return str.toString();
@@ -232,6 +238,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 
 		String str = new String();
 		int count = 0;
+		int total = 0;
 		Timestamp today = DateUtil.getCurrentTimestamp();
 
 
@@ -239,6 +246,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 
 			for (Transaction trans : party.getTransactions().getTransaction()) {
 
+				total++;
 				//when the status is pending
 				if("pending".equalsIgnoreCase(trans.getPaymentStatus())) {
 					Timestamp ts = trans.getStartTimestamp();
@@ -262,13 +270,17 @@ public class AccountSummarySales extends EnrichmentFunction {
 
 		//no defaulted payments
 		if(count == 0) 
-			str = "Meanwhile there has never been defaulted payment in the orders placed till date";
+			str = "There has never been defaulted payment in the orders placed till date";
 
 		if(count == 1) 
-			str = "Meanwhile there has been only one defaulted payment in the orders placed till date";
+			str = "There has been only one defaulted payment in the orders placed till date";
 
-		else
-			str = "Meanwhile there has been " + count + " defaulted payments in the orders placed till date";
+		else {
+			int prob = count * 100 /total;
+			str = "There has been " + count + " defaulted payments in the orders placed till date. ";
+			str = str + "These defaulted payments accounts for " + prob + "% of the total transactions.";
+
+		}
 
 		return str;
 	}
@@ -279,21 +291,52 @@ public class AccountSummarySales extends EnrichmentFunction {
 	 * @param party
 	 * @return
 	 */
-	private String getMostOrders(Party party) {
+	private String getMostSoldOrders(Party party) {
 
-		String str = new String();
+		StringBuilder str = new StringBuilder();
+		Map <String,Integer> productCountMap = new HashMap<String, Integer>();
 
-		logger.info("Deal Behaviour collection: " + party.getInsights().getDealBehaviour());
-		if(party.getInsights() != null && party.getInsights().getDealBehaviour() != null) {
+		if(party.getTransactions() != null && party.getTransactions().getTransaction() != null) {
 
-			for(DealBehaviour deal : party.getInsights().getDealBehaviour()) {
-				if(deal.getMostlyOrderedProduct() != null) {
-					str = "We have mostly sold " + deal.getMostlyOrderedProduct() + " to this account.";
+			for(Transaction trans : party.getTransactions().getTransaction()) {
+				if(trans.getProductName() != null) {
+					String product = trans.getProductName().toUpperCase();
+					if(trans.getQuantity() != null) {
+						Integer quantity = Integer.parseInt(trans.getQuantity());
+
+						if(productCountMap.containsKey(product)) {
+							productCountMap.put(product, productCountMap.get(product) + quantity);
+						}
+
+						else
+							productCountMap.put(product, quantity);
+					}
 				}
 			}
 		}
 
-		return str;
+		if(!productCountMap.isEmpty()) {
+			List<Map.Entry<String,Integer>> list = new LinkedList<>(productCountMap.entrySet());
+			Comparator<Entry<String, Integer>> c = new Comparator<Map.Entry<String,Integer>>() {
+
+				//sort in descending order
+				public int compare(Entry<String, Integer> o1, Entry<String, Integer> o2) {
+					return (o2.getValue().compareTo(o1.getValue()));
+				}
+			};
+
+			Collections.sort(list, c);
+
+			str.append("We have moslty sold " + list.get(0).getKey() + " to this account.");
+			str.append("\n Following is the list of products sold (desceding order): ");
+			for(int i = 1; i < list.size()-1 ; i++) {
+				str.append(list.get(i).getKey() + ", ");
+			}
+
+			str.append(list.get(list.size()-1).getKey());
+		}
+
+		return str.toString();
 	}
 
 	/** Best contact person for the account
@@ -310,32 +353,31 @@ public class AccountSummarySales extends EnrichmentFunction {
 			for(CRM crm : party.getCRMS().getCRM()) {
 
 				if("done".equalsIgnoreCase(crm.getDealStatus()) && crm.getContactPerson() != null) {
-					
+
 					String contactName = crm.getContactPerson();
 					if(contactMap.containsKey(contactName)) {
 						int value = contactMap.get(contactName);
 						value+=1;
 						contactMap.put(contactName, value);
 					}
-					
+
 					else
 						contactMap.put(contactName, 1);
 				}
 			}
 		}
 
-		
 		for(Map.Entry<String, Integer> pair : contactMap.entrySet()) {
 			if(max < pair.getValue()) {
 				bestSeller = new String(pair.getKey());
 				max = pair.getValue();
 			}
 		}
-		
+
 		if(!bestSeller.isEmpty()) {
 			str = "Best contact person for this account is " + bestSeller;
 		}
-		
+
 		return str;
 	}
 
@@ -348,6 +390,8 @@ public class AccountSummarySales extends EnrichmentFunction {
 		String str = new String();
 		int renewCount = 0;
 		int renewDoneCount = 0;
+		int totalDone = 0;
+		int totalDeal = 0;
 
 		if(party.getCRMS() != null && party.getCRMS().getCRM() != null) {
 
@@ -362,27 +406,42 @@ public class AccountSummarySales extends EnrichmentFunction {
 						renewDoneCount++;
 					}
 				}
+
+				totalDeal++;
+				if("done".equalsIgnoreCase(crm.getDealStatus())) 
+					totalDone++;
 			}
 		}
 
-		if(renewCount == 0)
-			str = "There are no renewal orders with us.";
+		if(totalDeal == 0) {
+			str = "There are no deals for this account";
+			return str;
+		}
 
 		else {
-			int prob = renewDoneCount * 100 / renewCount;
-			str = "This account closes the renewal orders in " + prob + "% of the cases.";
+
+			int totalProb = totalDone * 100 / totalDeal;
+
+			str = "This account closes the deals in " + totalProb + "% of the cases.";
+
+			if(renewCount != 0) {
+				int prob = renewDoneCount * 100 / renewCount;
+				str = str + "Also the renewal deals are closed in " + prob + "% of the cases.";
+			}
 		}
 
 		return str;
 	}
 
 	/**
-	 * Get Deal details
+	 * Get Deal closure details
 	 * @param party
 	 * @return
 	 */
 	private String getDealDetails(Party party) {
 		StringBuilder str = new StringBuilder();
+
+		Map<String,Set<Integer>> productBasedDeals = new HashMap<>();
 
 		String mostOrdered = null;
 		String leastOrdered = null;
@@ -476,29 +535,27 @@ public class AccountSummarySales extends EnrichmentFunction {
 	private String getFinanceInfo(Party party) {
 		StringBuilder str = new StringBuilder();
 
-		Double minAmt = 999999.0;
-		Double maxAmt = 0.0;
-		Double totalAmount = 0.0;
+		int minAmt = 9999999;
+		int maxAmt = 0;
+		int totalAmount = 0;
 		int totalDeals = 0;
 
 		if(party.getCRMS() != null && party.getCRMS().getCRM() != null) {
 
 			for(CRM crm : party.getCRMS().getCRM()) {
-				if("done".equalsIgnoreCase(crm.getDealStatus())) {
+				if("done".equalsIgnoreCase(crm.getDealStatus()) && crm.getEstimatedDealAmount() != null) {
 
-					Double estimateAmount = crm.getEstimatedDealAmount();
+					int estimateAmount = crm.getEstimatedDealAmount().intValue();
 					//set the max deal amount
-					if(estimateAmount != null && Double.compare(estimateAmount, maxAmt) > 0 )
+					if(estimateAmount > maxAmt)
 						maxAmt = estimateAmount;
 
 					//set minimum deal amount
-					if(estimateAmount != null && Double.compare(estimateAmount, minAmt) < 0 )
+					if(estimateAmount < minAmt)
 						minAmt = estimateAmount;
 
 					totalDeals ++;
-
-					if(estimateAmount != null)
-						totalAmount += estimateAmount;
+					totalAmount += estimateAmount;
 				}
 			}
 		}
@@ -508,14 +565,14 @@ public class AccountSummarySales extends EnrichmentFunction {
 			return str.toString();
 		}
 
-		Double avgAmount = totalAmount / totalDeals;
+		int avgAmount = totalAmount / totalDeals;
 
-		str.append("This account has signed an order of an average amount of $" + avgAmount + "/-.");
-		str.append(" And the amount range in which it has placed orders is $" + minAmt + "-$" + maxAmt + ".");
+		str.append("This account has signed an order of an average amount of $" + NumberFormat.getNumberInstance(Locale.US).format(avgAmount));
+		str.append(" And the amount range in which it has placed orders is $" + NumberFormat.getNumberInstance(Locale.US).format(minAmt) + "-$");
+		str.append(NumberFormat.getNumberInstance(Locale.US).format(maxAmt) + ".");
 
 		return str.toString();
 	}
-
 
 	@Override
 	public String standardize(String arg0) {
@@ -531,6 +588,29 @@ public class AccountSummarySales extends EnrichmentFunction {
 		System.out.println("Date " + date);
 		System.out.println("Th " + threshold);
 
-	}
 
+		Map <String,Integer> productCountMap = new HashMap<String, Integer>();
+
+		productCountMap.put("Wire", 1200);
+		productCountMap.put("Rods", 1300);
+		productCountMap.put("Ropes", 1100);
+		productCountMap.put("Paste", 900);
+		productCountMap.put("Sensors", 1150);
+
+		if(!productCountMap.isEmpty()) {
+			List<Map.Entry<String,Integer>> list = new LinkedList<>(productCountMap.entrySet());
+			Comparator<Entry<String, Integer>> c = new Comparator<Map.Entry<String,Integer>>() {
+
+				public int compare(Entry<String, Integer> o1, Entry<String, Integer> o2) {
+					return (o2.getValue().compareTo(o1.getValue()));
+				}
+			};
+
+			Collections.sort(list, c);
+			for(Map.Entry<String,Integer> a : list) {
+				System.out.println(a);
+			}
+
+		}
+	}
 }
