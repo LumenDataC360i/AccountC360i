@@ -510,10 +510,10 @@ public class AccountSummarySales extends EnrichmentFunction {
 					if(productBasedDeals.containsKey(prodId)) {
 
 						List<Integer> values = productBasedDeals.get(prodId);
-						values.add(0, values.get(0)+1);
+						values.set(0, values.get(0)+1);
 
 						if("done".equalsIgnoreCase(crm.getDealStatus())) {
-							values.add(1, values.get(1)+1);
+							values.set(1, values.get(1)+1);
 						}
 					}
 
@@ -692,6 +692,8 @@ public class AccountSummarySales extends EnrichmentFunction {
 		String amt = "1247.04";
 		int x = (int) Double.parseDouble(amt);
 		System.out.println(x);
+
+
 
 	}
 }
