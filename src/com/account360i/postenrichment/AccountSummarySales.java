@@ -63,30 +63,22 @@ public class AccountSummarySales extends EnrichmentFunction {
 		SUMMARYLIST.add(summary);
 
 		summary = getPaymentDetails(party);
-		SUMMARYLIST.add(summary);
-
-		summary = getDefaultPaymentDetails(party);
-		SUMMARYLIST.add(summary);
-
-		summary = getMostSoldOrders(party);
+		summary += getDefaultPaymentDetails(party);
 		SUMMARYLIST.add(summary);
 
 		summary = getBestContact(party);
+		summary += getMostSoldOrders(party);
 		SUMMARYLIST.add(summary);
 
 		summary = getRevenueDetails(party);
 		SUMMARYLIST.add(summary);
 
-		summary = getDealDetails(party);
-		SUMMARYLIST.add(summary);
-
 		summary = getDealRenewal(party);
+		summary += getDealDetails(party);
 		SUMMARYLIST.add(summary);
 
 		summary = getTotalOrders(party);
-		SUMMARYLIST.add(summary);
-
-		summary = getFinanceInfo(party);
+		summary += getFinanceInfo(party);
 		SUMMARYLIST.add(summary);
 
 
@@ -108,6 +100,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 			}
 		}
 
+		party.getInsights().setAccountSummary(null);
 		party.getInsights().setAccountSummary(summaryColl);
 		return party;
 	}
@@ -214,7 +207,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 				if(pay.getAvgPaymentTime() != null) {
 					String avgTime = pay.getAvgPaymentTime();
 					logger.info("Average payment time: " + avgTime);
-					str = new String("For orders placed usually the payment is done within " + avgTime + " of the closure.");
+					str = new String("For orders placed usually the payment is done within " + avgTime + " of the closure. ");
 				}
 
 				else {
@@ -265,16 +258,15 @@ public class AccountSummarySales extends EnrichmentFunction {
 		}
 
 		else{
-			str = "No payment detail available";
-			return str;
+			return null;
 		}
 
 		//no defaulted payments
 		if(count == 0) 
-			str = "There has never been defaulted payment in the orders placed till date";
+			str = "There has never been defaulted payment in the orders placed till date. ";
 
 		if(count == 1) 
-			str = "There has been only one defaulted payment in the orders placed till date";
+			str = "There has been only one defaulted payment in the orders placed till date. ";
 
 		else {
 			int prob = count * 100 /total;
@@ -329,9 +321,9 @@ public class AccountSummarySales extends EnrichmentFunction {
 			Collections.sort(list, c);
 
 			str.append("We have moslty sold " + list.get(0).getKey() + " to this account.");
-			str.append(" Following is the list of products sold (desceding order): ");
+			str.append(" List of products sold in desceding order is as follow: ");
 			for(int i = 1; i < list.size()-1 ; i++) {
-				str.append(list.get(i).getKey() + ", ");
+				str.append(list.get(i).getKey() + "; ");
 			}
 
 			str.append(list.get(list.size()-1).getKey());
@@ -376,7 +368,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 		}
 
 		if(!bestSeller.isEmpty()) {
-			str = "Best contact person for this account is " + bestSeller + ".";
+			str = "Best contact person for this account is " + bestSeller + ". ";
 		}
 
 		return str;
@@ -425,12 +417,12 @@ public class AccountSummarySales extends EnrichmentFunction {
 			Collections.sort(list, c);
 
 			str.append(list.get(0).getKey() + "  have generated revenue of $" + NumberFormat.getNumberInstance(Locale.US).format(list.get(0).getValue()) + " for this account.");
-			str.append(" Revenue from rest of the products is as follows (desceding order): ");
+			str.append(" Revenue from rest of the products is as follow: ");
 			for(int i = 1; i < list.size()-1 ; i++) {
-				str.append(list.get(i).getKey() + ": $" + NumberFormat.getNumberInstance(Locale.US).format(list.get(i).getValue()) + ", ");
+				str.append(list.get(i).getKey() + "- $" + NumberFormat.getNumberInstance(Locale.US).format(list.get(i).getValue()) + "; ");
 			}
 
-			str.append(list.get(list.size()-1).getKey() + ": $" + NumberFormat.getNumberInstance(Locale.US).format(list.get(list.size()-1).getValue()));
+			str.append(list.get(list.size()-1).getKey() + "- $" + NumberFormat.getNumberInstance(Locale.US).format(list.get(list.size()-1).getValue()));
 		}
 
 		return str.toString();
@@ -469,7 +461,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 		}
 
 		if(totalDeal == 0) {
-			str = "There are no deals for this account";
+			str = "There are no deals for this account. ";
 			return str;
 		}
 
@@ -477,11 +469,11 @@ public class AccountSummarySales extends EnrichmentFunction {
 
 			int totalProb = totalDone * 100 / totalDeal;
 
-			str = "This account closes the deals in " + totalProb + "% of the cases.";
+			str = "This account closes the deals in " + totalProb + "% of the cases. ";
 
 			if(renewCount != 0) {
 				int prob = renewDoneCount * 100 / renewCount;
-				str = str + " Also the renewal deals are closed in " + prob + "% of the cases.";
+				str = str + "Also the renewal deals are closed in " + prob + "% of the cases. ";
 			}
 		}
 
@@ -568,14 +560,14 @@ public class AccountSummarySales extends EnrichmentFunction {
 
 			Collections.sort(list, c);
 
-			str.append("Deals for " + list.get(0).getKey() + " is closed with " + list.get(0).getValue() + "% rate.");
-			str.append(" Deal closure rate for other prodcuts is as follows: ");
+			str.append("Deals for " + list.get(0).getKey() + " is closed with " + list.get(0).getValue() + "% rate. ");
+			str.append("Deal closure rate for other prodcuts is as follow: ");
 
 			for(int i = 1 ; i<list.size()-1 ; i++) {
-				str.append(list.get(i).getKey() + "- " + list.get(i).getValue() + "%, ");
+				str.append(list.get(i).getKey() + "- " + list.get(i).getValue() + "%; ");
 			}
 
-			str.append(list.get(list.size()-1).getKey() + "- " + list.get(list.size()-1).getValue() + "%");
+			str.append(list.get(list.size()-1).getKey() + "- " + list.get(list.size()-1).getValue() + "% ");
 
 		}
 
@@ -594,11 +586,11 @@ public class AccountSummarySales extends EnrichmentFunction {
 		if(party.getTransactions() != null && party.getTransactions().getTransaction() != null) {
 
 			Collection<Transaction> trans = party.getTransactions().getTransaction();
-			str = "This account has placed a total of " + trans.size() + " orders with us";
+			str = "This account has placed a total of " + trans.size() + " orders with us. ";
 		}
 
 		else 
-			str = "This account has placed no orders with us.";
+			str = "This account has placed no orders with us. ";
 
 		return str;
 	}
@@ -611,7 +603,7 @@ public class AccountSummarySales extends EnrichmentFunction {
 	private String getFinanceInfo(Party party) {
 		StringBuilder str = new StringBuilder();
 
-		int minAmt = 9999999;
+		int minAmt = 99999999;
 		int maxAmt = 0;
 		int totalAmount = 0;
 		int totalDeals = 0;
@@ -643,9 +635,9 @@ public class AccountSummarySales extends EnrichmentFunction {
 
 		int avgAmount = totalAmount / totalDeals;
 
-		str.append("This account has signed an order of an average amount of $" + NumberFormat.getNumberInstance(Locale.US).format(avgAmount) + ".");
-		str.append(" And the amount range in which it has placed orders is $" + NumberFormat.getNumberInstance(Locale.US).format(minAmt) + "-$");
-		str.append(NumberFormat.getNumberInstance(Locale.US).format(maxAmt) + ".");
+		str.append("This account has signed an order of an average amount of $" + NumberFormat.getNumberInstance(Locale.US).format(avgAmount) + ". ");
+		str.append("And the amount range in which it has placed orders is $" + NumberFormat.getNumberInstance(Locale.US).format(minAmt) + "-$");
+		str.append(NumberFormat.getNumberInstance(Locale.US).format(maxAmt) + ". ");
 
 		return str.toString();
 	}

@@ -20,51 +20,51 @@ public class CalculateTransactionAmount extends EnrichmentFunction {
 	@Override
 	public Object applyEnrichment(Entity<?> asParty) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 		if (asParty instanceof Party) {
-			
+
 			logger.debug("Enrichment to Calculate transaction amount");
 
 			logger.debug("party before enrichment : "  + asParty);
-			
+
 			if (((Party) asParty).getTransactions() != null && ((Party) asParty).getTransactions().getTransaction()!= null) {
-				
+
 				Collection<Transaction> transactions = ((Party) asParty).getTransactions().getTransaction();
 				logger.debug("Collection : " + transactions);
-				
+
 				for (Transaction transaction : transactions) {
-					
+
 					String unitPrice = transaction.getUnitAmount();
 					Double unitPriceDouble = Double.parseDouble(unitPrice);
-					
+
 					String quantity = transaction.getQuantity();
 					Integer quantityInt = Integer.parseInt(quantity);
-					
+
 					Double amount = unitPriceDouble * quantityInt;
 					String amountString = amount.toString();
-					
+
 					logger.debug("Amount : " + amount);
-					
+
 					transaction.setAmount(amountString);      //Amount value
-					
+
 					String discountPer = transaction.getDiscountPercentage();
 					Double discountPerStr = Double.parseDouble(discountPer);
-					
+
 					Double discount = amount * discountPerStr / 100;
 					String discountStr = discount.toString();
-					
+
 					logger.debug("discount : " + discount);
-					
+
 					transaction.setUnitAmountDouble(unitPriceDouble);
 					transaction.setDiscountAmountTotalDouble(discount);
-					
+
 					transaction.setDiscountAmountTotal(discountStr);  // discount value
-					
+
 					Double totalAmount = amount - discount;
 					String totalAmountStr = totalAmount.toString();
-					
+
 					logger.debug("totalAmount : " + totalAmount);
-					
+
 					transaction.setTotalAmount(totalAmountStr);     //Total Amount		
 				}
 			}		
@@ -78,6 +78,6 @@ public class CalculateTransactionAmount extends EnrichmentFunction {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 
 }

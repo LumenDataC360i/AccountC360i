@@ -16,28 +16,28 @@ import com.allsight.entity.impl.Entity;
  * Note : Perspective records business objects can not be part of eid post enrichment output
  */
 public class SummaryOutputHandler implements EnrichmentOutputHelper {
-	  private static final Logger logger = Logger.getLogger(SummaryOutputHandler.class);
+	private static final Logger logger = Logger.getLogger(SummaryOutputHandler.class);
 
 	@Override
 	public List<Entity> applyResult(Object resultObject, EnrichmentInfo enrichmentInfo, Entity entity) {
 		// TODO Auto-generated method stub
-		
+
 		if(!(resultObject instanceof Party)) {
-			 logger.error("Output Object is not of acceptable type. skipping enrichment");
+			logger.error("Output Object is not of acceptable type. skipping enrichment");
 			return null;
 		}
-		
+
 		Party asparty = new Party();
 		Party result = (Party)resultObject;
 		asparty.setInsights(result.getInsights());
-		
+
 		List<Entity> resultEntities = new ArrayList<Entity>();
 		resultEntities.add((Entity) asparty);
-		
+
 		if(resultEntities != null) {
 			return resultEntities;
 		}
-		
+
 		return null;
 	}
 }
