@@ -43,7 +43,7 @@ public class DealSummary extends EnrichmentFunction {
 	@SuppressWarnings("rawtypes")
 	private Party dealSummaryExtraction(Entity entity) {
 
-		
+
 		String summary = new String();
 		Party party = (Party) entity;
 		Collection<DealBehaviourSummary> summaryColl = new ArrayList<>();
@@ -53,29 +53,30 @@ public class DealSummary extends EnrichmentFunction {
 
 			DealBehaviour element = dealBehaviour.iterator().next();
 			if ( element.getAverageDealClosureTime()!= null) {
-			summary = "Avg Deal Closure Time : " + element.getAverageDealClosureTime();
-			SUMMARYLIST.add(summary);
-			}
-			
-			if(element.getMaxTimeDeal()!= null) {
-			summary = "Maximum Time Taken For a Deal : " + element.getMaxTimeDeal();
-			SUMMARYLIST.add(summary);
+				summary = "a) Avg deal closure : " + element.getAverageDealClosureTime();
+				SUMMARYLIST.add(summary);
 			}
 
-			if(element.getProductMaxDealTime()!=null) {
+			if(element.getMaxTimeDeal()!= null && element.getProductMaxDealTime()!=null) {
+				summary = "b) Maximum Time Taken For a Deal Closure is : " + element.getMaxTimeDeal() + "for " + element.getProductMaxDealTime() ;
+				SUMMARYLIST.add(summary);
+			}
+
+			/*	if(element.getProductMaxDealTime()!=null) {
 			summary = "Deal Taken Most Time For : " + element.getProductMaxDealTime();
 			SUMMARYLIST.add(summary);
+			}*/
+
+			if(element.getMostlyOrderedProduct()!=null) {			
+				summary = "c) Most ordered product : " + element.getMostlyOrderedProduct();
+				SUMMARYLIST.add(summary);
 			}
-			
 			if(element.getLeastOrderedProduct()!= null) {
-			summary = "Least Ordered Product : " + element.getLeastOrderedProduct();
-			SUMMARYLIST.add(summary);
+				summary = "d) Least Ordered Product : " + element.getLeastOrderedProduct();
+				SUMMARYLIST.add(summary);
 			}
 
-            if(element.getMostlyOrderedProduct()!=null) {			
-			summary = "Most Ordered Product : " + element.getMostlyOrderedProduct();
-			SUMMARYLIST.add(summary);
-            }
+
 		}	
 
 		if(!SUMMARYLIST.isEmpty()) {

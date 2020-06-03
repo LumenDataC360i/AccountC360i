@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -110,6 +111,8 @@ public class DealBehaviorProduct  extends EnrichmentFunction{
 						}
 					}
 
+					String maxDealTimeStr = maxDealTime(timeDurations);
+					String minDealTimeStr = minDealTime(timeDurations);
 					String noOfDeals = numberOfDeals(timeDurations); 
 					logger.debug(" noOfDeals :   "  + noOfDeals);
 					String avgDealClosureTimeStr = avgDealClosureTime(timeDurations);
@@ -121,7 +124,8 @@ public class DealBehaviorProduct  extends EnrichmentFunction{
 					dealBehaviorProduct.setProductID(productId);
 					dealBehaviorProduct.setNumberOfDeals(noOfDeals);
 					dealBehaviorProduct.setAvgDealTime(avgDealClosureTimeStr);
-					
+					dealBehaviorProduct.setMaxDealTime(maxDealTimeStr);
+					dealBehaviorProduct.setMinDealTime(minDealTimeStr);
 					/*Added the this condition not to populate the dealBehavior BO itself if the no Of Deals and avgDealClosureTimeStr is null */
 					if(noOfDeals!= null && avgDealClosureTimeStr!= null)
 					{
@@ -147,6 +151,43 @@ public class DealBehaviorProduct  extends EnrichmentFunction{
 		return null;
 	}
 
+	/**
+	 * 
+	 * Minimum Deal Time Duration for a Product 
+	 * @param timeDurations
+	 * @return
+	 */
+	private String minDealTime(List<Long> timeDurations) {
+		if(timeDurations.size() != 0) {
+			long time = Collections.min(timeDurations);
+			//logger.debug("max time in long : " + time);
+			String timeInStandard = timeStandard(time);
+			logger.debug("min Deal time in days/week  : " + time);
+			return timeInStandard;
+		}
+		return null;
+		
+	}
+
+	/**
+	 * 
+	 * Maximum Deal Time Duration for a Product
+	 * @param timeDurations
+	 * @return
+	 */
+	private String maxDealTime(List<Long> timeDurations) {
+		if(timeDurations.size() != 0) {
+			long time = Collections.max(timeDurations);
+			//logger.debug("max time in long : " + time);
+			String timeInStandard = timeStandard(time);
+			logger.debug("max Deal time in days/week  : " + time);
+			return timeInStandard;
+		}
+		return null;
+
+	}
+
+	
 	/**
 	 * Calculate the number of deals
 	 * @param timeDurations
