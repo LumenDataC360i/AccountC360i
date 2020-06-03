@@ -58,7 +58,7 @@ public class DealSummary extends EnrichmentFunction {
 			}
 
 			if(element.getMaxTimeDeal()!= null && element.getProductMaxDealTime()!=null) {
-				summary = "b) Maximum Time Taken For a Deal Closure is : " + element.getMaxTimeDeal() + "for " + element.getProductMaxDealTime() ;
+				summary = "b) Maximum Time Taken For a Deal Closure is " + element.getMaxTimeDeal() + " for " + element.getProductMaxDealTime() ;
 				SUMMARYLIST.add(summary);
 			}
 
