@@ -48,16 +48,13 @@ public class PaymentBehaviourPersonaSummary extends EnrichmentFunction {
 			Collection<PaymentBehaviour> paymentBehaviour = ((Party) entity).getInsights().getPaymentBehaviour();
 		
 			PaymentBehaviour element = paymentBehaviour.iterator().next();
-			summary = "Avg Time for payment         : " + element.getAvgPaymentTime();
+			summary = "a) Avg Time for payment         : " + element.getAvgPaymentTime();
 			SUMMARYLIST.add(summary);
 			
-			summary = "Max time for Payment         : " + element.getMaxPaymentTime();
+			summary = "b) Max time taken for payment is " + element.getMaxPaymentTime() + " for " + element.getMaxTimePaymentProduct();
 			SUMMARYLIST.add(summary);
 			
-			summary = "Product for Max Time         : " + element.getMaxTimePaymentProduct();
-			SUMMARYLIST.add(summary);
-			
-			summary = "Total Revenue         		: " + NumberFormat.getNumberInstance(Locale.US).format(element.getTotalRevenue());
+			summary = "c) Total Revenue (USD)         		: " + NumberFormat.getNumberInstance(Locale.US).format(element.getTotalRevenue());
 			SUMMARYLIST.add(summary);
 		}	
 		

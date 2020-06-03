@@ -48,19 +48,19 @@ public class InteractionSummary extends EnrichmentFunction {
 			Collection<InteractionBehaviour> interactionBehaviour = ((Party) entity).getInsights().getInteractionBehaviour();
 		
 			InteractionBehaviour element = interactionBehaviour.iterator().next();
-			summary = "Total number of interaction(s)         : " + element.getTotalInteractions();
+			summary = "a) Total number of interaction(s)         : " + element.getTotalInteractions();
 			SUMMARYLIST.add(summary);
 			
-			summary = "Total number of email interaction(s)   : " + element.getTotalEmailInteractions();
+			summary = "b) Total number of email interaction(s)   : " + element.getTotalEmailInteractions();
 			SUMMARYLIST.add(summary);
 			
-			summary = "Total number of webchat interaction(s) : " + element.getTotalWebchatInteractions();
+			summary = "c) Total number of webchat interaction(s) : " + element.getTotalWebchatInteractions();
 			SUMMARYLIST.add(summary);
 			
-			summary = "Preferred Medium                       : " + element.getPreferredMedium();
+			summary = "d) Preferred Medium                       : " + element.getPreferredMedium();
 			SUMMARYLIST.add(summary);
 			
-			summary = "Most Talked Product                    : " + element.getMostTalkedProduct();
+			summary = "e) Most Talked Product                    : " + element.getMostTalkedProduct();
 			SUMMARYLIST.add(summary);
 		}	
 		
