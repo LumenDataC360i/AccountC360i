@@ -1,0 +1,375 @@
+{
+	"banner": {
+		"field_one": {
+		},
+		"field_two": {
+			"bo": "Address",
+			"label": "Location",
+			"expression": {
+				"value": "($bo.CityName || $bo.OriginalCity ? ($bo.CityName || $bo.OriginalCity) + ', ':'') + ($bo.State || $bo.OriginalState ? ($bo.State || $bo.OriginalState) + ', ':'') + ($bo.Country || $bo.OriginalCountry ? ($bo.Country || $bo.OriginalCountry):'')"
+			}
+		},
+		"field_three": {
+			"bo": "PhoneNumber",
+			"label": "Phone",
+			"icon": "phone",
+			"expression": {
+				"value": "($bo.FullNumber && $bo.Extension) ? ($bo.FullNumber + ' ext ' + $bo.Extension) : (($bo.FullNumber) ? ($bo.FullNumber) : (($bo.CountryCode || $bo.AreaCode || $bo.Number || $bo.Extension) ? (($bo.CountryCode ? '+' + $bo.CountryCode:'') + ($bo.AreaCode) + ($bo.Number) + ($bo.Extension ? 'ext' + $bo.Extension : '')) : ($bo.OriginalPhoneNumber)))"
+			}
+		},
+		"field_four": {
+			"bo": "Email",
+			"label": "Email",
+			"expression": {
+				"value": "(($bo.EmailAddress)? $bo.EmailAddress : ($bo.Handle && $bo.Domain) ? $bo.Handle+'@'+$bo.domain:($bo.OriginalEmailAddress!=undefined)?$bo.OriginalEmailAddress:'')"
+			}
+		}
+	},
+	"advanced_banner": {
+		"field_one": {
+			"content": [{
+				"label": "First Name",
+				"bo": "PersonName",
+				"expression": {
+					"value": "($bo.FormalGivenNameOne  || $bo.GivenNameOne  || $bo.OriginalName)"
+				},
+				"entity": ["Person"]
+			},
+			{
+				"label": "Family Name",
+				"bo": "PersonName",
+				"expression": {
+					"value": "($bo.FamilyName || $bo.OriginalFamilyName)"
+				},
+				"entity": ["Person"]
+			},
+			{
+				"label": "Name",
+				"bo": "OrganizationName",
+				"expression": {
+					"value": "($bo.Name || $bo.OriginalName)"
+				},
+				"entity": ["Organization"]
+			},
+			{
+				"label": "Gender",
+				"bo": "Person",
+				"expression": {
+					"value": "($bo.Gender)"
+				},
+				"entity": ["Person"]
+			},
+			{
+				"label": "Birth Date",
+				"dateFormat": {
+					"MM-DD": "Do MMM",
+					"YYYY-MM": "MMM YYYY",
+					"YYYY-MM-DD": "Do MMM YYYY",
+					"YYYY": "YYYY"
+				},
+				"expression": {
+					"value": "($bo.BirthDate || $bo.OriginalBirthDate)"
+				},
+				"bo": "Person",
+				"entity": ["Person"]
+			},
+			{
+				"label": "Marital Status",
+				"bo": "Person",
+				"expression": {
+					"value": "($bo.MaritalStatus)"
+				},
+				"entity": ["Person"]
+			},
+			{
+				"label": "Region",
+				"bo": "Person",
+				"expression": {
+					"value": "($bo.Region)"
+				},
+				"entity": ["Person"]
+			},
+			{
+				"label": "Loyalty Id",
+				"bo": "Person",
+				"expression": {
+					"value": "($bo.LoyaltyId)"
+				},
+				"entity": ["Person"]
+			},
+			{
+				"label": "Job Role",
+				"bo": "Person",
+				"expression": {
+					"value": "($bo.JobRole)"
+				},
+				"entity": ["Person"]
+			},
+			{
+				"label": "Employer Name",
+				"bo": "Person",
+				"expression": {
+					"value": "($bo.EmployerName)"
+				},
+				"entity": ["Person"]
+			},
+			{
+				"label": "Language Preference",
+				"bo": "Person",
+				"expression": {
+					"value": "($bo.LanguagePreference)"
+				},
+				"entity": ["Person"]
+			},
+			{
+				"label": "Source Key",
+				"bo": "Person",
+				"expression": {
+					"value": "($bo.SourceKey)"
+				},
+				"entity": ["Person"]
+			},
+			{
+				"label": "Class",
+				"bo": "Person",
+				"expression": {
+					"value": "($bo.CustomerClass)"
+				},
+				"entity": ["Person"]
+			},
+			{
+				"label": "Business Segment",
+				"bo": "Person",
+				"expression": {
+					"value": "($bo.BusinessSegment)"
+				},
+				"entity": ["Person"]
+			},
+			{
+				"label": "Division Department",
+				"bo": "Person",
+				"expression": {
+					"value": "($bo.DivisionDepartment)"
+				},
+				"entity": ["Person"]
+			},
+			{
+				"label": "Since Date",
+				"bo": "Person",
+				"expression": {
+					"value": "($bo.CustomerSinceDate)"
+				},
+				"entity": ["Person"]
+			},
+			{
+				"label": "Created Date",
+				"bo": "Person",
+				"expression": {
+					"value": "($bo.CustomerCreateDate)"
+				},
+				"entity": ["Person"]
+			},
+			{
+				"label": "Last Updated Date",
+				"bo": "Person",
+				"expression": {
+					"value": "($bo.LastUpdatedTimestamp)"
+				},
+				"entity": ["Person"]
+			},
+			{
+				"label": "Customer Class",
+				"bo": "Organization",
+				"expression": {
+					"value": "($bo.CustomerClass)"
+				},
+				"entity": ["Organization"]
+			},
+			{
+				"label": "Business Segment",
+				"bo": "Organization",
+				"expression": {
+					"value": "($bo.BusinessSegment)"
+				},
+				"entity": ["Organization"]
+			},
+			{
+				"label": "Division Department",
+				"bo": "Organization",
+				"expression": {
+					"value": "($bo.DivisionDepartment)"
+				},
+				"entity": ["Organization"]
+			},
+			{
+				"label": "Customer Since Date",
+				"bo": "Organization",
+				"expression": {
+					"value": "($bo.CustomerSinceDate)"
+				},
+				"entity": ["Organization"]
+			},
+			{
+				"label": "Source Key",
+				"bo": "Organization",
+				"expression": {
+					"value": "($bo.SourceKey)"
+				},
+				"entity": ["Organization"]
+			},
+			{
+				"label": "Created Date",
+				"bo": "Organization",
+				"expression": {
+					"value": "($bo.CustomerCreateDate)"
+				},
+				"entity": ["Organization"]
+			},
+			{
+				"label": "Last Updated Date",
+				"bo": "Organization",
+				"expression": {
+					"value": "($bo.LastUpdatedTimestamp)"
+				},
+				"entity": ["Organization"]
+			},
+			{
+				"label": "Division Department",
+				"bo": "Organization",
+				"expression": {
+					"value": "($bo.DivisionDepartment)"
+				},
+				"entity": ["Organization"]
+			},
+			{
+				"label": "Status Date",
+				"bo": "Organization",
+				"expression": {
+					"value": "($bo.StatusDate)"
+				},
+				"entity": ["Organization"]
+			},
+			{
+				"label": "Status",
+				"bo": "Organization",
+				"expression": {
+					"value": "($bo.Status)"
+				},
+				"entity": ["Organization"]
+			},
+			{
+				"label": "AccountStatus",
+				"bo": "Organization",
+				"expression": {
+					"value": "($bo.AccountStatus)"
+				},
+				"entity": ["Organization"]
+			},
+			{
+				"label": "Account Number",
+				"bo": "Organization",
+				"expression": {
+					"value": "($bo.AccountNumber)"
+				},
+				"entity": ["Organization"]
+			},
+			{
+				"label": "Employee Size",
+				"bo": "Organization",
+				"expression": {
+					"value": "($bo.EmployeeSize)"
+				},
+				"entity": ["Organization"]
+			},
+			{
+				"label": "Account Type",
+				"bo": "Organization",
+				"expression": {
+					"value": "($bo.AccountType)"
+				},
+				"entity": ["Organization"]
+			},
+			{
+				"label": "Website URL",
+				"bo": "Organization",
+				"expression": {
+					"value": "($bo.WebsiteURL)"
+				},
+				"entity": ["Organization"]
+			}]
+		},
+		"field_two": {
+			"bo": "Address",
+			"unique": ["AddressType",
+			"HouseNumber",
+			"House",
+			"Road",
+			"Unit",
+			"Level",
+			"PostalCode",
+			"ZipPlusFour",
+			"AddressLineOne",
+			"AddressLineTwo",
+			"AddressLineThree",
+			"AddressLineFour",
+			"OriginalAddress"],
+			"content": [
+			{
+				"icon": "AddressType",
+				"title": "Address Type",
+				"class": "di-in-bl",
+				"expressions": [{
+					"condition": true,
+					"value": "(($bo.HouseNumber || $bo.House) && $bo.Road) ? (($bo.HouseNumber ? $bo.HouseNumber + ' ':'') + ($bo.House ? $bo.House + ' ':'') + ($bo.Road? $bo.Road + ' ':'') + ($bo.Unit ? $bo.Unit + ' ':'') + ($bo.Level ? $bo.Level + ' ':'') + ($bo.PostalCode ? $bo.PostalCode + '-':'') + ($bo.ZipPlusFour ? $bo.ZipPlusFour:'')):($bo.AddressLineOne || $bo.AddressLineTwo || $bo.AddressLineThree || $bo.AddressLineFour) ? (($bo.AddressLineOne ? $bo.AddressLineOne + ' ' :'')  + ($bo.AddressLineTwo ? $bo.AddressLineTwo + ' ' : '') + ( $bo.AddressLineThree ? $bo.AddressLineThree + ' ':'') + ($bo.AddressLineFour ? $bo.AddressLineFour: '')) : $bo.OriginalAddress"
+				}]
+			},
+			{
+				"class": "di-in-bl",
+				"expressions": [{
+					"condition": "($bo.CityName || $bo.OriginalCity)",
+					"value": "($bo.CityName || $bo.OriginalCity ? ($bo.CityName || $bo.OriginalCity) + ', ':'')"
+				},
+				{
+					"condition": "($bo.State || $bo.OriginalState)",
+					"value": "($bo.State || $bo.OriginalState ? ($bo.State || $bo.OriginalState) + ', ':'')"
+				},
+				{
+					"condition": "($bo.Country || $bo.OriginalCountry)",
+					"value": "($bo.Country || $bo.OriginalCountry ? ($bo.Country || $bo.OriginalCountry):'')"
+				}]
+			}]
+		},
+		"field_three": {
+			"bo": "PhoneNumber",
+			"unique": ["Extension",
+			"OriginalPhoneNumber",
+			"Number",
+			"FullNumber",
+			"CountryCode",
+			"AreaCode"],
+			"content": [{
+				"icon": "PhoneNumberType",
+				"title": "Phone Type",
+				"expressions": [{
+					"condition": true,
+					"value": "($bo.FullNumber && $bo.Extension) ? ($bo.FullNumber + ' ext ' + $bo.Extension) : (($bo.FullNumber) ? ($bo.FullNumber) : (($bo.CountryCode || $bo.AreaCode || $bo.Number || $bo.Extension) ? (($bo.CountryCode ? '+' + $bo.CountryCode:'') + ($bo.AreaCode) + ($bo.Number) + ($bo.Extension ? 'ext' + $bo.Extension : '')) : ($bo.OriginalPhoneNumber)))"
+				}]
+			}]
+		},
+		"field_four": {
+			"bo": "Email",
+			"unique": ["EmailAddress",
+			"Handle",
+			"Domain",
+			"OriginalEmailAddress"],
+			"content": [{
+				"icon": "EmailType",
+				"title": "Email Type",
+				"expressions": [{
+					"condition": true,
+					"value": "(($bo.EmailAddress)? $bo.EmailAddress : ($bo.Handle && $bo.Domain) ? $bo.Handle+'@'+$bo.domain:($bo.OriginalEmailAddress!=undefined)?$bo.OriginalEmailAddress:'')"
+				}]
+			}]
+		}
+	}
+}

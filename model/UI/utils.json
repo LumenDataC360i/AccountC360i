@@ -1,0 +1,494 @@
+{
+	"export_types": ["CSV","TXT"],
+	"moment_in_format": "DD-MM-YYYY,DD/MM/YYYY,YYYY-MM-DD,YYYYMMDDHHmmssSSS,YYYY-MM-DD HH:mm:ss.SSSS,YYYY-MM-DD HH:mm:ss,DD MMM YY, YYYYMM, MMM DD,YYYY, MMM 'YY,MMM DD'YY,YYYY-MM-DDTHH:mm:ss[Z],YYYY-MM-DD HH:mm:ss.SSSSSS",
+	"moment_out_format": "DD/MM/YYYY",
+	"entity": {
+		"person": {
+			"values": {
+				"male": {
+					"icon-value": "\uf222",
+					"icon-font": "FontAwesome"
+				},
+				"female": {
+					"icon-value": "\uf221",
+					"icon-font": "FontAwesome"
+				}
+			}
+		},
+		"org": {
+			"icon-value": "\uf19c",
+			"icon-font": "FontAwesome"
+		}
+	},
+	"purchase_by_category_widget": {
+		"values":{
+			"online": {
+				"value": "Online",
+				"color": "#2CA500",
+				"isAggLegend":true
+			},
+			"offline": {
+				"value": "Offline",
+				"color": "#C0C0C0",
+				"isAggLegend":true
+			},
+			"undefined": {
+				"value": "Undefined",
+				"color": "#EEE",
+				"isAggLegend":true
+			},
+			"ordered": {
+				"value": "Ordered",
+				"color": "#84b4df"
+			},
+			"pending": {
+				"value": "Pending",
+				"color": "#f4d03f"
+			},
+			"pd": {
+				"value": "Paid",
+				"color": "#5f9d61"
+			},
+			"cl": {
+				"value": "Canceled",
+				"color": "#ed7669"
+			},
+			"mn": {
+				"value": "Manifest",
+				"color": "#6ab04c"
+			},
+			"pc": {
+				"value": "Production Complete",
+				"color": "#22a6b3"
+			},
+			"in": {
+				"value": "Invoiced",
+				"color": "#130f40"
+			},
+			"hl": {
+				"value": "Hold",
+				"color": "#535c68"
+			},
+			"kb": {
+				"value": "Ken Burton status",
+				"color": "#f9ca24"
+			},
+			"pp": {
+				"value": "Pending Production",
+				"color": "#eb4d4b"
+			},
+			"ip": {
+				"value": "In Progess",
+				"color": "#8c7ae6"
+			},
+			"quoted": {
+				"value": "Quoted",
+				"color": "#40739e"
+			}
+		}
+	},
+	"quotes_widget": {
+		"values": {
+			"ordered": {
+				"value": "Ordered",
+				"color": "#ED7D31"
+			},
+			"quoted": {
+				"value": "Quoted",
+				"color": "#5B9BD5"
+			},
+			"undefined": {
+				"value": "Undefined",
+				"color": "#c0c0c0"
+			}
+		}
+	},
+	"service_widget": {
+		"values": {
+			"1-asap": {
+				"value": "ASAP",
+				"color": "#6D214F",
+				"isAggLegend":true
+			},
+			"2-high": {
+				"value": "High",
+				"color": "#E83907",
+				"isAggLegend":true
+			},
+			"3-medium": {
+				"value": "Medium",
+				"color": "#FFC903",
+				"isAggLegend":true
+			},
+			"4-low": {
+				"value": "Low",
+				"color": "#9ACC03",
+				"isAggLegend":true
+			},
+			"undefined": {
+				"value": "Undefined",
+				"color": "#c0c0c0",
+				"isAggLegend":true
+			}
+		}
+	},
+	"productmention_widget": {
+		"values": {
+			"emailfrom": {
+				"value": "EmailFrom",
+				"color": "#168de2"
+			},
+			"emailfromparty": {
+				"value": "EmailFromParty",
+				"color": "#168de2"
+			},
+			"webchat": {
+				"value": "Webchat",
+				"color": "#7bb32e"
+			},
+			"contactcentercall": {
+				"value": "ContactCenterCall",
+				"color": "#097BB9"
+			},
+			"emailtoparty": {
+				"value": "EmailToParty",
+				"color": "#449a88"
+			},
+			"twitter": {
+				"value": "Twitter",
+				"color": "#55acee"
+			},
+			"tweet": {
+				"value": "Twitter",
+				"color": "#55acee"
+			},
+			"facebook": {
+				"value": "Facebook",
+				"color": "#3b5998"
+			},
+			"instagram": {
+				"value": "Instagram",
+				"color": "#fcaf45"
+			},
+			"gplus": {
+				"value": "GPlus",
+				"color": "#dc4e41"
+			},
+			"about me": {
+				"value": "About Me",
+				"color": "#2b82ad"
+			},
+			"aboutme": {
+				"value": "About Me",
+				"color": "#2b82ad"
+			},
+			"gravatar": {
+				"value": "Gravatar",
+				"color": "#1e8cbe"
+			},
+			"flickr": {
+				"value": "Flickr",
+				"color": "#ff0084"
+			},
+			"foursquare": {
+				"value": "Foursquare",
+				"color": "#f94877"
+			},
+			"linkedin": {
+				"value": "Linkedin",
+				"color": "#0077b5"
+			},
+			"yelp": {
+				"value": "Yelp",
+				"color": "#af0606"
+			},
+			"tripadvisor": {
+				"value": "TripAdvisor",
+				"color": "#589442"
+			},
+			"undefined": {
+				"value": "Undefined",
+				"color": "#c0c0c0"
+			}
+		}
+	},
+	"companymention_widget": {
+		"values": {
+			"emailfrom": {
+				"value": "EmailFrom",
+				"color": "#168de2"
+			},
+			"emailfromparty": {
+				"value": "EmailFromParty",
+				"color": "#168de2"
+			},
+			"webchat": {
+				"value": "Webchat",
+				"color": "#7bb32e"
+			},
+			"contactcentercall": {
+				"value": "ContactCenterCall",
+				"color": "#097BB9"
+			},
+			"emailtoparty": {
+				"value": "EmailToParty",
+				"color": "#449a88"
+			},
+			"twitter": {
+				"value": "Twitter",
+				"color": "#55acee"
+			},
+			"tweet": {
+				"value": "Twitter",
+				"color": "#55acee"
+			},
+			"facebook": {
+				"value": "Facebook",
+				"color": "#3b5998"
+			},
+			"instagram": {
+				"value": "Instagram",
+				"color": "#fcaf45"
+			},
+			"gplus": {
+				"value": "GPlus",
+				"color": "#dc4e41"
+			},
+			"about me": {
+				"value": "About Me",
+				"color": "#2b82ad"
+			},
+			"aboutme": {
+				"value": "About Me",
+				"color": "#2b82ad"
+			},
+			"gravatar": {
+				"value": "Gravatar",
+				"color": "#1e8cbe"
+			},
+			"flickr": {
+				"value": "Flickr",
+				"color": "#ff0084"
+			},
+			"foursquare": {
+				"value": "Foursquare",
+				"color": "#f94877"
+			},
+			"linkedin": {
+				"value": "Linkedin",
+				"color": "#0077b5"
+			},
+			"yelp": {
+				"value": "Yelp",
+				"color": "#af0606"
+			},
+			"tripadvisor": {
+				"value": "TripAdvisor",
+				"color": "#589442"
+			},
+			"undefined": {
+				"value": "Undefined",
+				"color": "#c0c0c0"
+			}
+		}
+	},
+	"interactions_widget": {
+		"values": {
+			"emailfromparty": {
+				"value": "EmailFromParty",
+				"color": "#168de2"
+			},
+			"webchat": {
+				"value": "Webchat",
+				"color": "#7bb32e"
+			},
+			"contactcentercall": {
+				"value": "ContactCenterCall",
+				"color": "#097BB9"
+			},
+			"emailtoparty": {
+				"value": "EmailToParty",
+				"color": "#449a88"
+			},
+			"social": {
+				"value": "Social",
+				"color": "#34bf49"
+			},
+			"undefined": {
+				"value": "Undefined",
+				"color": "#c0c0c0"
+			}
+		}
+	},
+	"default_chart_color": "#ED7D31,#5B9BD5,#C0C0C0,#109618,#DCCEB5,#A18E6C,#544427,#C58E2A,#FFB939",
+	"Account_1": "Global Account",
+	"Account_2": "Parent Account",
+	"Account_3": "Sub Account",
+	"Address": {
+		"Home": {
+			"value": "Home",
+			"color": "#a8a8a8",
+			"icon": "fa fa-home"
+		},
+		"Business": {
+			"value": "Work",
+			"color": "#a8a8a8",
+			"icon": "fa fa-bank"
+		},
+		"Billing": {
+			"value": "Billing",
+			"color": "#a8a8a8",
+			"icon": "fa fa-file-text"
+		},
+		"Shipping": {
+			"value":"Shipping",
+			"color": "#a8a8a8",
+			"icon": "fa fa-truck"
+		},
+		"Mailing": {
+			"value":"Mailing",
+			"color": "#a8a8a8",
+			"icon": "fa fa-truck"
+		},
+		"Service": {
+			"value":"Service",
+			"color": "#a8a8a8",
+			"icon": "fa fa-cogs"
+		},
+		"Physical": {
+			"value":"Physical",
+			"color": "#a8a8a8",
+			"icon": "fa fa-gavel"
+		},
+		"Custodian": {
+			"value":"Custodian",
+			"color": "#a8a8a8",
+			"icon": "fa fa-shield"
+		},
+		"Guarantor": {
+			"value":"Guarantor",
+			"color": "#a8a8a8",
+			"icon": "fa fa-handshake-o"
+		},
+		"Other": {
+			"value":"Other",
+			"color": "#a8a8a8",
+			"icon": "fa fa-map-marker"
+		},
+		"Project": {
+			"value":"Project",
+			"color": "#a8a8a8",
+			"icon": "fa fa-cubes"
+		},
+		"Order": {
+			"value":"Order",
+			"color": "#a8a8a8",
+			"icon": "fa fa-tags"
+		},
+		"Payment": {
+			"value":"Payment",
+			"color": "#a8a8a8",
+			"icon": "fa fa-file-text"
+		},
+		"H": {
+			"value":"Building",
+			"color": "#a8a8a8",
+			"icon": "fa fa-building-o"
+		},
+		"B": {
+			"value":"Building",
+			"color": "#a8a8a8",
+			"icon": "fa fa-building-o"
+		},
+		"L": {
+			"value":"Organization",
+			"color": "#a8a8a8",
+			"icon": "fa fa-bank"
+		},"F": {
+			"value":"Business",
+			"color": "#a8a8a8",
+			"icon": "fa fa-bank"
+		},"P": {
+			"value":"Post Office Box",
+			"color": "#a8a8a8",
+			"icon": "fa fa-inbox"
+		},"S": {
+			"value":"Street",
+			"color": "#a8a8a8",
+			"icon": "fa fa-road"
+		},"U": {
+			"value":"Unknown",
+			"color": "#a8a8a8",
+			"icon": "fa fa-map-marker"
+		},"R": {
+			"value":"Road",
+			"color": "#a8a8a8",
+			"icon": "fa fa-road"
+		},"G": {
+			"value":"Delivery Address",
+			"color": "#a8a8a8",
+			"icon": "fa fa-truck"
+		},
+		"default": {
+			"value": "Not Available",
+			"color": "#a8a8a8",
+			"icon": "fa fa-map-marker"
+		}
+	},
+	"Email": {
+		"Home": {
+			"value": "Home",
+			"icon": "fa fa-home",
+			"color": "#a8a8a8"
+		},
+		"Business": {
+			"value": "Business",
+			"icon": "fa fa-building-o",
+			"color": "#a8a8a8"
+		},
+		"H": {
+			"value": "Home",
+			"icon": "fa fa-home",
+			"color": "#a8a8a8"
+		},
+		"B": {
+			"value": "Business",
+			"icon": "fa fa-building-o",
+			"color": "#a8a8a8"
+		},
+		"default": {
+			"value": "Not Available",
+			"icon": "fa fa-envelope-o",
+			"color": "#a8a8a8"
+		}
+	},
+	"PhoneNumber": {
+		"Home": {
+			"value": "Home",
+			"icon": "fa fa-home",
+			"color": "#a8a8a8"
+		},
+		"BUSINESS": {
+			"value": "Work",
+			"icon": "fa fa-building-o",
+			"color": "#a8a8a8"
+		},
+		"H": {
+			"value": "Home",
+			"icon": "fa fa-home",
+			"color": "#a8a8a8"
+		},
+		"B": {
+			"value": "Work",
+			"icon": "fa fa-building-o",
+			"color": "#a8a8a8"
+		},
+		"default": {
+			"value": "Not Available",
+			"icon": "fa fa-phone",
+			"color": "#a8a8a8"
+		}
+	},
+	"page_size": 25,
+	"sameas_match_type":"PARTY_MATCH"
+}

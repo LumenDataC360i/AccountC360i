@@ -1,0 +1,10 @@
+{
+	"details.page.size": 25,
+	"details.sort.order": "desc",
+	"details.sort.field.suffix": "LastUpdatedTimestamp",
+	"details.default.bo": "Demographics.Address,Demographics.Email,Demographics.PersonName,Demographics.Organization,Demographics.OrganizationName,Demographics.Person,Demographics.PhoneNumber,Interactions.EmailToParty,Interactions.EmailFromParty,Interactions.Webchat,Interactions.ContactCenterCall,Transactions.Quote,Transactions.Transaction,Insights.OverallSentiment,Insights.CustomerTier,Insights.CustomerChurnRisk,Insights.CustomerPotential,Insights.CustomerRisk,ServiceRequests.ServiceRequest,SocialInteractions.ProfileEnrichment.LifeEvent,SocialInteractions.Mentions.ProductMention,SocialInteractions.Mentions.KeywordMention,Products.Product,Demographics.SocialHandle,Transactions.Transaction.TransactionItem,Finance.FinanceInfo,CRMS.CRM,SocialInteractions.Mentions.Mention,Campaigns.Campaign,HierarchyCategory.OrganizationHierarchy,Insights.InteractionBehaviour,Insights.FinancialPotential,Insights.PaymentBehaviour,Insights.FinancialPotentialSummary,Insights.AccountSummary,Insights.DealBehaviourProduct,Insights.DealBehaviour",
+	"relationships.types": ["ChildOf","Family","Employment","Contact","SameAs","Link","AddressRelationship","OrganizationRelations","SellerOf"],
+	"max.relation.per.customer": 100,
+	"relations.default.bo": "Demographics.OrganizationName|Demographics.PersonName",
+	"enable.source.type":"true"
+}

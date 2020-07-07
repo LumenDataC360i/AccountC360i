@@ -1,0 +1,3216 @@
+{
+	"Address": {
+		"icon": {
+			"attribute": "AddressType",
+			"values": {
+				"home": {
+					"value": "Home",
+					"color": "#a8a8a8",
+					"fontFamily": "FontAwesome",
+					"content": ""
+				},
+				"business": {
+					"value": "Work",
+					"color": "#a8a8a8",
+					"fontFamily": "FontAwesome",
+					"content": ""
+				},
+				"billing": {
+					"value": "Billing",
+					"color": "#a8a8a8",
+					"fontFamily": "FontAwesome",
+					"content": ""
+				},
+				"shipping": {
+					"value": "Shipping",
+					"color": "#a8a8a8",
+					"fontFamily": "FontAwesome",
+					"content": ""
+				},
+				"mailing": {
+					"value": "Mailing",
+					"color": "#a8a8a8",
+					"fontFamily": "FontAwesome",
+					"content": ""
+				},
+				"service": {
+					"value": "Service",
+					"color": "#a8a8a8",
+					"fontFamily": "FontAwesome",
+					"content": ""
+				},
+				"physical": {
+					"value": "Physical",
+					"color": "#a8a8a8",
+					"fontFamily": "FontAwesome",
+					"content": ""
+				},
+				"custodian": {
+					"value": "Custodian",
+					"color": "#a8a8a8",
+					"fontFamily": "FontAwesome",
+					"content": ""
+				},
+				"guarantor": {
+					"value": "Guarantor",
+					"color": "#a8a8a8",
+					"fontFamily": "FontAwesome",
+					"content": ""
+				},
+				"other": {
+					"value": "Other",
+					"color": "#a8a8a8",
+					"fontFamily": "FontAwesome",
+					"content": ""
+				},
+				"project": {
+					"value": "Project",
+					"color": "#a8a8a8",
+					"fontFamily": "FontAwesome",
+					"content": ""
+				},
+				"order": {
+					"value": "Order",
+					"color": "#a8a8a8",
+					"fontFamily": "FontAwesome",
+					"content": ""
+				},
+				"payment": {
+					"value": "Payment",
+					"color": "#a8a8a8",
+					"fontFamily": "FontAwesome",
+					"content": ""
+				},
+				"h": {
+					"value": "Buliding",
+					"color": "#a8a8a8",
+					"fontFamily": "FontAwesome",
+					"content": ""
+				},
+				"b": {
+					"value": "Buliding",
+					"color": "#a8a8a8",
+					"fontFamily": "FontAwesome",
+					"content": ""
+				},
+				"l": {
+					"value": "Organization",
+					"color": "#a8a8a8",
+					"fontFamily": "FontAwesome",
+					"content": ""
+				},
+				"f": {
+					"value": "Business",
+					"color": "#a8a8a8",
+					"fontFamily": "FontAwesome",
+					"content": ""
+				},
+				"p": {
+					"value": "Post Office Box",
+					"color": "#a8a8a8",
+					"fontFamily": "FontAwesome",
+					"content": ""
+				},
+				"s": {
+					"value": "Street",
+					"color": "#a8a8a8",
+					"fontFamily": "FontAwesome",
+					"content": ""
+				},
+				"u": {
+					"value": "Unknown",
+					"color": "#a8a8a8",
+					"fontFamily": "FontAwesome",
+					"content": ""
+				},
+				"r": {
+					"value": "Road",
+					"color": "#a8a8a8",
+					"fontFamily": "FontAwesome",
+					"content": ""
+				},
+				"g": {
+					"value": "Delivery Address",
+					"color": "#a8a8a8",
+					"fontFamily": "FontAwesome",
+					"content": ""
+				},
+				"default": {
+					"value": "Not Available",
+					"color": "",
+					"fontFamily": "FontAwesome",
+					"content": ""
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"AddressLineOne"
+					],
+					"splitBy": ", "
+				},
+				{
+					"attributes": [
+						"AddressLineTwo"
+					],
+					"splitBy": ", "
+				},
+				{
+					"attributes": [
+						"CityName",
+						"State",
+						"Country",
+						"PostalCode"
+					],
+					"splitBy": ", "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"Email": {
+		"icon": {
+			"attribute": "EmailType",
+			"values": {
+				"b": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#a8a8a8"
+				},
+				"business": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#a8a8a8"
+				},
+				"h": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#a8a8a8"
+				},
+				"home": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#a8a8a8"
+				},
+				"default": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": ""
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"EmailAddress"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"Person": {
+		"icon": {
+			"attribute": "Gender",
+			"values": {
+				"male": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": ""
+				},
+				"female": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": ""
+				}
+			}
+		},
+		"content": {
+			"flex": 65,
+			"lineGroups": [
+				{
+					"attributes": [
+						"JobRole"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"flex": 25,
+			"lineGroups": [
+				{
+					"attributes": [
+						"BirthDate"
+					]
+				}
+			]
+		}
+	},
+	"SameAs": {
+		"icon": {
+			"attribute": "RelationshipSubType",
+			"values": {
+				"email_match": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": ""
+				},
+				"webchat_match": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": ""
+				},
+				"party_match": {
+					"content": "",
+					"fontFamily": "Material Icons",
+					"color": ""
+				}
+			}
+		},
+		"content": {
+			"flex": 65,
+			"lineGroups": [
+				{
+					"attributes": [
+						"TargetSourceKey"
+					],
+					"splitBy": ","
+				}
+			]
+		},
+		"special": {
+			"flex": 25,
+			"lineGroups": [
+				{
+					"attributes": [
+						"TargetSourceName"
+					]
+				}
+			]
+		}
+	},
+	"Link": {
+		"icon": {
+			"attribute": "RelationshipSubType",
+			"values": {
+				"default": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": ""
+				}
+			}
+		},
+		"content": {
+			"flex": 65,
+			"lineGroups": [
+				{
+					"attributes": [
+						"TargetSourceKey",
+						"RelationshipSubType"
+					],
+					"splitBy": ","
+				}
+			]
+		},
+		"special": {
+			"flex": 25,
+			"lineGroups": [
+				{
+					"attributes": [
+						"TargetSourceName"
+					]
+				}
+			]
+		}
+	},
+	"Contact": {
+		"icon": {
+			"attribute": "",
+			"values": {}
+		},
+		"content": {
+			"flex": 65,
+			"lineGroups": [
+				{
+					"attributes": [
+						"TargetSourceKey"
+					],
+					"splitBy": ","
+				}
+			]
+		},
+		"special": {
+			"flex": 25,
+			"lineGroups": [
+				{
+					"attributes": [
+						"TargetSourceName"
+					]
+				}
+			]
+		}
+	},
+	"AddressRelationship": {
+		"icon": {
+			"attribute": "",
+			"values": {}
+		},
+		"content": {
+			"flex": 65,
+			"lineGroups": [
+				{
+					"attributes": [
+						"TargetSourceKey"
+					],
+					"splitBy": ","
+				}
+			]
+		},
+		"special": {
+			"flex": 25,
+			"lineGroups": [
+				{
+					"attributes": [
+						"TargetSourceName"
+					]
+				}
+			]
+		}
+	},
+	"ChildOf": {
+		"icon": {
+			"attribute": "",
+			"values": {}
+		},
+		"content": {
+			"flex": 65,
+			"lineGroups": [
+				{
+					"attributes": [
+						"TargetSourceKey"
+					],
+					"splitBy": ","
+				}
+			]
+		},
+		"special": {
+			"flex": 25,
+			"lineGroups": [
+				{
+					"attributes": [
+						"TargetSourceName"
+					]
+				}
+			]
+		}
+	},
+	"Employment": {
+		"icon": {
+			"attribute": "",
+			"values": {}
+		},
+		"content": {
+			"flex": 65,
+			"lineGroups": [
+				{
+					"attributes": [
+						"TargetSourceKey"
+					],
+					"splitBy": ","
+				}
+			]
+		},
+		"special": {
+			"flex": 25,
+			"lineGroups": [
+				{
+					"attributes": [
+						"TargetSourceName"
+					]
+				}
+			]
+		}
+	},
+	"Family": {
+		"icon": {
+			"attribute": "",
+			"values": {}
+		},
+		"content": {
+			"flex": 65,
+			"lineGroups": [
+				{
+					"attributes": [
+						"TargetSourceKey"
+					],
+					"splitBy": ","
+				}
+			]
+		},
+		"special": {
+			"flex": 25,
+			"lineGroups": [
+				{
+					"attributes": [
+						"TargetSourceName"
+					]
+				}
+			]
+		}
+	},
+	"OrganizationRelations": {
+		"icon": {
+			"attribute": "",
+			"values": {}
+		},
+		"content": {
+			"flex": 65,
+			"lineGroups": [
+				{
+					"attributes": [
+						"TargetSourceKey",
+						"RelationshipSubType"
+					],
+					"splitBy": ","
+				}
+			]
+		},
+		"special": {
+			"flex": 25,
+			"lineGroups": [
+				{
+					"attributes": [
+						"RelationshipSubType"
+					]
+				}
+			]
+		}
+	},
+	"SellerOf": {
+		"icon": {
+			"attribute": "",
+			"values": {}
+		},
+		"content": {
+			"flex": 65,
+			"lineGroups": [
+				{
+					"attributes": [
+						"TargetSourceKey",
+						"RelationshipSubType"
+					],
+					"splitBy": ","
+				}
+			]
+		},
+		"special": {
+			"flex": 25,
+			"lineGroups": [
+				{
+					"attributes": [
+						"RelationshipSubType"
+					]
+				}
+			]
+		}
+	},
+	"HasTransaction": {
+		"icon": {
+			"attribute": "",
+			"values": {}
+		},
+		"content": {
+			"flex": 65,
+			"lineGroups": [
+				{
+					"attributes": [
+						"TargetSourceKey"
+					],
+					"splitBy": ","
+				}
+			]
+		},
+		"special": {
+			"flex": 25,
+			"lineGroups": [
+				{
+					"attributes": [
+						"TargetSourceName"
+					]
+				}
+			]
+		}
+	},
+	"Organization": {
+		"icon": {
+			"attribute": "CustomerClass",
+			"values": {
+				"default": {
+					"value": "Customer Class",
+					"color": "",
+					"fontFamily": "FontAwesome",
+					"content": ""
+				}
+			}
+		},
+		"content": {
+			"flex": 65,
+			"lineGroups": [
+				{
+					"attributes": [
+						"CustomerCategory"
+					],
+					"splitBy": " "
+				},
+				{
+					"attributes": [
+						"Region"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"flex": 25,
+			"lineGroups": [
+				{
+					"attributes": [
+						"BusinessSegment"
+					]
+				}
+			]
+		}
+	},
+	"OrganizationName": {
+		"icon": {
+			"attribute": "NameType",
+			"values": {
+				"personal": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#ddd"
+				},
+				"business": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#ddd"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"Name"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"PersonName": {
+		"icon": {
+			"attribute": "NameType",
+			"values": {
+				"personal": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#ddd"
+				},
+				"business": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#ddd"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"GivenNameOne",
+						"FamilyName"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"PhoneNumber": {
+		"icon": {
+			"attribute": "PhoneNumberType",
+			"values": {
+				"h": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#ddd",
+					"value": "Home"
+				},
+				"b": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#ddd",
+					"value": "Business"
+				},
+				"home": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#ddd",
+					"value": "Home"
+				},
+				"business": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#ddd",
+					"value": "Business"
+				},
+				"default": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "",
+					"value": "Business"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"FullNumber"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"EmailFromParty": {
+		"icon": {
+			"attribute": "Status",
+			"values": {
+				"open": {
+					"content": "OP",
+					"fontFamily": "Segoe UI",
+					"color": "#e74c3c",
+					"value": "Open"
+				},
+				"closed": {
+					"content": "CL",
+					"fontFamily": "Segoe UI",
+					"color": "#2ECC71",
+					"value": "Closed"
+				},
+				"pending": {
+					"content": "PE",
+					"fontFamily": "Segoe UI",
+					"color": "#f4d03f",
+					"value": "Closed"
+				},
+				"default": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": ""
+				}
+			}
+		},
+		"content": {
+			"flex": 70,
+			"lineGroups": [
+				{
+					"attributes": [
+						"FromEmailAddress",
+						"AgentNotes"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"flex": 20,
+			"lineGroups": [
+				{
+					"attributes": [
+						"Date"
+					]
+				}
+			]
+		}
+	},
+	"EmailToParty": {
+		"icon": {
+			"attribute": "Status",
+			"values": {
+				"active": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#9acc03"
+				},
+				"closed": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#2ECC71"
+				},
+				"default": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": ""
+				}
+			}
+		},
+		"content": {
+			"flex": 70,
+			"lineGroups": [
+				{
+					"attributes": [
+						"ToEmailAddresses",
+						"AgentNotes"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"flex": 20,
+			"lineGroups": [
+				{
+					"attributes": [
+						"Date"
+					]
+				}
+			]
+		}
+	},
+	"Webchat": {
+		"icon": {
+			"attribute": "Status",
+			"values": {
+				"open": {
+					"content": "OP",
+					"fontFamily": "Segoe UI",
+					"color": "#e74c3c",
+					"value": "Open"
+				},
+				"closed": {
+					"content": "CL",
+					"fontFamily": "Segoe UI",
+					"color": "#2ECC71",
+					"value": "Closed"
+				},
+				"pending": {
+					"content": "PE",
+					"fontFamily": "Segoe UI",
+					"color": "#f4d03f",
+					"value": "Closed"
+				},
+				"default": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": ""
+				}
+			}
+		},
+		"content": {
+			"flex": 70,
+			"lineGroups": [
+				{
+					"attributes": [
+						"OrderNumber",
+						"Subject"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"flex": 20,
+			"lineGroups": [
+				{
+					"attributes": [
+						"Timestamp"
+					]
+				}
+			]
+		}
+	},
+	"ContactCenterCall": {
+		"icon": {
+			"attribute": "Status",
+			"values": {
+				"active": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#9acc03"
+				},
+				"inactive": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#e83907"
+				},
+				"default": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": ""
+				}
+			}
+		},
+		"content": {
+			"flex": 70,
+			"lineGroups": [
+				{
+					"attributes": [
+						"Subject",
+						"AccountNumber"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"flex": 20,
+			"lineGroups": [
+				{
+					"attributes": [
+						"Timestamp"
+					]
+				}
+			]
+		}
+	},
+	"Transaction": {
+		"icon": {
+			"attribute": "Status",
+			"values": {
+				"iconType": "box-icon",
+				"intransit": {
+					"content": "IT",
+					"fontFamily": "Segoe UI",
+					"color": "#F76300",
+					"value": "In Transit"
+				},
+				"delivered": {
+					"content": "DE",
+					"fontFamily": "Segoe UI",
+					"color": "#8BB412",
+					"value": "Delivered"
+				},
+				"ordered": {
+					"content": "OR",
+					"fontFamily": "Segoe UI",
+					"color": "#84b4df",
+					"value": "Ordered"
+				},
+				"online": {
+					"content": "ON",
+					"fontFamily": "Segoe UI",
+					"color": "#2CA500",
+					"value": "Online"
+				},
+				"offline": {
+					"content": "OFF",
+					"fontFamily": "Segoe UI",
+					"color": "#C0C0C0",
+					"value": "Offline"
+				},
+				"pending": {
+					"content": "PE",
+					"fontFamily": "Segoe UI",
+					"color": "#f4d03f",
+					"value": "Pending"
+				},
+				"pd": {
+					"content": "PD",
+					"fontFamily": "Segoe UI",
+					"color": "#5f9d61",
+					"value": "Paid"
+				},
+				"cl": {
+					"content": "CL",
+					"fontFamily": "Segoe UI",
+					"color": "#ed7669",
+					"value": "Canceled"
+				},
+				"mn": {
+					"content": "MN",
+					"fontFamily": "Segoe UI",
+					"color": "#6ab04c",
+					"value": "Manifest"
+				},
+				"pc": {
+					"content": "PC",
+					"fontFamily": "Segoe UI",
+					"color": "#22a6b3",
+					"value": "Production Complete"
+				},
+				"in": {
+					"content": "IN",
+					"fontFamily": "Segoe UI",
+					"color": "#130f40",
+					"value": "Invoiced"
+				},
+				"hl": {
+					"content": "HL",
+					"fontFamily": "Segoe UI",
+					"color": "#535c68",
+					"value": "Hold"
+				},
+				"kb": {
+					"content": "KB",
+					"fontFamily": "Segoe UI",
+					"color": "#f9ca24",
+					"value": "Ken Burton Status"
+				},
+				"pp": {
+					"content": "PP",
+					"fontFamily": "Segoe UI",
+					"color": "#eb4d4b",
+					"value": "Pending Production"
+				},
+				"ip": {
+					"content": "IP",
+					"fontFamily": "Segoe UI",
+					"color": "#8c7ae6",
+					"value": "In Progress"
+				},
+				"quoted": {
+					"content": "QU",
+					"fontFamily": "Segoe UI",
+					"color": "#40739e",
+					"value": "Quoted"
+				},
+				"default": {
+					"content": "NA",
+					"fontFamily": "Segoe UI",
+					"color": "#c0c0c0"
+				}
+			}
+		},
+		"content": {
+			"flex": 60,
+			"lineGroups": [
+				{
+					"attributes": [
+						"ReferenceNumber"
+					],
+					"splitBy": " "
+				},
+				{
+					"attributes": [
+						"Channel"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"flex": 30,
+			"lineGroups": [
+				{
+					"attributes": [
+						"Amount",
+						"AmountCurrency"
+					],
+					"splitBy": " "
+				},
+				{
+					"attributes": [
+						"StartTimestamp"
+					],
+					"splitBy": " "
+				}
+			]
+		}
+	},
+	"Quote": {
+		"icon": {
+			"attribute": "Status",
+			"values": {
+				"iconType": "box-icon",
+				"open": {
+					"content": "OP",
+					"fontFamily": "Segoe UI",
+					"color": "#e74c3c",
+					"value": "Open"
+				},
+				"closed": {
+					"content": "CL",
+					"fontFamily": "Segoe UI",
+					"color": "#2ECC71",
+					"value": "Closed"
+				},
+				"ordered": {
+					"content": "OR",
+					"fontFamily": "Segoe UI",
+					"color": "#ED7D31"
+				},
+				"quoted": {
+					"content": "QU",
+					"fontFamily": "Segoe UI",
+					"color": "#5B9BD5"
+				},
+				"default": {
+					"content": "NA",
+					"fontFamily": "Segoe UI",
+					"color": "#c0c0c0"
+				},
+				"undefined": {
+					"content": "UN",
+					"fontFamily": "Segoe UI",
+					"color": "#c0c0c0"
+				}
+			}
+		},
+		"content": {
+			"flex": 65,
+			"lineGroups": [
+				{
+					"attributes": [
+						"ReferenceNumber",
+						"BusinessUnit"
+					],
+					"splitBy": " "
+				},
+				{
+					"attributes": [
+						"QuoteBy"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"flex": 25,
+			"lineGroups": [
+				{
+					"attributes": [
+						"TotalAmount"
+					],
+					"splitBy": " "
+				},
+				{
+					"attributes": [
+						"QuoteTimestamp"
+					],
+					"splitBy": " "
+				}
+			]
+		}
+	},
+	"ServiceRequest": {
+		"icon": {
+			"attribute": "ProductName",
+			"values": {
+				"iconType": "image"
+			}
+		},
+		"content": {
+			"flex": 80,
+			"lineGroups": [
+				{
+					"attributes": [
+						"ServiceRequestId"
+					],
+					"splitBy": " "
+				},
+				{
+					"attributes": [
+						"ServiceRequestBy"
+					],
+					"splitBy": " "
+				},
+				{
+					"attributes": [
+						"ProductName",
+						"ProductCategory"
+					],
+					"splitBy": ", "
+				}
+			]
+		},
+		"special": {
+			"flex": 10,
+			"class": "service_request",
+			"lineGroups": [
+				{
+					"attributes": [
+						"Status"
+					],
+					"splitBy": " "
+				}
+			]
+		}
+	},
+	"LifeEvent": {
+		"icon": {
+			"attribute": "MentionMediaType",
+			"values": {
+				"webchat": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#77B3D4",
+					"value": "Webchat"
+				},
+				"emailfromparty": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#168DE2",
+					"value": "Email From Party"
+				},
+				"twitter": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#5EAADE",
+					"value": "Twitter"
+				},
+				"facebook": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#3C599B",
+					"value": "Facebook"
+				},
+				"instagram": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#C5A4D5",
+					"value": "Instagram"
+				},
+				"flickr": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#0060D4",
+					"value": "Flickr"
+				},
+				"foursquare": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#F94877",
+					"value": "Foursquare"
+				},
+				"gravatar": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#1270B6",
+					"value": "Gravatar",
+					"extraClass": "rotate-270"
+				},
+				"aboutme": {
+					"content": "me",
+					"fontFamily": "Segoe UI",
+					"color": "#ddd",
+					"value": "AboutMe"
+				},
+				"gplus": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#DD4B39",
+					"value": "Google Plus"
+				},
+				"contactcentercall": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#9DD2D8",
+					"value": "Contact center call"
+				},
+				"linkedin": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#017BBE",
+					"value": "LinkedIn"
+				},
+				"default": {
+					"content": "\\uf21e",
+					"fontFamily": "FontAwesome",
+					"color": ""
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"EnrichmentValue"
+					],
+					"splitBy": " "
+				},
+				{
+					"attributes": [
+						"MentionAccountId"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide",
+			"lineGroups": []
+		}
+	},
+	"ProductMention": {
+		"icon": {
+			"attribute": "MentionMediaType",
+			"values": {
+				"webchat": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#77B3D4",
+					"value": "Webchat"
+				},
+				"emailfromparty": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#168DE2",
+					"value": "Email From Party"
+				},
+				"twitter": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#5EAADE",
+					"value": "Twitter"
+				},
+				"facebook": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#ddd",
+					"value": "Facebook"
+				},
+				"instagram": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#C5A4D5",
+					"value": "Instagram"
+				},
+				"flickr": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#0060D4",
+					"value": "Flickr"
+				},
+				"foursquare": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#F94877",
+					"value": "Foursquare"
+				},
+				"gravatar": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#1270B6",
+					"value": "Gravatar",
+					"extraClass": "rotate-270"
+				},
+				"aboutme": {
+					"content": "me",
+					"fontFamily": "Segoe UI",
+					"color": "#ddd",
+					"value": "AboutMe"
+				},
+				"gplus": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#DD4B39",
+					"value": "Google Plus"
+				},
+				"contactcentercall": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#9DD2D8",
+					"value": "Contact center call"
+				},
+				"linkedin": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#017BBE",
+					"value": "LinkedIn"
+				},
+				"default": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "",
+					"value": "Product Mention"
+				}
+			}
+		},
+		"content": {
+			"flex": 70,
+			"lineGroups": [
+				{
+					"attributes": [
+						"ProductName"
+					],
+					"splitBy": " "
+				},
+				{
+					"attributes": [
+						"MentionText"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"flex": 20,
+			"lineGroups": [
+				{
+					"attributes": [
+						"MentionTimestamp"
+					],
+					"splitBy": " "
+				}
+			]
+		}
+	},
+	"Mention": {
+		"icon": {
+			"attribute": "MentionMediaType",
+			"values": {
+				"webchat": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#77B3D4",
+					"value": "Webchat"
+				},
+				"emailfromparty": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#168DE2",
+					"value": "Email From Party"
+				},
+				"twitter": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#5EAADE",
+					"value": "Twitter"
+				},
+				"facebook": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#3C599B",
+					"value": "Facebook"
+				},
+				"instagram": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#C5A4D5",
+					"value": "Instagram"
+				},
+				"flickr": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#0060D4",
+					"value": "Flickr"
+				},
+				"foursquare": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#F94877",
+					"value": "Foursquare"
+				},
+				"gravatar": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#1270B6",
+					"value": "Gravatar",
+					"extraClass": "rotate-270"
+				},
+				"aboutme": {
+					"content": "me",
+					"fontFamily": "Segoe UI",
+					"color": "#ddd",
+					"value": "AboutMe"
+				},
+				"gplus": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#DD4B39",
+					"value": "Google Plus"
+				},
+				"contactcentercall": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#9DD2D8",
+					"value": "Contact center call"
+				},
+				"linkedin": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#017BBE",
+					"value": "LinkedIn"
+				},
+				"default": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "",
+					"value": "Mention"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"ItemNames"
+					],
+					"splitBy": " "
+				},
+				{
+					"attributes": [
+						"ItemSubCategories"
+					],
+					"splitBy": " "
+				},
+				{
+					"attributes": [
+						"ItemCategories"
+					],
+					"splitBy": " "
+				},
+				{
+					"attributes": [
+						"Names"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"CompanyMention": {
+		"icon": {
+			"attribute": "MentionMediaType",
+			"values": {
+				"webchat": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#77B3D4",
+					"value": "Webchat"
+				},
+				"emailfromparty": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#168DE2",
+					"value": "Email From Party"
+				},
+				"twitter": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#5EAADE",
+					"value": "Twitter"
+				},
+				"facebook": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#3C599B",
+					"value": "Facebook"
+				},
+				"instagram": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#C5A4D5",
+					"value": "Instagram"
+				},
+				"flickr": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#0060D4",
+					"value": "Flickr"
+				},
+				"foursquare": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#F94877",
+					"value": "Foursquare"
+				},
+				"gravatar": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#1270B6",
+					"value": "Gravatar",
+					"extraClass": "rotate-270"
+				},
+				"aboutme": {
+					"content": "me",
+					"fontFamily": "Segoe UI",
+					"color": "#ddd",
+					"value": "AboutMe"
+				},
+				"gplus": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#DD4B39",
+					"value": "Google Plus"
+				},
+				"contactcentercall": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#9DD2D8",
+					"value": "Contact center call"
+				},
+				"linkedin": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#017BBE",
+					"value": "LinkedIn"
+				},
+				"default": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "",
+					"value": "Company Mention"
+				}
+			}
+		},
+		"content": {
+			"flex": 70,
+			"lineGroups": [
+				{
+					"attributes": [
+						"CompanyName"
+					],
+					"splitBy": " "
+				},
+				{
+					"attributes": [
+						"MentionText"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"flex": 20,
+			"lineGroups": [
+				{
+					"attributes": [
+						"MentionTimestamp"
+					],
+					"splitBy": " "
+				}
+			]
+		}
+	},
+	"LocationMention": {
+		"icon": {
+			"attribute": "MentionMediaType",
+			"values": {
+				"webchat": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#77B3D4",
+					"value": "Webchat"
+				},
+				"emailfromparty": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#168DE2",
+					"value": "Email From Party"
+				},
+				"twitter": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#5EAADE",
+					"value": "Twitter"
+				},
+				"facebook": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#3C599B",
+					"value": "Facebook"
+				},
+				"instagram": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#C5A4D5",
+					"value": "Instagram"
+				},
+				"flickr": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#0060D4",
+					"value": "Flickr"
+				},
+				"foursquare": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#F94877",
+					"value": "Foursquare"
+				},
+				"gravatar": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#1270B6",
+					"value": "Gravatar",
+					"extraClass": "rotate-270"
+				},
+				"aboutme": {
+					"content": "me",
+					"fontFamily": "Segoe UI",
+					"color": "#ddd",
+					"value": "AboutMe"
+				},
+				"gplus": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#DD4B39",
+					"value": "Google Plus"
+				},
+				"contactcentercall": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#9DD2D8",
+					"value": "Contact center call"
+				},
+				"linkedin": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#017BBE",
+					"value": "LinkedIn"
+				},
+				"default": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "",
+					"value": "Location Mention"
+				}
+			}
+		},
+		"content": {
+			"flex": 70,
+			"lineGroups": [
+				{
+					"attributes": [
+						"City",
+						"StateProvince",
+						"Country"
+					],
+					"splitBy": ", "
+				}
+			]
+		},
+		"special": {
+			"flex": 20,
+			"lineGroups": [
+				{
+					"attributes": [
+						"MentionMediaId"
+					],
+					"splitBy": " "
+				}
+			]
+		}
+	},
+	"StoreEntry": {
+		"icon": {
+			"attribute": "MentionMediaType",
+			"values": {
+				"webchat": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#77B3D4",
+					"value": "Webchat"
+				},
+				"emailfromparty": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#168DE2",
+					"value": "Email From Party"
+				},
+				"twitter": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#5EAADE",
+					"value": "Twitter"
+				},
+				"facebook": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#3C599B",
+					"value": "Facebook"
+				},
+				"instagram": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#C5A4D5",
+					"value": "Instagram"
+				},
+				"flickr": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#0060D4",
+					"value": "Flickr"
+				},
+				"foursquare": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#F94877",
+					"value": "Foursquare"
+				},
+				"gravatar": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#1270B6",
+					"value": "Gravatar",
+					"extraClass": "rotate-270"
+				},
+				"aboutme": {
+					"content": "me",
+					"fontFamily": "Segoe UI",
+					"color": "#ddd",
+					"value": "AboutMe"
+				},
+				"gplus": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#DD4B39",
+					"value": "Google Plus"
+				},
+				"contactcentercall": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#9DD2D8",
+					"value": "Contact center call"
+				},
+				"linkedin": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#017BBE",
+					"value": "LinkedIn"
+				},
+				"default": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "",
+					"value": "Store Entry"
+				}
+			}
+		},
+		"content": {
+			"flex": 70,
+			"lineGroups": [
+				{
+					"attributes": [
+						"StoreName"
+					],
+					"splitBy": " "
+				},
+				{
+					"attributes": [
+						"StoreAddressLine",
+						"StoreCity",
+						"StoreStateProvince"
+					],
+					"splitBy": ", "
+				}
+			]
+		},
+		"special": {
+			"flex": 20,
+			"lineGroups": [
+				{
+					"attributes": [
+						"CheckinTimestamp"
+					],
+					"splitBy": " "
+				}
+			]
+		}
+	},
+	"KeywordMention": {
+		"icon": {
+			"attribute": "MentionMediaType",
+			"values": {
+				"webchat": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#77B3D4",
+					"value": "Webchat"
+				},
+				"emailfromparty": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#168DE2",
+					"value": "Email From Party"
+				},
+				"twitter": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#5EAADE",
+					"value": "Twitter"
+				},
+				"facebook": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#3C599B",
+					"value": "Facebook"
+				},
+				"instagram": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#C5A4D5",
+					"value": "Instagram"
+				},
+				"flickr": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#0060D4",
+					"value": "Flickr"
+				},
+				"foursquare": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#F94877",
+					"value": "Foursquare"
+				},
+				"gravatar": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#1270B6",
+					"value": "Gravatar",
+					"extraClass": "rotate-270"
+				},
+				"aboutme": {
+					"content": "me",
+					"fontFamily": "Segoe UI",
+					"color": "#ddd",
+					"value": "AboutMe"
+				},
+				"gplus": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#DD4B39",
+					"value": "Google Plus"
+				},
+				"contactcentercall": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#9DD2D8",
+					"value": "Contact center call"
+				},
+				"linkedin": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#017BBE",
+					"value": "LinkedIn"
+				},
+				"default": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "",
+					"value": "Keyword Mention"
+				}
+			}
+		},
+		"content": {
+			"flex": 70,
+			"lineGroups": [
+				{
+					"attributes": [
+						"Keyword"
+					],
+					"splitBy": " "
+				},
+				{
+					"attributes": [
+						"MentionText"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"flex": 20,
+			"lineGroups": [
+				{
+					"attributes": [
+						"MentionTimestamp"
+					],
+					"splitBy": " "
+				}
+			]
+		}
+	},
+	"CustomerPotential": {
+		"icon": {
+			"attribute": "Potential",
+			"values": {
+				"low": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"extraClass": ""
+				},
+				"high": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"extraClass": ""
+				},
+				"medium": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"extraClass": ""
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"class": "sentiment",
+			"lineGroups": [
+				{
+					"attributes": [
+						"Potential"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"CustomerRisk": {
+		"icon": {
+			"attribute": "Risk",
+			"values": {
+				"low": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"extraClass": ""
+				},
+				"high": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"extraClass": ""
+				},
+				"medium": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"extraClass": ""
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"class": "risk",
+			"lineGroups": [
+				{
+					"attributes": [
+						"Risk"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"CustomerChurnRisk": {
+		"icon": {
+			"attribute": "ChurnRisk",
+			"values": {
+				"low": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"extraClass": ""
+				},
+				"high": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"extraClass": ""
+				},
+				"medium": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"extraClass": ""
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"class": "risk",
+			"lineGroups": [
+				{
+					"attributes": [
+						"ChurnRisk"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"CustomerTier": {
+		"icon": {
+			"attribute": "Tier",
+			"values": {
+				"low": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"extraClass": ""
+				},
+				"high": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"extraClass": ""
+				},
+				"medium": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"extraClass": ""
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"class": "sentiment",
+			"lineGroups": [
+				{
+					"attributes": [
+						"Tier"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"OverallSentiment": {
+		"icon": {
+			"attribute": "Sentiment",
+			"values": {
+				"negative": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"extraClass": ""
+				},
+				"positive": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"extraClass": ""
+				},
+				"neutral": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"extraClass": ""
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"class": "sentiment",
+			"lineGroups": [
+				{
+					"attributes": [
+						"Sentiment"
+					],
+					"splitBy": " "
+				},
+				{
+					"attributes": [
+						"SentimentScore"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide",
+			"lineGroups": []
+		}
+	},
+	"Preferences": {
+		"icon": {
+			"attribute": "MentionMediaType",
+			"values": {
+				"webchat": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#77B3D4",
+					"value": "Webchat"
+				},
+				"emailfromparty": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#168DE2",
+					"value": "Email From Party"
+				},
+				"twitter": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#5EAADE",
+					"value": "Twitter"
+				},
+				"facebook": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#3C599B",
+					"value": "Facebook"
+				},
+				"instagram": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#C5A4D5",
+					"value": "Instagram"
+				},
+				"flickr": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#0060D4",
+					"value": "Flickr"
+				},
+				"foursquare": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#F94877",
+					"value": "Foursquare"
+				},
+				"gravatar": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#1270B6",
+					"value": "Gravatar",
+					"extraClass": "rotate-270"
+				},
+				"aboutme": {
+					"content": "me",
+					"fontFamily": "Segoe UI",
+					"color": "#ddd",
+					"value": "AboutMe"
+				},
+				"gplus": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#DD4B39",
+					"value": "Google Plus"
+				},
+				"contactcentercall": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#9DD2D8",
+					"value": "Contact center call"
+				},
+				"linkedin": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#017BBE",
+					"value": "LinkedIn"
+				},
+				"default": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "",
+					"value": "Keyword Mention"
+				}
+			}
+		},
+		"content": {
+			"flex": 70,
+			"lineGroups": [
+				{
+					"attributes": [
+						"EnrichmentValue"
+					],
+					"splitBy": " "
+				},
+				{
+					"attributes": [
+						"MentionType"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"flex": 20,
+			"lineGroups": [
+				{
+					"attributes": [
+						"InferredDate"
+					],
+					"splitBy": " "
+				}
+			]
+		}
+	},
+	"Occupation": {
+		"icon": {
+			"attribute": "MentionMediaType",
+			"values": {
+				"webchat": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#77B3D4",
+					"value": "Webchat"
+				},
+				"emailfromparty": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#168DE2",
+					"value": "Email From Party"
+				},
+				"twitter": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#5EAADE",
+					"value": "Twitter"
+				},
+				"facebook": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#3C599B",
+					"value": "Facebook"
+				},
+				"instagram": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#C5A4D5",
+					"value": "Instagram"
+				},
+				"flickr": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#0060D4",
+					"value": "Flickr"
+				},
+				"foursquare": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#F94877",
+					"value": "Foursquare"
+				},
+				"gravatar": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#1270B6",
+					"value": "Gravatar",
+					"extraClass": "rotate-270"
+				},
+				"aboutme": {
+					"content": "me",
+					"fontFamily": "Segoe UI",
+					"color": "#ddd",
+					"value": "AboutMe"
+				},
+				"gplus": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#DD4B39",
+					"value": "Google Plus"
+				},
+				"contactcentercall": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#9DD2D8",
+					"value": "Contact center call"
+				},
+				"linkedin": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#017BBE",
+					"value": "LinkedIn"
+				},
+				"default": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "",
+					"value": "Keyword Mention"
+				}
+			}
+		},
+		"content": {
+			"flex": 70,
+			"lineGroups": [
+				{
+					"attributes": [
+						"EnrichmentValue"
+					],
+					"splitBy": " "
+				},
+				{
+					"attributes": [
+						"MentionType"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"flex": 20,
+			"lineGroups": [
+				{
+					"attributes": [
+						"InferredDate"
+					],
+					"splitBy": " "
+				}
+			]
+		}
+	},
+	"AboutMeAccount": {
+		"icon": {
+			"attribute": "DisplayName",
+			"values": {
+				"default": {
+					"content": "me",
+					"fontFamily": "Segoe UI",
+					"color": "",
+					"value": "Display Name"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"AccountId"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"FlickrAccount": {
+		"icon": {
+			"attribute": "UserName",
+			"values": {
+				"default": {
+					"content": "me",
+					"fontFamily": "Segoe UI",
+					"color": "",
+					"value": "User Name"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"ScreenName"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"FoursquareAccount": {
+		"icon": {
+			"attribute": "ScreenName",
+			"values": {
+				"default": {
+					"content": "me",
+					"fontFamily": "Segoe UI",
+					"color": "",
+					"value": "Screen Name"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"UserName"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"GPlusAccount": {
+		"icon": {
+			"attribute": "GPlusDisplayName",
+			"values": {
+				"default": {
+					"content": "me",
+					"fontFamily": "Segoe UI",
+					"color": "",
+					"value": "Display Name"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"GPlusDisplayName"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"GravatarAccount": {
+		"icon": {
+			"attribute": "DisplayName",
+			"values": {
+				"default": {
+					"content": "me",
+					"fontFamily": "Segoe UI",
+					"color": "",
+					"value": "Display Name"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"GravatarAccountsUserName"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"ReviewSiteAccount": {
+		"icon": {
+			"attribute": "ScreenName",
+			"values": {
+				"default": {
+					"content": "me",
+					"fontFamily": "Segoe UI",
+					"color": "",
+					"value": "Screen Name"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"UserName"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"FacebookAccount": {
+		"icon": {
+			"attribute": "ScreenName",
+			"values": {
+				"default": {
+					"content": "me",
+					"fontFamily": "Segoe UI",
+					"color": "",
+					"value": "Screen Name"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"UserName"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"InstagramAccount": {
+		"icon": {
+			"attribute": "ScreenName",
+			"values": {
+				"default": {
+					"content": "me",
+					"fontFamily": "Segoe UI",
+					"color": "",
+					"value": "Screen Name"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"FullName"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"TwitterAccount": {
+		"icon": {
+			"attribute": "ScreenName",
+			"values": {
+				"default": {
+					"content": "me",
+					"fontFamily": "Segoe UI",
+					"color": "",
+					"value": "Screen Name"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"UserName"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"VehicleOwned": {
+		"icon": {
+			"attribute": "ModelName",
+			"values": {
+				"default": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#35AA47",
+					"value": "Model Name"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"ModelName"
+					],
+					"splitBy": " "
+				},
+				{
+					"attributes": [
+						"ModelYear"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"PurchaseOrder": {
+		"icon": {
+			"attribute": "CustomerName",
+			"values": {
+				"default": {
+					"fontFamily": "FontAwesome",
+					"content": "",
+					"color": "#35AA47",
+					"value": "CustomerName"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"CustomerName"
+					],
+					"fontFamily": "FontAwesome",
+					"content": "",
+					"color": "#35AA47",
+					"splitBy": " "
+				},
+				{
+					"attributes": [
+						"CustToDealerSentimentLabel"
+					],
+					"fontFamily": "FontAwesome",
+					"content": "",
+					"color": "#35AA47",
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"DealerSentiment": {
+		"icon": {
+			"attribute": "DealerName",
+			"values": {
+				"default": {
+					"fontFamily": "Material Icons",
+					"content": "",
+					"color": "#B26F0F",
+					"value": "DealerName"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"DealerName"
+					],
+					"fontFamily": "Material Icons",
+					"content": "",
+					"color": "#B26F0F",
+					"splitBy": " "
+				},
+				{
+					"attributes": [
+						"Sentiment"
+					],
+					"fontFamily": "Material Icons",
+					"content": "",
+					"color": "#B26F0F",
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"PurchasedFrom": {
+		"icon": {
+			"attribute": "TargetSourceKey",
+			"values": {
+				"default": {
+					"fontFamily": "Material Icons",
+					"content": "",
+					"color": "#C83A2A",
+					"value": "TargetSourceKey"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"TargetSourceKey"
+					],
+					"fontFamily": "Material Icons",
+					"content": "",
+					"color": "#C83A2A",
+					"splitBy": " "
+				},
+				{
+					"attributes": [
+						"RelationshipSubType"
+					],
+					"fontFamily": "Material Icons",
+					"content": "",
+					"color": "#C83A2A",
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"DealerOf": {
+		"icon": {
+			"attribute": "TargetSourceKey",
+			"values": {
+				"default": {
+					"fontFamily": "Material Icons",
+					"content": "",
+					"color": "#C83A2A",
+					"value": "TargetSourceKey"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"TargetSourceKey"
+					],
+					"fontFamily": "Material Icons",
+					"content": "",
+					"color": "#C83A2A",
+					"splitBy": " "
+				},
+				{
+					"attributes": [
+						"RelationshipSubType"
+					],
+					"fontFamily": "Material Icons",
+					"content": "",
+					"color": "#C83A2A",
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"SocialHandle": {
+		"icon": {
+			"attribute": "",
+			"values": {}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"Value"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"Product": {
+		"icon": {
+			"attribute": "ProductName",
+			"values": {
+				"default": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#a8a8a8",
+					"value": "ProductName"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"ProductName",
+						"SourceName"
+					],
+					"splitBy": ","
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"TransactionItem": {
+		"icon": {
+			"attribute": "ProductName",
+			"values": {
+				"default": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#35AA47",
+					"value": "Product Name"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"ProductName",
+						"ProductCode",
+						"Amount",
+						"Status"
+					],
+					"splitBy": "  "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"TripDetails": {
+		"icon": {
+			"attribute": "DistanceCovered",
+			"values": {
+				"default": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#35AA47",
+					"value": "Distance covered"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"StartPlace"
+					],
+					"splitBy": " "
+				},
+				{
+					"attributes": [
+						"EndPlace"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"FinanceInfo": {
+		"icon": {
+			"attribute": "AccountNumber",
+			"values": {
+				"default": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#2ecc71",
+					"value": "Account Number"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"AccountNumber",
+						"BankName",
+						"CreditCardType"
+					],
+					"splitBy": " , "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"CRM": {
+		"icon": {
+			"attribute": "SellerName",
+			"values": {
+				"default": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#3498db",
+					"value": "Seller Name"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"SellerName",
+						"AccountName",
+						"ProductName"
+					],
+					"splitBy": " , "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"Campaign": {
+		"icon": {
+			"attribute": "CampaignID",
+			"values": {
+				"default": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#3498db",
+					"value": "Campaign ID"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"CampaignID",
+						"CampaignType",
+						"CampaignCategory"
+					],
+					"splitBy": " , "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"OrganizationHierarchy": {
+		"icon": {
+			"attribute": "Root",
+			"values": {
+				"default": {
+					"content": "",
+					"fontFamily": "FontAwesome",
+					"color": "#3498db",
+					"value": "Root"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"Root",
+						"Parent",
+						"Child"
+					],
+					"splitBy": " , "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"DealBehaviour": {
+		"icon": {
+			"attribute": "",
+			"values": {
+				"default": {}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"AverageDealClosureTime",
+						"MostlyOrderedProduct"
+					],
+					"splitBy": ","
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"DealBehaviourProduct": {
+		"icon": {
+			"attribute": "ProductName",
+			"values": {
+				"default": {
+					"content": "*",
+					"fontFamily": "FontAwesome",
+					"color": "#a8a8a8",
+					"value": "ProductName"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"ProductName",
+						"NumberOfDeals"
+					],
+					"splitBy": ","
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"AccountSummary": {
+		"icon": {
+			"attribute": "",
+			"values": {
+				"default": {}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"Key"
+					],
+					"splitBy": ""
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"FinancialPotential": {
+		"icon": {
+			"attribute": "ContactName",
+			"values": {
+				"default": {
+					"content": "*",
+					"fontFamily": "FontAwesome",
+					"color": "#a8a8a8",
+					"value": "ContactName"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"ContactName",
+						"AvgAmount"
+					],
+					"splitBy": ","
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"InteractionBehaviour": {
+		"icon": {
+			"attribute": "PreferredMedium",
+			"values": {
+				"default": {
+					"content": "*",
+					"fontFamily": "FontAwesome",
+					"color": "#a8a8a8",
+					"value": "PreferredMedium"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"PreferredMedium"
+					],
+					"splitBy": ""
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"PaymentBehaviour": {
+		"icon": {
+			"attribute": "TotalRevenue",
+			"values": {
+				"default": {
+					"content": "*",
+					"fontFamily": "FontAwesome",
+					"color": "#a8a8a8",
+					"value": "TotalRevenue"
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"TotalRevenue"
+					],
+					"splitBy": ""
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	},
+	"Identifier": {
+		"icon": {
+			"attribute": "IdentifierType",
+			"values": {
+				"default": {
+					"content": "\uE90D",
+					"fontFamily": "FontAwesome",
+					"color": ""
+				}
+			}
+		},
+		"content": {
+			"flex": 90,
+			"lineGroups": [
+				{
+					"attributes": [
+						"IdentifierValue"
+					],
+					"splitBy": " "
+				}
+			]
+		},
+		"special": {
+			"class": "hide"
+		}
+	}
+}

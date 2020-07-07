@@ -1,0 +1,96 @@
+<div class="widget-table-view-wrapper" bindonce flex="100" ng-controller="widgetTableController as wtc">
+	<div layout-align="center center" layout-fill>
+		<div bo-if="$data.pre_defined == true" flex="90" class="widget-table-view-container" id="{{::$data.widget_name+'_table'}}">
+			<div layout-align="start center" layout-fill>
+				<div flex class="table-view-header">
+					<div layout="row" layout-align="start center">
+						<div flex="5" class="table-view-header-content cu-de" bo-if="widgetTemplate[$data.widget_name].table_view.expand" style="color:transparent">D</div>
+						<div class="table-view-header-content flex-text-wrap" ng-repeat="$headerData in widgetTemplate[$data.widget_name].table_view.headings track by $index" ng-click="!$headerData.sortable || wtc.sortWidget($headerData, $data)" style="cursor:{{!$headerData.sortable ? 'default':'pointer'}}" flex="{{::$headerData.width}}" md-truncate>
+							<span>{{::$data.widget_name+'_table_'+$headerData.name.toLowerCase().replace(' ','_')|translator:$headerData.name}}<md-tooltip>{{::($headerData.tooltip ? ($data.widget_name+'_table_tooltip_'+$headerData.tooltip.toLowerCase().replace(' ','_')|translator:$headerData.tooltip):($data.widget_name+'_table_'+$headerData.name.toLowerCase().replace(' ','_')|translator:$headerData.name))}}</md-tooltip></span>
+							<md-icon bo-if="$headerData.sortable == true && !wtc.isSortField($headerData, $data)" class="md-icon-xs">
+								sort
+							</md-icon>
+							<md-icon bo-if="$headerData.sortable == true && wtc.isSortField($headerData, $data) && $data.request_data.order == 'asc'" class="md-icon-xs">
+								arrow_upward
+							</md-icon>
+							<md-icon bo-if="$headerData.sortable == true && wtc.isSortField($headerData, $data) && $data.request_data.order == 'desc'" class="md-icon-xs">
+								arrow_downward
+							</md-icon>
+						</div>
+					</div>
+				</div>
+				<div flex class="scrollable-table-view-body"  ng-style="{'height': (widgetTemplate.tabHeight == undefined ? (widgetTemplate.portletHeight * 0.9 - 26) : widgetTemplate.tabHeight) + 'px'}">
+					<div layout-align="start center" layout-fill>
+						<div flex class="table-view-data-item" ng-if="$data.widget_data.rows && $data.widget_data.rows.length && !widgetTemplate[$data.widget_name].table_view.expand" ng-repeat="$widgetrow in $data.widget_data.rows track by $index" ng-class="{'odd-child': $index%2 == 0}">
+							<div layout="row" layout-align="start stretch">
+								<div flex="{{::$headerData.width}}" class="table-view-data-content" ng-repeat="$headerData in widgetTemplate[$data.widget_name].table_view.headings track by $index" style="text-align:{{$headerData.align}}">
+									<span>{{::$parent.$parent.$parent.wc.getWidgetFieldValue($widgetrow[$headerData.field], $headerData, $widgetrow, $data.pre_defined,$data.widget_name)}}</span>
+								</div>
+							</div>
+						</div>
+						<div flex class="table-view-data-item" ng-if="$data.widget_data.rows && $data.widget_data.rows.length && widgetTemplate[$data.widget_name].table_view.expand" ng-repeat-start="$widgetrow in $data.widget_data.rows track by $index" ng-class="{'odd-child': $index%2 == 0}" ng-init="$widgetrow.is_expanded = false">
+							<div layout="row" layout-align="start stretch">
+								<div flex="5" class="table-view-data-content cu-po expand-col" ng-click="$widgetrow.is_expanded = !$widgetrow.is_expanded"><md-icon class="te-al-le" ng-if="!$widgetrow.is_expanded">add</md-icon><md-icon ng-if="$widgetrow.is_expanded">remove</md-icon></div>
+								<div flex="{{$headerData.width}}" class="table-view-data-content" ng-repeat="$headerData in widgetTemplate[$data.widget_name].table_view.headings track by $index" style="text-align:{{$headerData.align}}">
+									<span>{{::$parent.$parent.$parent.wc.getWidgetFieldValue($widgetrow[$headerData.field], $headerData, $widgetrow, $data.pre_defined,$data.widget_name)}}</span>
+								</div>
+							</div>
+						</div>
+						<div flex class="table-view-data-item-expand expanded-row-container" ng-class="{'close-row':!$widgetrow.is_expanded}" ng-if="$data.widget_data.rows && $data.widget_data.rows.length && widgetTemplate[$data.widget_name].table_view.expand" ng-repeat-end>
+							<div layout="row" layout-align="start stretch" ng-repeat="$expandData in widgetTemplate[$data.widget_name].table_view.expand_fields track by $index" class="expanded-row">
+								<div flex="30" md-truncate class="expanded-row-value heading">
+									<span>{{::$data.widget_name+'_table_'+$expandData.name.toLowerCase().replace(' ','_')|translator:$expandData.name}}</span>
+									<md-tooltip show-only-on-text-overflow>{{::$data.widget_name+'_table_'+$expandData.name.toLowerCase().replace(' ','_')|translator:$expandData.name}}</md-tooltip>
+								</div>
+								<div flex="70" md-truncate class="expanded-row-value">
+									<span>{{::$parent.$parent.$parent.wc.getWidgetFieldValue($widgetrow[$expandData.field], $expandData, $widgetrow, $data.pre_defined,$data.widget_name)}}</span>
+									<md-tooltip show-only-on-text-overflow>{{::$parent.$parent.$parent.wc.getWidgetFieldValue($widgetrow[$expandData.field], $expandData, $widgetrow, $data.pre_defined,$data.widget_name)}}</md-tooltip>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div bo-if="$data.pre_defined == false" flex="90" class="widget-table-view-container custom-widget">
+			<div layout-align="start center" layout-fill>
+				<div flex class="table-view-header">
+					<div layout="row" layout-align="start center">
+						<div class="table-view-header-content cu-po" ng-repeat="$headerData in $data.response_objects.split(',') track by $index" ng-click="wtc.sortWidgetDefault($index,$data)" flex md-truncate>
+							{{::'AS_'+$headerData|translator:$headerData:enable_visual_attr}}
+							<md-tooltip>{{::'AS_'+$headerData|translator:$headerData:enable_visual_attr}}</md-tooltip>
+							<md-icon ng-if="!wtc.isSortFieldDefault($index, $data)" class="md-icon-xs">
+								sort
+							</md-icon>
+							<md-icon ng-if="wtc.isSortFieldDefault($index, $data) && $data.request_data.order == 'asc'" class="md-icon-xs">
+								arrow_upward
+							</md-icon>
+							<md-icon ng-if="wtc.isSortFieldDefault($index, $data) && $data.request_data.order == 'desc'" class="md-icon-xs">
+								arrow_downward
+							</md-icon>
+						</div>
+					</div>
+				</div>
+				<div flex class="scrollable-table-view-body" ng-style="{'height': (widgetTemplate.tabHeight == undefined ? (widgetTemplate.portletHeight * 0.9 - 24) : widgetTemplate.tabHeight) + 'px'}">
+					<div layout-align="start center" layout-fill>
+						<div flex class="table-view-data-item" ng-if="$data.widget_data.rows && $data.widget_data.rows.length" ng-repeat="$widgetrow in $data.widget_data.rows track by $index" ng-class="{'odd-child': $index%2 == 0}">
+							<div layout="row" layout-align="start stretch">
+								<div flex class="table-view-data-content" ng-repeat="$headerData in $data.response_objects.split(',') track by $index" style="text-align:{{($headerData.indexOf('Date') >=0 || $headerData.indexOf('Timestamp') >=0 ? 'right' : 'left')}}">
+									<span>{{::$parent.$parent.$parent.wc.getWidgetFieldValue($widgetrow[$headerData], $headerData, $widgetrow, $data.pre_defined,$data.widget_name)}}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div flex="10" class="pagination-container">
+			<div ng-if="$data.widget_data.rows && $data.widget_data.rows.length" layout="row" layout-align="space-between center">
+				<!--<div flex="50" flex-sm="60" flex-xs="60" class="pagination-info">{{::'widget_records_showing'|translator:'Showing'}} {{$data.widget_data.offset + 1}} {{::'widget_records_to'|translator:'to'}} {{$data.widget_data.current}} {{::'widget_records_of'|translator:'out of'}} {{$data.widget_data.total}} {{::'widget_records_rows'|translator:'records'}}</div> -->
+				<div flex="50" flex-sm="40" flex-xs="40" class="pagination-list">
+					<ul uib-pagination ng-change="wtc.paginationChange($data)" boundary-links="false" force-ellipses="false" items-per-page="25" max-size="3" total-items="$data.widget_data.total" ng-model="$data.widget_data.currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
